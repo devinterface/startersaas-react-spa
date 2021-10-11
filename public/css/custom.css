@@ -1,0 +1,146 @@
+
+  .img-responsive {
+    width: 100%;
+    height: auto;
+  }
+  .center-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .icon-wh {
+    width: 75px;
+    height: 75px;
+  }
+
+  .nav-item{
+    min-width: 40px;
+    text-align: center;
+  }
+  .only-mobile{
+    display: none;
+  }
+  @media screen and (max-width: 771px){
+    .nav-item{
+      font-size: 30px;
+      margin: 20px;
+    }	
+    .only-mobile{
+      margin: 5px;
+      font-size: 22px;
+      position: relative;
+      top: -5px;
+      left: 10px;
+      display: inline-block;
+    }
+  }
+  
+  
+  .heading-list-group-item-green {
+    background-color: #0d8680;
+    }
+  
+  .heading-list-group-item-blue {
+    background-color: #007bff;
+    }
+  
+  .font-size-small {
+    font-size: 14px;
+  }
+  
+  .logo {
+    width: 190px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  #intro-home {
+    background-color: #fbfbfc;
+  }
+  
+  #container-prezzi {
+    background-color: #fbfbfc;
+  }
+  
+  #budget-paragraph {
+    font-size: 13px;
+  }
+  
+  #container-servizi {
+    background-color: #f7fff8;
+  }
+  
+  #footer {
+    background-color: #fbfbfc;
+  }
+
+  @media screen and (min-width: 576px){
+    .logo {
+      width: 260px;
+      height: auto;
+    }	
+  }
+  .w-100-perc{
+    width: 100% !important;
+  }
+  .w-100{
+    width: 100px !important;
+  }
+  .w-200{
+    width: 200px !important;
+  }
+  .w-300{
+    width: 300px !important;
+  }
+  .w-400{
+    width: 400px !important;
+  }
+  .w-500{
+    width: 500px !important;
+  }
+  .m-0-auto{
+    margin: 0 auto !important;
+  }
+  .m-b-0{
+    margin-bottom: 0 !important;
+  }
+  .m-20{
+    margin: 20px
+  }
+  .m-l-20{
+    margin-left:20px
+  }
+  .m-b-60{
+    margin-bottom: 60px
+  }
+  .m-b-40{
+    margin-bottom: 40px
+  }
+  .m-b-30{
+    margin-bottom: 30px
+  }
+  .m-t-30{
+    margin-top: 30px
+  }
+  .m-b-20{
+    margin-bottom: 20px
+  }
+  .m-t-20{
+    margin-top: 20px
+  }
+  .m-b-10{
+    margin-bottom: 10px
+  }
+  .m-t-10{
+    margin-top: 10px
+  }
+  .m-t-60{
+    margin-top: 60px;
+  }
+  .m-t-40{
+    margin-top: 40px;
+  }
+  .p-50{
+    padding: 50px !important;
+  }
