@@ -116,5 +116,7 @@ export default {
   'How did you find us': 'Come ci hai conosciuti?',
   'Comments here': 'Aggiungi eventuali commenti qui',
   Submit: 'Invia',
-  'Your survey has been successfully updated': 'Il sondaggio è stato inviato correttamente'
+  'Your survey has been successfully updated': 'Il sondaggio è stato inviato correttamente',
+  'You are currently working on the trial version of Starter SAAS. Enjoy!': 'Stai lavorando con la versione di prova di Starter SAAS. Al termine della prova gratuita potrai decidere se abbonarti oppure no.',
+  'Go to plans': 'Vai ai piani'
 }

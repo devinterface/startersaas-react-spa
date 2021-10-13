@@ -1,10 +1,12 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
+import moment from 'moment'
+import { isAccountActive } from 'libs/utils'
 
 const PrivateActiveRoute = ({
   user, isAuthenticated, component: Component, layout: Layout, container, allowedRoles, ...rest
 }) => {
-  const active = isAuthenticated && user && allowedRoles.includes(user.role) && user.account.active
+  const authorized = isAuthenticated && user && allowedRoles.includes(user.role) && isAccountActive(user.account)
 
   return (
     <Route
@@ -20,7 +22,7 @@ const PrivateActiveRoute = ({
             />
             ) : (
               // eslint-disable-next-line no-nested-ternary
-              active
+              authorized
                 ? (
                   Layout === undefined ? (
                     <Component user={user} {...props} />

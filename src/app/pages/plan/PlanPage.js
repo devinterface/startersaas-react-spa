@@ -57,13 +57,6 @@ const PlanPage = (props) => {
           header={
             <div style={{ textAlign: 'center', minWidth: '300px', width: '50%', margin: '0 auto', marginTop: '20px' }}>
               <h1>{t('Select a plan')}</h1>
-              <p>Attiva l’abbonamento che desideri e ricorda che puoi disdire quando vuoi.
-                <br /><br />Non hai una carta di credito? Contattaci all’indirizzo <a href='mailto:info@mintmarketing.it'>info@mintmarketing.it</a> e provvederemo ad attivare il tuo account.
-                <br /><br />
-              </p>
-              <p>
-                Aiutaci a focalizzare meglio i tuoi obiettivi e necessità rispondendo a questo questionario
-              </p>
             </div>
           }
           body={
@@ -98,19 +91,6 @@ const PlanPage = (props) => {
                   </>
                 )}
               </Row>
-              <ul>
-                <li>
-                  <i>per "sponsorizzazioni sui social" si intende la
-                    sponsorizzazione diretta di post pubblicati.
-                  </i>
-                </li>
-                <li>
-                  <i>per ideazione linea grafica su Instagram (IG) si intende la linea grafica
-                    coerente da seguire nelle varie pubblicazioni (elemento base per gestire
-                    professionalmente Instagram essendo un social visual)
-                  </i>
-                </li>
-              </ul>
             </div>
           }
         />
