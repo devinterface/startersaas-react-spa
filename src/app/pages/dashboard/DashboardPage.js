@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { STRIPE_CONF } from 'config'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
@@ -9,13 +9,17 @@ import { Link } from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert' // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import Loader from 'app/components/Loader'
-import { formatMoney } from 'libs/utils'
+import { formatMoney, isFreeTrial, hasFailedPayment } from 'libs/utils'
 import { Button, Col, Row, Table } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
-import { isFreeTrial } from 'libs/utils'
+
+import TrialComponent from './TrialComponent'
 
 const DashboardPage = ({ user }) => {
   const { t } = useTranslation()
+
+  const [currentSubscription, setCurrentSubscription] = useState({})
+  const [selectedPlan, setSelectedPlan] = useState({})
 
   const queryClient = useQueryClient()
 
@@ -90,7 +94,15 @@ const DashboardPage = ({ user }) => {
   }
 
   const { isLoading, data } = useQuery(['Customer', user.accountId], Customer, {
-    retry: false
+    retry: false,
+    onSuccess: data => {
+      if (!isFreeTrial(user.account)) {
+        const cs = data.data.subscriptions.data[0]
+        setCurrentSubscription(cs)
+        const sp = STRIPE_CONF.plans.filter(p => p.id === cs.plan.id)[0]
+        setSelectedPlan(sp)
+      }
+    }
   })
 
   const { isLoading: cardsLoading, data: cardsData } = useQuery(['CustomerCards', user.accountId], CustomerCards, {
@@ -105,41 +117,10 @@ const DashboardPage = ({ user }) => {
     return <Loader />
   }
 
-  let currentSubscription = {}
-  let selectedPlan = {}
-
-  if (!isFreeTrial(user.account)) {
-    currentSubscription = data.data.subscriptions.data[0]
-    selectedPlan = STRIPE_CONF.plans.filter(p => p.id === currentSubscription.plan.id)[0]
-  }
-
-
-
   return (
     <div className='dashboard-page'>
       {isFreeTrial(user.account) ? (
-        <>
-          <Row>
-            <Box
-              color='blue'
-              image={<img src='/images/articoliesocial-2.svg' />}
-              header={
-                <div>
-                  <h1>{user.email}</h1>
-                </div>
-              }
-              body={
-                <div>
-                  <p>
-                    {t('You are currently working on the trial version of Starter SAAS. Enjoy!')}
-                  </p>
-                  <strong>{t('Trial period end')} {moment(user.account.trialPeriodEndsAt).format('DD/MM/YYYY')}</strong>
-                  <Link to='/plan' className='custom-btn green'>{t('Go to plans')}</Link>
-                </div>
-              }
-            />
-          </Row>
-        </>
+        <TrialComponent user={user} />
       ) : (
         <>
           <Row>
@@ -307,8 +288,7 @@ const DashboardPage = ({ user }) => {
             </Col>
           </Row>
         </>
-      )
-      }
+      )}
     </div>
   )
 }

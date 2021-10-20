@@ -20,6 +20,8 @@ const PlanPage = (props) => {
 
   const [redirectTo, setRedirectTo] = useState(false)
 
+  const [currentSubscription, setCurrentSubscription] = useState({})
+
   useEffect(() => {
     // Storage.setItem('selectedPlan', selectedPlan)
     if (selectedPlan !== undefined) {
@@ -28,20 +30,15 @@ const PlanPage = (props) => {
   }, [selectedPlan, props])
 
   const { isLoading, error, data } = useQuery('Customer', Customer, {
-    retry: false
+    retry: false,
+    onSuccess: data => {
+      const cs = data.data.subscriptions.data[0]
+      setCurrentSubscription(cs)
+    }
   })
 
   if (isLoading) {
     return <Loader />
-  }
-
-  let currentSubscription
-
-  if (data) {
-    try {
-      currentSubscription = data.data.subscriptions.data[0]
-    } catch (error) {
-    }
   }
 
   if (redirectTo) {
