@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { STRIPE_CONF } from 'config'
+import { STRIPE_CONF, PAYMENT_FAIL_AFTER_DAYS } from 'config'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { Customer, CustomerCards, CustomerInvoices } from 'api/queries'
 import { CancelSubscription, RemoveCreditCard, SetDefaultCreditCard } from 'api/mutations'
@@ -138,11 +138,18 @@ const DashboardPage = ({ user }) => {
                     <p>
                       {t('In this panel you can manage your subscription and check your payment history')}
                     </p>
-                    <p>
-                      {currentSubscription.canceled_at
-                        ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
-                        : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
-                    </p>
+                    {hasFailedPayment(user.account) ? (
+                      <p>
+                        <strong>{t('ATTENTION! You have a failed payment at')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br />
+                        <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedFirstAt).add(PAYMENT_FAIL_AFTER_DAYS, 'days').format('DD/MM/YYYY')}</strong>
+                      </p>
+                    )
+                      : (<p>
+                        {currentSubscription.canceled_at
+                          ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
+                          : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
+                      </p>
+                      )}
                   </div>
                 }
               />

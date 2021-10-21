@@ -10,6 +10,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
 import { useRecoilState } from 'recoil'
 import { selectedPlanState } from 'libs/atoms'
+import { isFreeTrial } from 'libs/utils'
 
 const PlanPage = (props) => {
   const { t } = useTranslation()
@@ -32,8 +33,10 @@ const PlanPage = (props) => {
   const { isLoading, error, data } = useQuery('Customer', Customer, {
     retry: false,
     onSuccess: data => {
-      const cs = data.data.subscriptions.data[0]
-      setCurrentSubscription(cs)
+      if (!isFreeTrial(props.user.account)) {
+        const cs = data.data.subscriptions.data[0]
+        setCurrentSubscription(cs)
+      }
     }
   })
 
