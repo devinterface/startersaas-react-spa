@@ -51,7 +51,7 @@ const PrivateLayout = ({ children, user }) => {
               <nav className='navbar navbar-light navbar-expand-md sticky-top d-xl-flex'>
                 <div className='container-fluid'>
                   <a className='navbar-brand' onClick={goToHome}>
-                    <img className='logo' src='/images/logo-articoliesocial.svg' />
+                    <img className='logo' src='/images/logo-startersaas.svg' />
                   </a><button data-toggle='collapse' className='navbar-toggler' data-target='#navcol-1'><span className='sr-only'>Toggle navigation</span><span className='navbar-toggler-icon' /></button>
                   <div className='collapse navbar-collapse d-md-flex d-lg-flex justify-content-md-start justify-content-lg-end' id='navcol-1'>
                     <ul className='navbar-nav d-md-flex flex-grow-1 justify-content-md-end flex-lg-grow-0 justify-content-xl-end'>

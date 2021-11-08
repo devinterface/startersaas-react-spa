@@ -14,7 +14,7 @@ const ActivateAccountPage = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    async function activate() {
+    async function activate () {
       const response = await mutation.mutateAsync({ token: token })
       if (response) {
         miniToastr.success(t('User has been activated'))

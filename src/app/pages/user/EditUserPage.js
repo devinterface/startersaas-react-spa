@@ -34,7 +34,7 @@ const EditUserPage = (props) => {
   return (
     <Row>
       <Col xs={12}>
-        <Box 
+        <Box
           header={
             <div>
               <h1>{t('Change password')}</h1>
@@ -44,21 +44,21 @@ const EditUserPage = (props) => {
           body={
             <div>
               <Form id='email-form' name='email-form' data-name='Reset Password Form' onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type='password' maxLength='256' name='password' data-name='password' placeholder='' id='password' ref={register} />
-                    <span className="text-muted">
-                      {errors.password?.message}
-                    </span>
-                  </Form.Group>
-                  <Form.Group controlId="formPasswordConfirmation">
-                    <Form.Label>{t('Password confirmation')}</Form.Label>
-                    <Form.Control type='password' maxLength='256' name='passwordConfirmation' data-name='Password Confirmation' placeholder='' id='passwordConfirmation' ref={register} />
-                    <span className="text-muted">
-                      {errors.passwordConfirmation?.message}
-                    </span>
-                  </Form.Group>
-                  <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...' ref={register} >{t('Update password')}</Button>
+                <Form.Group controlId='formPassword'>
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type='password' maxLength='256' name='password' data-name='password' placeholder='' id='password' ref={register} />
+                  <span className='text-muted'>
+                    {errors.password?.message}
+                  </span>
+                </Form.Group>
+                <Form.Group controlId='formPasswordConfirmation'>
+                  <Form.Label>{t('Password confirmation')}</Form.Label>
+                  <Form.Control type='password' maxLength='256' name='passwordConfirmation' data-name='Password Confirmation' placeholder='' id='passwordConfirmation' ref={register} />
+                  <span className='text-muted'>
+                    {errors.passwordConfirmation?.message}
+                  </span>
+                </Form.Group>
+                <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...' ref={register}>{t('Update password')}</Button>
               </Form>
             </div>
           }

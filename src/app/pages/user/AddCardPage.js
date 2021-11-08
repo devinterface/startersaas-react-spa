@@ -13,7 +13,7 @@ const AddCardPage = (props) => {
   return (
     <Row>
       <Col xs={12}>
-        <Box 
+        <Box
           header={
             <h1>{t('Credit card data')}</h1>
           }

@@ -15,7 +15,7 @@ const RegisterPage = (props) => {
   const { t } = useTranslation()
 
   const schema = yup.object().shape({
-    subdomain: yup.string().matches(/^[a-z](-?[a-z])*$/, { excludeEmptyString: false, message: t('Invalid subdomain format') }).lowercase().required(),
+    subdomain: yup.string().matches(/^[a-z0-9](-?[a-z0-9])*$/, { excludeEmptyString: false, message: t('Invalid subdomain format') }).lowercase().required(),
     email: yup.string().lowercase().email().required(),
     password: yup.string().min(8).required(),
     policy: yup.boolean()

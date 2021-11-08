@@ -20,7 +20,7 @@ const PrivateRoute = ({
             }}
             />
           ) : (
-          // eslint-disable-next-line no-nested-ternary
+            // eslint-disable-next-line no-nested-ternary
             allowed ? (
               Layout === undefined ? (
                 <Component user={user} {...props} />

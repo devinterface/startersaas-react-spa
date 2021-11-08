@@ -14,7 +14,7 @@ const AuthLayout = ({ children }) => {
           </Col>
           <Col lg={6} md={10} sm={12}>
             <div className='card-body text-center'>
-              <Image className='logo m-b-40' src='/images/logo-articoliesocial.svg' alt='Articoliesocial Logo' />
+              <Image className='logo m-b-40' src='/images/logo-startersaas.svg' alt='Articoliesocial Logo' />
               {children}
             </div>
           </Col>

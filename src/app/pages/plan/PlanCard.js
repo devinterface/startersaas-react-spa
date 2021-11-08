@@ -73,12 +73,12 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription }) => {
               {currentSubscription && currentSubscription.status === 'active' && currentSubscription.plan.id === plan.id && !currentSubscription.canceled_at
                 ? (<Button className='custom-btn w-100-perc' onClick={() => { }}>{t('Your curren plan')}</Button>)
                 : (currentSubscription && currentSubscription.status === 'active'
-                  ? (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('Change plan')}</Button>)
-                  : (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('Select this plan')}</Button>)
-                )}
+                    ? (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('Change plan')}</Button>)
+                    : (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('Select this plan')}</Button>)
+                  )}
             </Card.Body>
           </div>
-        )}
+          )}
     </Card>
   )
 }

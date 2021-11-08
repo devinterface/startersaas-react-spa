@@ -149,7 +149,7 @@ const DashboardPage = ({ user }) => {
                           ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
                           : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
                       </p>
-                      )}
+                        )}
                   </div>
                 }
               />
@@ -189,7 +189,7 @@ const DashboardPage = ({ user }) => {
                           <strong>{t('Will renew on')}</strong>
                           <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                         </div>
-                      )}
+                        )}
                   </div>
                 }
               />

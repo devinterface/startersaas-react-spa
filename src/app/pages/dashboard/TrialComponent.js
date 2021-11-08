@@ -10,7 +10,7 @@ const TrialComponent = ({ user }) => {
   return (
     <Row>
       <Box
-        color='blue'
+        color='white'
         image={<img src='/images/articoliesocial-2.svg' />}
         header={
           <div>
@@ -18,7 +18,7 @@ const TrialComponent = ({ user }) => {
           </div>
         }
         body={
-          <div>
+          <div className='text-dark'>
             <p>
               {t('You are currently working on the trial version of Starter SAAS. Enjoy!')}
             </p>

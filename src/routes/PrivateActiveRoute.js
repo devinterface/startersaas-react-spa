@@ -16,28 +16,28 @@ const PrivateActiveRoute = ({
           // eslint-disable-next-line no-nested-ternary
           !isAuthenticated
             ? (<Redirect to={{
-              pathname: '/auth/login',
-              state: { from: props.location }
-            }}
-            />
-            ) : (
+                pathname: '/auth/login',
+                state: { from: props.location }
+              }}
+               />
+              ) : (
               // eslint-disable-next-line no-nested-ternary
-              authorized
-                ? (
-                  Layout === undefined ? (
-                    <Component user={user} {...props} />
-                  ) : (
-                    <Layout container={container} user={user}><Component user={user} {...props} /></Layout>
-                  )
-                )
-                : (
-                  <Redirect to={{
-                    pathname: '/plan',
-                    state: { from: props.location }
-                  }}
-                  />
-                )
-            )
+                authorized
+                  ? (
+                      Layout === undefined ? (
+                        <Component user={user} {...props} />
+                      ) : (
+                        <Layout container={container} user={user}><Component user={user} {...props} /></Layout>
+                      )
+                    )
+                  : (
+                    <Redirect to={{
+                      pathname: '/plan',
+                      state: { from: props.location }
+                    }}
+                    />
+                    )
+              )
         )
       }}
     />
