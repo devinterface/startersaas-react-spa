@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { STRIPE_CONF, PAYMENT_FAIL_AFTER_DAYS } from 'config'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
-import { Customer, CustomerCards, CustomerInvoices } from 'api/queries'
+import { Customer, CustomerCards, CustomerInvoices, Plans } from 'api/queries'
 import { CancelSubscription, RemoveCreditCard, SetDefaultCreditCard } from 'api/mutations'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
@@ -93,13 +92,17 @@ const DashboardPage = ({ user }) => {
     })
   }
 
+  const { isLoading: plansLoading, data: plansData } = useQuery('Plans', Plans, {
+    retry: false
+  })
+
   const { isLoading, data } = useQuery(['Customer', user.accountId], Customer, {
     retry: false,
     onSuccess: data => {
       if (!isFreeTrial(user.account)) {
         const cs = data.data.subscriptions.data[0]
         setCurrentSubscription(cs)
-        const sp = STRIPE_CONF.plans.filter(p => p.id === cs.plan.id)[0]
+        const sp = plansData.data.plans.filter(p => p.id === cs.plan.id)[0]
         setSelectedPlan(sp)
       }
     }
@@ -113,7 +116,7 @@ const DashboardPage = ({ user }) => {
     retry: false
   })
 
-  if (isLoading || cardsLoading || invoicesLoading) {
+  if (plansLoading || isLoading || cardsLoading || invoicesLoading) {
     return <Loader />
   }
 
@@ -141,7 +144,7 @@ const DashboardPage = ({ user }) => {
                     {hasFailedPayment(user.account) ? (
                       <p>
                         <strong>{t('ATTENTION! You have a failed payment at')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br />
-                        <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedFirstAt).add(PAYMENT_FAIL_AFTER_DAYS, 'days').format('DD/MM/YYYY')}</strong>
+                        <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedFirstAt).add(user.account.subscriptionRevokedAfterDays, 'days').format('DD/MM/YYYY')}</strong>
                       </p>
                     )
                       : (<p>
@@ -149,7 +152,7 @@ const DashboardPage = ({ user }) => {
                           ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
                           : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
                       </p>
-                        )}
+                      )}
                   </div>
                 }
               />
@@ -189,7 +192,7 @@ const DashboardPage = ({ user }) => {
                           <strong>{t('Will renew on')}</strong>
                           <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                         </div>
-                        )}
+                      )}
                   </div>
                 }
               />

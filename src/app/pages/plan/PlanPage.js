@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Customer } from 'api/queries'
+import { Customer, Plans } from 'api/queries'
 import { useQuery } from 'react-query'
-import { STRIPE_CONF } from 'config'
 import PlanCard from './PlanCard'
 import { Redirect } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -40,7 +39,11 @@ const PlanPage = (props) => {
     }
   })
 
-  if (isLoading) {
+  const { isLoading: plansLoading, data: plansData } = useQuery('Plans', Plans, {
+    retry: false
+  })
+
+  if (isLoading || plansLoading) {
     return <Loader />
   }
 
@@ -61,7 +64,7 @@ const PlanPage = (props) => {
           }
           body={
             <div>
-              {STRIPE_CONF.plans.filter(p => p.monthly).length > 0 && STRIPE_CONF.plans.filter(p => !p.monthly).length > 0 && (
+              {plansData.data.plans.filter(p => p.monthly).length > 0 && plansData.data.plans.filter(p => !p.monthly).length > 0 && (
                 <Row>
                   <Col xs={12}>
                     <div className='contain-buttons-plan'>
@@ -74,16 +77,16 @@ const PlanPage = (props) => {
               <Row>
                 {selectedPlanRecurring === 1 && (
                   <>
-                    {STRIPE_CONF.plans.filter(p => p.monthly).map((plan, i) =>
+                    {plansData.data.plans.filter(p => p.monthly).map((plan, i) =>
                       <Col xs={12} md={4} key={i} className='contain-card-plan'>
                         <PlanCard plan={plan} monthly key={`montly-${i}`} setSelectedPlan={setSelectedPlan} currentSubscription={currentSubscription} />
                       </Col>
                     )}
                   </>
                 )}
-                {selectedPlanRecurring === 2 && STRIPE_CONF.plans.filter(p => !p.monthly).length > 0 && (
+                {selectedPlanRecurring === 2 && plansData.data.plans.filter(p => !p.monthly).length > 0 && (
                   <>
-                    {STRIPE_CONF.plans.filter(p => !p.monthly).map((plan, i) =>
+                    {plansData.data.plans.filter(p => !p.monthly).map((plan, i) =>
                       <Col xs={12} md={4} key={i} className='contain-card-plan'>
                         <PlanCard plan={plan} monthly={false} key={`yearly-${i}`} setSelectedPlan={setSelectedPlan} currentSubscription={currentSubscription} />
                       </Col>

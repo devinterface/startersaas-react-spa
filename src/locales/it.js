@@ -35,6 +35,7 @@ export default {
   'Your subscription will automatically renew on': 'Il tuo abbonamento si rinnoverà automaticamente il',
   Plan: 'Piano',
   Monthly: 'Mensile',
+  Invoicing: 'Fatturazione',
   Yearly: 'Annuale',
   Price: 'Prezzo',
   'Trial period discount': 'Sconto prova gratuita',

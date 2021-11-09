@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { PAYMENT_FAIL_AFTER_DAYS } from 'config'
 
 const formatMoney = (locale, currency, number) => {
   return new Intl.NumberFormat('de-DE', { style: 'currency', currency: currency }).format(number)
@@ -10,7 +9,7 @@ const hasFailedPayment = (account) => {
 }
 
 const isFailedPaymentExpired = (account) => {
-  return account.paymentFailed && moment(moment(account.paymentFailedFirstAt).add(PAYMENT_FAIL_AFTER_DAYS, 'days')).isBefore(Date.now())
+  return account.paymentFailed && moment(moment(account.paymentFailedFirstAt).add(account.subscriptionRevokedAfterDays, 'days')).isBefore(Date.now())
 }
 
 const isAccountActive = (account) => {

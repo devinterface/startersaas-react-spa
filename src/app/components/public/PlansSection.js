@@ -1,13 +1,17 @@
-import stripeConf from 'config/stripe.conf'
-import React, { useEffect, useState } from 'react'
+import React, { } from 'react'
 import PlanComponent from './PlanComponent'
+import { useQuery } from 'react-query'
+import { Plans } from 'api/queries'
+import Loader from 'app/components/Loader'
 
-const PlansSection = () => {
-  const [plans, setPlans] = useState([])
+const PlansSection = (plans) => {
+  const { isLoading, data } = useQuery('Plans', Plans, {
+    retry: false
+  })
 
-  useEffect(() => {
-    setPlans(stripeConf.plans)
-  }, [stripeConf])
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <section id='prezzi' className='mb-5'>
@@ -21,8 +25,8 @@ const PlansSection = () => {
           </div>
           <div className='row d-flex d-sm-flex d-lg-flex flex-column align-items-center flex-lg-row justify-content-lg-center align-items-lg-start align-items-xl-start mb-5' data-aos='zoom-in-up' data-aos-once='true'>
 
-            {(plans.length > 0)
-              ? plans.map(plan => (
+            {(data.data.plans.length > 0)
+              ? data.data.plans.map(plan => (
                 <PlanComponent key={plan.id} plan={plan} />
                 ))
               : 'Non ci sono piani disponibili'}

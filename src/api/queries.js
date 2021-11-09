@@ -25,4 +25,9 @@ const CustomerCards = async () => {
   return result
 }
 
-export { Me, Account, Customer, CustomerInvoices, CustomerCards }
+const Plans = async () => {
+  const result = await Axios.base().get('/stripe/plans')
+  return result
+}
+
+export { Me, Account, Customer, CustomerInvoices, CustomerCards, Plans }

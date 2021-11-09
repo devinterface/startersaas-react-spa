@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { UpdateAccount } from 'api/mutations'
+import { Plans } from 'api/queries'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation } from 'react-query'
-import { STRIPE_CONF } from 'config'
+import { useMutation, useQuery } from 'react-query'
 import { StripeProvider, Elements } from 'react-stripe-elements'
 import StripeForm from './StripeForm'
 import { useTranslation } from 'react-i18next'
-import moment from 'moment'
 import { formatMoney } from 'libs/utils'
 import { Form, Button, Col, Row } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
 import { selectedPlanState } from 'libs/atoms'
 import { useRecoilValue } from 'recoil'
+import Loader from 'app/components/Loader'
 
 const schema = yup.object().shape({
   companyName: yup.string().required(),
@@ -30,7 +30,7 @@ const SubscribePlanPage = (props) => {
 
   const planId = useRecoilValue(selectedPlanState)
 
-  const selectedPlan = STRIPE_CONF.plans.filter(p => p.id === planId)[0]
+  const [selectedPlan, setSelectedPlan] = useState(null)
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -56,6 +56,18 @@ const SubscribePlanPage = (props) => {
     } catch (error) {
       setInvoicingUpdated(false)
     }
+  }
+
+  const { isLoading: plansLoading, data: plansData } = useQuery('Plans', Plans, {
+    retry: false,
+    onSuccess: plansData => {
+      const sp = plansData.data.plans.filter(p => p.id === planId)[0]
+      setSelectedPlan(sp)
+    }
+  })
+
+  if (plansLoading) {
+    return <Loader />
   }
 
   return (
@@ -128,6 +140,26 @@ const SubscribePlanPage = (props) => {
           />
         </Col>
       </Row>
+      {selectedPlan && (
+        <Row>
+          <Col xs={12} style={{ marginTop: '30px' }}>
+            <Box
+              header={
+                <div>
+                  <h1>{t('Your order')}</h1>
+                </div>
+              }
+              body={
+                <div>
+                  <div className='inline-data'><strong>{t('Plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
+                  <div className='inline-data'><strong>{t('Invoicing')}</strong><span className='right'>{selectedPlan.monthly ? t('Monthly') : t('Yearly')}</span></div>
+                  <div className='inline-data'><strong>{t('Price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
+                </div>
+              }
+            />
+          </Col>
+        </Row>
+      )}
       <Row>
         {invoicingUpdated && (
           <Col xs={12} style={{ marginTop: '30px' }}>
@@ -139,9 +171,9 @@ const SubscribePlanPage = (props) => {
               }
               body={
                 <div>
-                  <StripeProvider apiKey={STRIPE_CONF.publicKey}>
+                  <StripeProvider apiKey={plansData.data.publicKey}>
                     <Elements>
-                      <StripeForm planId={selectedPlan.id} user={props.user} />
+                      <StripeForm planId={planId} user={props.user} />
                     </Elements>
                   </StripeProvider>
                 </div>
@@ -149,34 +181,6 @@ const SubscribePlanPage = (props) => {
             />
           </Col>
         )}
-      </Row>
-
-      <Row>
-        <Col xs={12} style={{ marginTop: '30px' }}>
-          <Box
-            header={
-              <div>
-                <h1>{t('Your order')}</h1>
-                {selectedPlan.freeTrial && (
-                  <p>{t("You'll receive an email some days before the end of the trial period.")}</p>
-                )}
-              </div>
-            }
-            body={
-              <div>
-                <div className='inline-data'><strong>{t('Plan')}</strong><span className='right'>{selectedPlan.monthly ? t('Monthly') : t('Yearly')}</span></div>
-                <div className='inline-data'><strong>{t('Price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
-                {selectedPlan.freeTrial && (
-                  <div>
-                    <div className='inline-data'><strong>{t('Trial period discount')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
-                    <div className='inline-data'><strong>{t('Trial period end')}</strong><span className='right'>{moment().add(selectedPlan.trialDays, 'days').format('DD/MM/YYYY')}</span></div>
-                    <div className='inline-data'><strong>{t('Total')}</strong><span className='right'>€ 0,00</span></div>
-                  </div>
-                )}
-              </div>
-            }
-          />
-        </Col>
       </Row>
     </div>
   )
