@@ -26,14 +26,14 @@ body{
 .dashboard-box{
   min-height: 250px;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: #fff;
   width: 100%;
   padding: 10px 20px;
   margin: 0 auto;
   -webkit-box-shadow: 0 5px 10px 0 rgb(0 0 0 / 16%);
   -moz-box-shadow: 0 5px 10px 0 rgb(0 0 0 / 16%);
-  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 16%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
   overflow: hidden;
   position: relative;
 }
