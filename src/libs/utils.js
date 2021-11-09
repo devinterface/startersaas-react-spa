@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-const formatMoney = (locale, currency, number) => {
+const formatMoney = (locale, currency = 'EUR', number) => {
   return new Intl.NumberFormat('de-DE', { style: 'currency', currency: currency }).format(number)
 }
 

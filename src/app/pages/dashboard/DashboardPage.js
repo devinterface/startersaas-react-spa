@@ -116,7 +116,7 @@ const DashboardPage = ({ user }) => {
     retry: false
   })
 
-  if (plansLoading || isLoading || cardsLoading || invoicesLoading) {
+  if (isLoading || plansLoading || isLoading || cardsLoading || invoicesLoading) {
     return <Loader />
   }
 
@@ -151,8 +151,8 @@ const DashboardPage = ({ user }) => {
                         {currentSubscription.canceled_at
                           ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
                           : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
-                      </p>
-                      )}
+                         </p>
+                        )}
                   </div>
                 }
               />
@@ -186,13 +186,13 @@ const DashboardPage = ({ user }) => {
                           <strong>{t('Will deactivate at')}</strong>
                           <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                         </div>
-                      </>)
+                         </>)
                       : (
                         <div className='inline-data'>
                           <strong>{t('Will renew on')}</strong>
                           <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                         </div>
-                      )}
+                        )}
                   </div>
                 }
               />
