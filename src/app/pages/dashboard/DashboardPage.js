@@ -144,15 +144,15 @@ const DashboardPage = ({ user }) => {
                     {hasFailedPayment(user.account) ? (
                       <p>
                         <strong>{t('ATTENTION! You have a failed payment at')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br />
-                        <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedFirstAt).add(user.account.subscriptionRevokedAfterDays, 'days').format('DD/MM/YYYY')}</strong>
+                        <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong>
                       </p>
                     )
                       : (<p>
                         {currentSubscription.canceled_at
                           ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
                           : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
-                         </p>
-                        )}
+                      </p>
+                      )}
                   </div>
                 }
               />
@@ -186,13 +186,13 @@ const DashboardPage = ({ user }) => {
                           <strong>{t('Will deactivate at')}</strong>
                           <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                         </div>
-                         </>)
+                      </>)
                       : (
                         <div className='inline-data'>
                           <strong>{t('Will renew on')}</strong>
                           <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                         </div>
-                        )}
+                      )}
                   </div>
                 }
               />

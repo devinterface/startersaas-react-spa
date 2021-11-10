@@ -9,7 +9,7 @@ const hasFailedPayment = (account) => {
 }
 
 const isFailedPaymentExpired = (account) => {
-  return account.paymentFailed && moment(moment(account.paymentFailedFirstAt).add(account.subscriptionRevokedAfterDays, 'days')).isBefore(Date.now())
+  return account.paymentFailed && moment(account.paymentFailedSubscriptionEndsAt).isBefore(Date.now())
 }
 
 const isAccountActive = (account) => {
