@@ -32,8 +32,8 @@ const ApplicationRouter = () => {
       <OnlyPublic exact path='/auth/login' component={LoginPage} layout={AuthLayout} />
       <OnlyPublic exact path='/auth/forgot-password' component={ForgotPasswordPage} layout={AuthLayout} />
       <OnlyPublic exact path='/auth/resend-activation' component={ResendActivationPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/reset-password/:passwordResetToken' component={ResetPasswordPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/activate/:token' component={ActivateAccountPage} layout={AuthLayout} />
+      <OnlyPublic exact path='/auth/reset-password/:email' component={ResetPasswordPage} layout={AuthLayout} />
+      <OnlyPublic exact path='/auth/activate/:email' component={ActivateAccountPage} layout={AuthLayout} />
       <OnlyPublic exact path='/auth/register' component={RegisterPage} layout={AuthLayout} />
       <PrivateActive exact path='/dashboard' layout={PrivateLayout} allowedRoles={['admin', 'user']} component={DashboardPage} />
       <Private exact path='/plan/subscribe' layout={PrivateLayout} allowedRoles={['admin']} component={SubscribePlanPage} />

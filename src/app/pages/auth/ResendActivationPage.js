@@ -25,8 +25,8 @@ const ResendActivationPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        miniToastr.success('An email with the activation link has been sent. Check your inbox.')
-        props.history.push('/auth/login')
+        miniToastr.success('An email with the activation token has been sent. Check your inbox.')
+        props.history.push(`/auth/activate/${data.email}`)
       }
     } catch (error) {
       miniToastr.error('Email not valid')
@@ -35,7 +35,7 @@ const ResendActivationPage = (props) => {
 
   return (
     <div>
-      <h3 className='m-20 m-b-30'>{t('Resend activation link')}</h3>
+      <h3 className='m-20 m-b-30'>{t('Resend activation code')}</h3>
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>

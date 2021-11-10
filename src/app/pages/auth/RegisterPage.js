@@ -41,8 +41,8 @@ const RegisterPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        miniToastr.success(t('An email with the activation link has been sent. Check your inbox.'))
-        props.history.push('/auth/login')
+        miniToastr.success(t('An email with the activation token has been sent. Check your inbox.'))
+        props.history.push(`/auth/activate/${data.email}`)
       }
     } catch (error) {
       miniToastr.error(t('Email or password invalid'))

@@ -25,11 +25,11 @@ const ForgotPasswordPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        miniToastr.success(t('An email with the reset password link has been sent. Check your inbox'))
-        props.history.push('/auth/login')
+        miniToastr.success(t('An email with the reset password code has been sent. Check your inbox'))
+        props.history.push(`/auth/reset-password/${data.email}`)
       }
     } catch (error) {
-      miniToastr.success(t('An email with the reset password link has been sent. Check your inbox'))
+      miniToastr.success(t('Reset password went wrong, please retry'))
     }
   }
 
@@ -41,7 +41,7 @@ const ForgotPasswordPage = (props) => {
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
           <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' ref={register} />
         </FormGroup>
-        <input type='submit' value={t('Send reset link')} className='btn btn-primary m-t-20' />
+        <input type='submit' value={t('Send reset code')} className='btn btn-primary m-t-20' />
       </Form>
       <Col sm={12} className='text-center m-t-20'>
         <Link to='/auth/login'>{t('Back to login page')}</Link><br />

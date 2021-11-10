@@ -2,7 +2,7 @@ export default {
   'Your subscription': 'Il tuo abbonamento',
   'The terms and conditions must be accepted.': 'I termini e condizioni devono essere accettati',
   'Invalid subdomain format': 'Formato sottodominio invalido',
-  'An email with the activation link has been sent. Check your inbox.': 'Una mail con il link di attivazione è stata inviata. Controlla la tua posta elettronica.',
+  'An email with the activation token has been sent. Check your inbox.': 'Una mail con il codice di attivazione è stata inviata. Controlla la tua posta elettronica.',
   Access: 'Accedi',
   Subdomain: 'Sottodominio',
   'Your subdomain will be:': 'Il tuo sottodominio sarà:',
@@ -13,10 +13,10 @@ export default {
   'Forgot password?': 'Password dimenticata?',
   'An email with the reset password link has been sent. Check your inbox': 'Una mail con il link per il recupero password è stata inviata al tuo indirizzo email',
   'Password reset': 'Recupera password',
-  'Send reset link': 'Invia link di recupero',
-  'Insert your email and we\'ll send a link to reset your password': 'Inserisci la mail e invieremo al tuo indirizzo di posta elettronica un link per recuperare la password.',
+  'Send reset code': 'Invia codice di recupero',
+  'Insert your email and we\'ll send a link to reset your password': 'Inserisci la mail e invieremo al tuo indirizzo di posta elettronica un codice per recuperare la password.',
   'Back to login page': 'Torna alla login',
-  'Resend activation link': 'Reinvia link di attivazione',
+  'Resend activation code': 'Reinvia codice di attivazione',
   'Insert your email and we\'ll send the activation link to your inbox': 'Inserisci la mail e invieremo al tuo indirizzo di posta elettronica un link per attivare il tuo account.',
   'Your password has been successfully updated': 'La tua password è stata modificata con successo',
   'Change password': 'Cambia password',
@@ -120,5 +120,7 @@ export default {
   'Your survey has been successfully updated': 'Il sondaggio è stato inviato correttamente',
   'You are currently working on the trial version of Starter SAAS. Enjoy!': 'Stai lavorando con la versione di prova di Starter SAAS. Al termine della prova gratuita potrai decidere se abbonarti oppure no.',
   'Go to plans': 'Vai ai piani',
-  'ATTENTION! You have a failed payment at': 'ATTENZIONE! Hai un pagamento fallito il'
+  'ATTENTION! You have a failed payment at': 'ATTENZIONE! Hai un pagamento fallito il',
+  'Activate Account': 'Attiva Account',
+  Activate: 'Attiva'
 }

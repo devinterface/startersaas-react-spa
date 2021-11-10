@@ -10,8 +10,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
 
 const schema = yup.object().shape({
-  password: yup.string().min(8).required('Password is required'),
-  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], "Passwords don't match").required('Confirm Password is required')
+  password: yup.string().min(8).required('Password is required')
 })
 
 const EditUserPage = (props) => {
@@ -49,13 +48,6 @@ const EditUserPage = (props) => {
                   <Form.Control type='password' maxLength='256' name='password' data-name='password' placeholder='' id='password' ref={register} />
                   <span className='text-muted'>
                     {errors.password?.message}
-                  </span>
-                </Form.Group>
-                <Form.Group controlId='formPasswordConfirmation'>
-                  <Form.Label>{t('Password confirmation')}</Form.Label>
-                  <Form.Control type='password' maxLength='256' name='passwordConfirmation' data-name='Password Confirmation' placeholder='' id='passwordConfirmation' ref={register} />
-                  <span className='text-muted'>
-                    {errors.passwordConfirmation?.message}
                   </span>
                 </Form.Group>
                 <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...' ref={register}>{t('Update password')}</Button>
