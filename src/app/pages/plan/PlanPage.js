@@ -34,7 +34,9 @@ const PlanPage = (props) => {
     onSuccess: data => {
       if (!isFreeTrial(props.user.account)) {
         const cs = data.data.subscriptions.data[0]
-        setCurrentSubscription(cs)
+        if (cs) {
+          setCurrentSubscription(cs)
+        }
       }
     }
   })

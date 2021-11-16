@@ -122,5 +122,6 @@ export default {
   'Go to plans': 'Vai ai piani',
   'ATTENTION! You have a failed payment at': 'ATTENZIONE! Hai un pagamento fallito il',
   'Activate Account': 'Attiva Account',
-  Activate: 'Attiva'
+  Activate: 'Attiva',
+  'Trial period ends at': 'Il periodo di prova termina il'
 }
