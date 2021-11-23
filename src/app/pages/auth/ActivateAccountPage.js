@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Activate } from 'api/mutations'
 import { useMutation } from 'react-query'
 import { useParams, Link } from 'react-router-dom'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 import { useTranslation } from 'react-i18next'
 import { Col, Form, FormGroup } from 'react-bootstrap'
 
@@ -18,7 +18,7 @@ const ActivateAccountPage = (props) => {
 
   const { email } = useParams()
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   })
   const mutation = useMutation(Activate)
@@ -28,11 +28,11 @@ const ActivateAccountPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        miniToastr.success(t('Your account has been activated'))
+        ConfirmAlert.success(t('alerts.accountActivated'))
         props.history.push('/auth/login')
       }
     } catch (error) {
-      miniToastr.error('Activation went wrong, please retry')
+      ConfirmAlert.error('Activation went wrong, please retry')
     }
   }
 
@@ -42,7 +42,7 @@ const ActivateAccountPage = (props) => {
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='passwordHelp' className='form-text text-muted'>{errors.token?.message}</small>
-          <input className='form-control custom-input' type='string' maxLength='256' name='token' data-name='Token' placeholder={t('Token')} id='token' required='' ref={register} />
+          <input className='form-control custom-input' type='string' maxLength='256' name='token' data-name='Token' placeholder={t('Token')} id='token' required='' {...register('token', { required: true })} />
         </FormGroup>
         <input type='submit' value={t('Activate')} className='btn btn-primary' />
       </Form>

@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ChangePassword } from 'api/mutations'
 import { useMutation } from 'react-query'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 import { useTranslation } from 'react-i18next'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 const EditUserPage = (props) => {
   const { t } = useTranslation()
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   })
   const mutation = useMutation(ChangePassword)
@@ -25,7 +25,7 @@ const EditUserPage = (props) => {
     data = { password: data.password }
     const response = await mutation.mutateAsync(data)
     if (response) {
-      miniToastr.success(t('Your password has been successfully updated'))
+      ConfirmAlert.success(t('Your password has been successfully updated'))
       props.history.push('/')
     }
   }
@@ -45,12 +45,12 @@ const EditUserPage = (props) => {
               <Form id='email-form' name='email-form' data-name='Reset Password Form' onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId='formPassword'>
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type='password' maxLength='256' name='password' data-name='password' placeholder='' id='password' ref={register} />
+                  <Form.Control type='password' maxLength='256' name='password' data-name='password' placeholder='' id='password' {...register('password', { required: true })} />
                   <span className='text-muted'>
                     {errors.password?.message}
                   </span>
                 </Form.Group>
-                <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...' ref={register}>{t('Update password')}</Button>
+                <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('Update password')}</Button>
               </Form>
             </div>
           }

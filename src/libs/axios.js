@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Storage from './storage'
-// import miniToastr from './minitoastr'
 import { API_URL, JWT_TOKEN } from 'config'
 
 // const formatErrors = (error) => {
@@ -22,19 +21,19 @@ import { API_URL, JWT_TOKEN } from 'config'
 //       miniToastr.warn(formatErrors(error.response.data), 'Request failed')
 //       break
 //     case 401:
-//       miniToastr.error(formatErrors(error.response.data), 'Unauthorized')
+//       ConfirmAlert.error(formatErrors(error.response.data), 'Unauthorized')
 //       break
 //     case 403:
-//       miniToastr.error(formatErrors(error.response.data), 'Forbidden')
+//       ConfirmAlert.error(formatErrors(error.response.data), 'Forbidden')
 //       break
 //     case 422:
 //       miniToastr.warn(formatErrors(error.response.data), 'Unprocessable Entity')
 //       break
 //     case 500:
-//       miniToastr.error(formatErrors(error.response.data), 'Internal Server Error')
+//       ConfirmAlert.error(formatErrors(error.response.data), 'Internal Server Error')
 //       break
 //     default:
-//       miniToastr.error(formatErrors(error.response.data), 'Unknown Error')
+//       ConfirmAlert.error(formatErrors(error.response.data), 'Unknown Error')
 //   }
 // }
 

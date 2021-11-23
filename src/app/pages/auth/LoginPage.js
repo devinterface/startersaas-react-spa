@@ -7,7 +7,7 @@ import { useMutation } from 'react-query'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Col, Form, FormGroup } from 'react-bootstrap'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -17,7 +17,7 @@ const schema = yup.object().shape({
 const LoginPage = (props) => {
   const { t } = useTranslation()
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   })
   const mutation = useMutation(Login)
@@ -26,7 +26,7 @@ const LoginPage = (props) => {
     try {
       await mutation.mutateAsync(data)
     } catch (error) {
-      miniToastr.error(t('Email or password invalid'))
+      ConfirmAlert.error(t('Email or password invalid'))
     }
     props.history.push('/dashboard')
   }
@@ -37,11 +37,11 @@ const LoginPage = (props) => {
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
-          <input className='form-control custom-input' type='text' name='email' aria-describedby='emailHelp' placeholder='Email' maxLength='256' data-name='Email' id='email' ref={register} />
+          <input className='form-control custom-input' type='text' name='email' aria-describedby='emailHelp' placeholder='Email' maxLength='256' data-name='Email' id='email' {...register('email', { required: true })} />
         </FormGroup>
         <FormGroup>
           <small id='passwordHelp' className='form-text text-muted'>{errors.password?.message}</small>
-          <input className='form-control custom-input' type='password' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' ref={register} />
+          <input className='form-control custom-input' type='password' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' {...register('password', { required: true })} />
         </FormGroup>
         <input type='submit' value='Conferma' className='btn btn-primary' />
       </Form>

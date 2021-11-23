@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Subscribe } from 'api/mutations'
 import { useMutation } from 'react-query'
 import Loader from 'app/components/Loader'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 import { formatMoney } from 'libs/utils'
 import { confirmAlert } from 'react-confirm-alert' // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
@@ -41,7 +41,7 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription }) => {
       const response = await mutation.mutateAsync(paymentRequest)
       if (response) {
         setTimeout(function () {
-          miniToastr.success(t('Plan successfully updated'))
+          ConfirmAlert.success(t('Plan successfully updated'))
           window.location.href = '/'
         }, 1000)
       }

@@ -56,7 +56,7 @@ const PrivateLayout = ({ children, user }) => {
                   <div className='collapse navbar-collapse d-md-flex d-lg-flex justify-content-md-start justify-content-lg-end' id='navcol-1'>
                     <ul className='navbar-nav d-md-flex flex-grow-1 justify-content-md-end flex-lg-grow-0 justify-content-xl-end'>
                       <li className='nav-item'>
-                        <select onChange={handleSubmit(onSubmit)} name='language' ref={register}>
+                        <select onChange={handleSubmit(onSubmit)} name='language' {...register('language')}>
                           <option value='it'>IT</option>
                           <option value='en'>EN</option>
                         </select>

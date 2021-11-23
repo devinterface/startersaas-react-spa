@@ -5,9 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Register } from 'api/mutations'
 import { useMutation } from 'react-query'
 import { Link } from 'react-router-dom'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 import { useTranslation } from 'react-i18next'
-import { v4 as uuidv4 } from 'uuid'
 import { Col, Form, FormGroup } from 'react-bootstrap'
 
 const RegisterPage = (props) => {
@@ -32,7 +31,7 @@ const RegisterPage = (props) => {
     setValue('subdomain', slug)
   }
 
-  const { register, handleSubmit, errors, setValue } = useForm({
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm({
     resolver: yupResolver(schema)
   })
 
@@ -41,11 +40,11 @@ const RegisterPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        miniToastr.success(t('An email with the activation token has been sent. Check your inbox.'))
+        ConfirmAlert.success(t('An email with the activation token has been sent. Check your inbox.'))
         props.history.push(`/auth/activate/${data.email}`)
       }
     } catch (error) {
-      miniToastr.error(t('Email or password invalid'))
+      ConfirmAlert.error(t('Email or password invalid'))
     }
   }
 
@@ -55,22 +54,22 @@ const RegisterPage = (props) => {
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='subdomainHelp' className='form-text text-muted'>{errors.subdomain?.message}</small>
-          <input type='subdomain' className='form-control custom-input' maxLength='256' aria-describedby='subdomainHelp' name='subdomain' data-name='Subdomain' placeholder='Subdomain' id='subdomain' ref={register} onChange={e => slugify(e.target.value)} />
+          <input type='subdomain' className='form-control custom-input' maxLength='256' aria-describedby='subdomainHelp' name='subdomain' data-name='Subdomain' placeholder='Subdomain' id='subdomain' {...register('subdomain', { required: true })} onChange={e => slugify(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
-          <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' ref={register} />
+          <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' {...register('email', { required: true })} />
         </FormGroup>
         <FormGroup>
           <small id='passwordHelp' className='form-text text-muted'>{errors.password?.message}</small>
-          <input type='password' className='form-control custom-input' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' ref={register} />
+          <input type='password' className='form-control custom-input' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' {...register('password', { required: true })} />
         </FormGroup>
         <FormGroup>
           <small id='policyHelp' className='form-text text-muted'>{errors.policy?.message}</small>
           <input
             type='checkbox' id='policy' name='policy' data-name='Checkbox'
             className='w-checkbox-input checkbox'
-            ref={register}
+            {...register('policy', { required: true })}
             aria-describedby='policyHelp'
           />
           <span className='checkbox-label w-form-label'>{t("By clicking on the 'Register' button I consent the terms and conditions of the service and I understand that my account's informations will be used according to the privacy policy.")}</span>

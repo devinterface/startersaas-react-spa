@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, Container, Image, Col, Row, Card } from 'react-bootstrap'
+import { Container, Image, Col, Row, Card } from 'react-bootstrap'
 import '../../../css/authLayout/auth.css'
 
 const AuthLayout = ({ children }) => {

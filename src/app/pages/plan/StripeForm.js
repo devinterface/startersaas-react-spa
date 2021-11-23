@@ -4,19 +4,16 @@ import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
 import { Subscribe } from 'api/mutations'
 import { useTranslation } from 'react-i18next'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 import Loader from 'app/components/Loader'
 import { Button, Form } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 
 const StripeForm = props => {
   const { t } = useTranslation()
 
   const queryClient = useQueryClient()
 
-  const history = useHistory()
-
-  const { register, handleSubmit, errors } = useForm({})
+  const { register, handleSubmit, formState: { errors } } = useForm({})
 
   const [cardElement, setCardElement] = useState(null)
 
@@ -55,7 +52,7 @@ const StripeForm = props => {
         queryClient.invalidateQueries(['Customer', props.user.accountId])
         queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
         queryClient.invalidateQueries(['Me'])
-        miniToastr.success(t('Payment successfully completed'))
+        ConfirmAlert.success(t('Payment successfully completed'))
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
@@ -63,14 +60,14 @@ const StripeForm = props => {
         queryClient.invalidateQueries(['Customer', props.user.accountId])
         queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
         queryClient.invalidateQueries(['Me'])
-        miniToastr.info(response.data.message)
+        // ConfirmAlert.success(response.data.message)
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
       }
     } catch (error) {
       console.log(error)
-      miniToastr.error(t('Payment failed'))
+      ConfirmAlert.error(t('Payment failed'))
       setTimeout(function () {
         window.location.href = '/dashboard'
       }, 3000)
@@ -86,14 +83,14 @@ const StripeForm = props => {
         )}
         <Form.Group controlId='formCard'>
           <Form.Label>{t('Credit card owner')}</Form.Label>
-          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name='Card Holder' placeholder='' id='cardHolderName' ref={register({ required: true, maxLength: 256 })} />
+          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name='Card Holder' placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
           <span className='text-muted'>
             {errors.cardHolderName?.message}
           </span>
           <CardElement style={{ base: { fontSize: '18px', color: '#333', border: '1px solid #ccc' } }} onReady={handleReady} />
         </Form.Group>
         {!loading && (
-          <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...' ref={register}>{t('Subscribe')}</Button>
+          <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('Subscribe')}</Button>
         )}
       </Form>
     </>

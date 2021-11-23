@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { ForgotPassword } from 'api/mutations'
 import { useMutation } from 'react-query'
 import { Link } from 'react-router-dom'
-import miniToastr from 'libs/minitoastr'
+import ConfirmAlert from 'libs/confirmAlert'
 import { useTranslation } from 'react-i18next'
 import { Col, Form, FormGroup } from 'react-bootstrap'
 
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 const ForgotPasswordPage = (props) => {
   const { t } = useTranslation()
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   })
   const mutation = useMutation(ForgotPassword)
@@ -25,11 +25,11 @@ const ForgotPasswordPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        miniToastr.success(t('An email with the reset password code has been sent. Check your inbox'))
+        ConfirmAlert.success(t('An email with the reset password code has been sent. Check your inbox'))
         props.history.push(`/auth/reset-password/${data.email}`)
       }
     } catch (error) {
-      miniToastr.success(t('Reset password went wrong, please retry'))
+      ConfirmAlert.success(t('Reset password went wrong, please retry'))
     }
   }
 
@@ -39,7 +39,7 @@ const ForgotPasswordPage = (props) => {
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
-          <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' ref={register} />
+          <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' {...register('email', { required: true })} />
         </FormGroup>
         <input type='submit' value={t('Send reset code')} className='btn btn-primary m-t-20' />
       </Form>

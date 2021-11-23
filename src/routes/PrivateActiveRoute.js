@@ -1,6 +1,5 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import moment from 'moment'
 import { isAccountActive } from 'libs/utils'
 
 const PrivateActiveRoute = ({
@@ -24,18 +23,20 @@ const PrivateActiveRoute = ({
               // eslint-disable-next-line no-nested-ternary
                 authorized
                   ? (
-                      Layout === undefined ? (
-                        <Component user={user} {...props} />
-                      ) : (
-                        <Layout container={container} user={user}><Component user={user} {...props} /></Layout>
+                      Layout === undefined
+? (
+                    <Component user={user} {...props} />
+                      )
+: (
+                    <Layout container={container} user={user}><Component user={user} {...props} /></Layout>
                       )
                     )
                   : (
-                    <Redirect to={{
-                      pathname: '/plan',
-                      state: { from: props.location }
-                    }}
-                    />
+                  <Redirect to={{
+                    pathname: '/plan',
+                    state: { from: props.location }
+                  }}
+                  />
                     )
               )
         )
