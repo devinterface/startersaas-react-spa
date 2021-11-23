@@ -17,7 +17,7 @@ const RegisterPage = (props) => {
     subdomain: yup.string().matches(/^[a-z0-9](-?[a-z0-9])*$/, { excludeEmptyString: false, message: t('Invalid subdomain format') }).lowercase().required(),
     email: yup.string().lowercase().email().required(),
     password: yup.string().min(8).required(),
-    policy: yup.boolean()
+    privacyAccepted: yup.boolean()
       .required(t('The terms and conditions must be accepted.'))
       .oneOf([true], t('The terms and conditions must be accepted.'))
   })
@@ -36,7 +36,6 @@ const RegisterPage = (props) => {
   })
 
   const onSubmit = async data => {
-    delete data.policy
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
@@ -65,22 +64,32 @@ const RegisterPage = (props) => {
           <input type='password' className='form-control custom-input' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' {...register('password', { required: true })} />
         </FormGroup>
         <FormGroup>
-          <small id='policyHelp' className='form-text text-muted'>{errors.policy?.message}</small>
+          <small id='privacyAcceptedHelp' className='form-text text-muted'>{errors.privacyAccepted?.message}</small>
           <input
-            type='checkbox' id='policy' name='policy' data-name='Checkbox'
+            type='checkbox' id='privacyAccepted' name='policy' data-name='Checkbox'
             className='w-checkbox-input checkbox'
-            {...register('policy', { required: true })}
-            aria-describedby='policyHelp'
+            {...register('privacyAccepted', { required: true })}
+            aria-describedby='privacyAcceptedHelp'
           />
-          <span className='checkbox-label w-form-label'>{t("By clicking on the 'Register' button I consent the terms and conditions of the service and I understand that my account's informations will be used according to the privacy policy.")}</span>
+          <span className='checkbox-label w-form-label text-justify'>&nbsp;{t("By clicking on the 'Register' button I consent the terms and conditions of the service and I understand that my account's informations will be used according to the privacy policy.")}</span>
           <br />
           <a href='/' target='_blank'>{t('Terms and Conditions')}</a>
           <br />
           <a href='/' target='_blank'>{t('Privacy and Policy')}</a>
         </FormGroup>
+        <FormGroup>
+          <small id='marketingAcceptedHelp' className='form-text text-muted'>{errors.marketingAccepted?.message}</small>
+          <input
+            type='checkbox' id='marketingAccepted' name='policy' data-name='Checkbox'
+            className='w-checkbox-input checkbox'
+            {...register('marketingAccepted')}
+            aria-describedby='marketingAcceptedHelp'
+          />
+          <span className='checkbox-label w-form-label text-justify'>&nbsp;{t('Starter SAAS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.')}</span>
+        </FormGroup>
         <input type='submit' value='Conferma' className='btn btn-primary m-t-20' />
       </Form>
-      <Col sm={12} className='text-center m-t-20'>
+      <Col sm={12} className='text-justify m-t-20'>
         <Link to='/auth/login'>{t('Already registered?')}</Link><br />
         <Link to={{ pathname: '/auth/resend-activation' }}>{t('Didn\'t receive the activation email?')}</Link><br />
       </Col>

@@ -42,7 +42,7 @@ const ResetPasswordPage = (props) => {
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='passwordResetTokenHelp' className='form-text text-muted'>{errors.passwordResetToken?.message}</small>
-          <input className='form-control custom-input' type='string' maxLength='256' name='passwordResetToken' data-name='Token' placeholder='passwordResetToken' id='passwordResetToken' required='' {...register('passwordResetToken', { required: true })} />
+          <input className='form-control custom-input' type='string' maxLength='256' name='passwordResetToken' data-name='Token' placeholder='Token' id='passwordResetToken' required='' {...register('passwordResetToken', { required: true })} />
           <p>{errors.passwordResetToken?.message}</p>
         </FormGroup>
         <FormGroup>
