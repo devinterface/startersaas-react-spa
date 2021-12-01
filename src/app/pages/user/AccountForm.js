@@ -78,7 +78,7 @@ const AccountForm = ({ user, onSubmit }) => {
       </Form.Group>
       <Form.Group controlId='formcompanySdi'>
         <Form.Label>{t('SDI')}</Form.Label>
-        <Form.Control type='text' maxLength='256' name='companySdi' data-name='Company SDI' placeholder='' id='companySdi' {...register('email')} />
+        <Form.Control type='text' maxLength='256' name='companySdi' data-name='Company SDI' placeholder='' id='companySdi' {...register('companySdi')} />
         <span className='text-muted'>
           {errors.companySdi?.message}
         </span>
