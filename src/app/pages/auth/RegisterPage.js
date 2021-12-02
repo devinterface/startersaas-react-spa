@@ -87,7 +87,7 @@ const RegisterPage = (props) => {
           />
           <span className='checkbox-label w-form-label text-justify'>&nbsp;{t('Starter SAAS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.')}</span>
         </FormGroup>
-        <input type='submit' value='Conferma' className='btn btn-primary m-t-20' />
+        <input type='submit' value='Confirm' className='btn btn-primary m-t-20' />
       </Form>
       <Col sm={12} className='text-justify m-t-20'>
         <Link to='/auth/login'>{t('Already registered?')}</Link><br />

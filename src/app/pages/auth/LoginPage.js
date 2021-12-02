@@ -43,7 +43,7 @@ const LoginPage = (props) => {
           <small id='passwordHelp' className='form-text text-muted'>{errors.password?.message}</small>
           <input className='form-control custom-input' type='password' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' {...register('password', { required: true })} />
         </FormGroup>
-        <input type='submit' value='Conferma' className='btn btn-primary' />
+        <input type='submit' value='Confirm' className='btn btn-primary' />
       </Form>
       <Col sm={12} className='text-center m-t-20'>
         <Link to={{ pathname: '/auth/register' }}>{t('Register')}</Link><br />

@@ -41,7 +41,7 @@ const ResendActivationPage = (props) => {
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
           <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' {...register('email', { required: true })} />
         </FormGroup>
-        <input type='submit' value='Conferma' className='btn btn-primary m-t-20' />
+        <input type='submit' value='Confirm' className='btn btn-primary m-t-20' />
       </Form>
       <Col sm={12} className='text-center m-t-20'>
         <Link to='/auth/login'>{t('Back to login page')}</Link><br />
