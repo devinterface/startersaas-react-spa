@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { injectStripe, CardElement } from 'react-stripe-elements'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { AddCreditCard } from 'api/mutations'
+import { AddCreditCard, CreateSetupIntent } from 'api/mutations'
 import { useTranslation } from 'react-i18next'
 import ConfirmAlert from 'libs/confirmAlert'
 import Loader from 'app/components/Loader'
@@ -18,6 +18,8 @@ const StripeCCForm = props => {
 
   const mutation = useMutation(AddCreditCard)
 
+  const setupIntentMutation = useMutation(CreateSetupIntent)
+
   const [loading, setLoading] = useState(false)
 
   const [cardElement, setCardElement] = useState(null)
@@ -27,17 +29,18 @@ const StripeCCForm = props => {
   }
 
   const onStripeSubmit = async data => {
-    const source = await props.stripe.createSource({ type: 'card' }, data.cardHolderName)
-    if (source.error) {
-      setLoading(false)
-      return
-    }
-    const cardRequest = {
-      sourceToken: source.source.id
-    }
     try {
       setLoading(true)
-      const response = await mutation.mutateAsync(cardRequest)
+      const setupIntent = await setupIntentMutation.mutateAsync()
+
+      const response = await props.stripe.confirmCardSetup(
+        setupIntent.data.client_secret,
+        {
+          payment_method: {
+            card: cardElement
+          }
+        }
+      )
       if (response) {
         setTimeout(function () {
           ConfirmAlert.success(t('Card added successfully'))
