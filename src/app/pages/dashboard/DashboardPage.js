@@ -213,10 +213,9 @@ const DashboardPage = ({ user }) => {
                           <span>{cardData.card.exp_month}/{cardData.card.exp_year}</span>
                           {cardsData.data.length > 1 && (
                             <span className='right'>
-                              <Button className='custom-btn mini inline red' onClick={() => removeCard(cardData.id)}>{t('remove')}</Button>
-                              {cardData.id !== data.data.default_source
-                                ? (<Button className='custom-btn mini inline grey' onClick={() => setDefaultCard(cardData.id)}>{t('default')}</Button>)
-                                : (<Button className='custom-btn mini inline green' onClick={() => { }}>{t('default')}</Button>)}
+                              {cardData.id === data.data.invoice_settings.default_payment_method || cardData.id === data.data.invoice_settings.default_payment_method.id
+                                ? (<Button className='custom-btn mini inline green' onClick={() => { }}>{t('default')}</Button>)
+                                : (<><Button className='custom-btn mini inline red' onClick={() => removeCard(cardData.id)}>{t('remove')}</Button><Button className='custom-btn mini inline grey' onClick={() => setDefaultCard(cardData.id)}>{t('default')}</Button></>)}
                             </span>
                           )}
                         </div>
