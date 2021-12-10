@@ -149,13 +149,13 @@ const DashboardPage = ({ user }) => {
                         ? (<p>
                           <strong>{t('ATTENTION! You have a failed payment at')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br />
                           <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong>
-                        </p>)
+                           </p>)
                         : (<p>
                           {currentSubscription.canceled_at
                             ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
                             : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
-                        </p>
-                        )}
+                           </p>
+                          )}
                     </div>
                   }
                 />
@@ -182,13 +182,13 @@ const DashboardPage = ({ user }) => {
                             <strong>{t('Will deactivate at')}</strong>
                             <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                           </div>
-                        </>)
+                           </>)
                         : (
                           <div className='inline-data'>
                             <strong>{t('Will renew on')}</strong>
                             <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                           </div>
-                        )}
+                          )}
                     </div>
                   }
                 />
@@ -213,10 +213,9 @@ const DashboardPage = ({ user }) => {
                           <span>{cardData.card.exp_month}/{cardData.card.exp_year}</span>
                           {cardsData.data.length > 1 && (
                             <span className='right'>
-
-                              {cardData.id !== data.data.invoice_settings.default_payment_method
-                                ? (<><Button className='custom-btn mini inline red' onClick={() => removeCard(cardData.id)}>{t('remove')}</Button><Button className='custom-btn mini inline grey' onClick={() => setDefaultCard(cardData.id)}>{t('default')}</Button></>)
-                                : (<Button className='custom-btn mini inline green' onClick={() => { }}>{t('default')}</Button>)}
+                              {cardData.id === data.data.invoice_settings.default_payment_method || cardData.id === data.data.invoice_settings.default_payment_method.id
+                                ? (<Button className='custom-btn mini inline green' onClick={() => { }}>{t('default')}</Button>)
+                                : (<><Button className='custom-btn mini inline red' onClick={() => removeCard(cardData.id)}>{t('remove')}</Button><Button className='custom-btn mini inline grey' onClick={() => setDefaultCard(cardData.id)}>{t('default')}</Button></>)}
                             </span>
                           )}
                         </div>
@@ -294,7 +293,7 @@ const DashboardPage = ({ user }) => {
               </Col>
             </Row>
           </>
-        )}
+          )}
     </div>
   )
 }
