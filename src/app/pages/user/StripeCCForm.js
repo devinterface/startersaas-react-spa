@@ -37,7 +37,10 @@ const StripeCCForm = props => {
         setupIntent.data.client_secret,
         {
           payment_method: {
-            card: cardElement
+            card: cardElement,
+            billing_details: {
+              name: data.cardHolderName
+            }
           }
         }
       )

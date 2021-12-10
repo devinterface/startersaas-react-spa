@@ -46,7 +46,10 @@ const StripeForm = props => {
           {
             setup_future_usage: 'off_session',
             payment_method: {
-              card: cardElement
+              card: cardElement,
+              billing_details: {
+                name: data.cardHolderName
+              }
             }
           }
         )
