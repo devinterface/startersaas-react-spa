@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { injectStripe, CardElement } from 'react-stripe-elements'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import { AddCreditCard, CreateSetupIntent } from 'api/mutations'
+import { SetDefaultCreditCard, CreateSetupIntent } from 'api/mutations'
 import { useTranslation } from 'react-i18next'
 import ConfirmAlert from 'libs/confirmAlert'
 import Loader from 'app/components/Loader'
@@ -16,9 +16,9 @@ const StripeCCForm = props => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({})
 
-  const mutation = useMutation(AddCreditCard)
-
   const setupIntentMutation = useMutation(CreateSetupIntent)
+
+  const setDefaultCreditCard = useMutation(SetDefaultCreditCard)
 
   const [loading, setLoading] = useState(false)
 
@@ -42,6 +42,7 @@ const StripeCCForm = props => {
         }
       )
       if (response) {
+        await setDefaultCreditCard.mutate({ cardId: response.setupIntent.payment_method })
         setTimeout(function () {
           ConfirmAlert.success(t('Card added successfully'))
           history.push('/')

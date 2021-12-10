@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { injectStripe, CardElement } from 'react-stripe-elements'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
-import { Subscribe } from 'api/mutations'
+import { Subscribe, SetDefaultCreditCard } from 'api/mutations'
 import { useTranslation } from 'react-i18next'
 import ConfirmAlert from 'libs/confirmAlert'
 import Loader from 'app/components/Loader'
@@ -23,6 +23,8 @@ const StripeForm = props => {
     }
   })
 
+  const setDefaultCreditCard = useMutation(SetDefaultCreditCard)
+
   const [loading, setLoading] = useState(false)
 
   const handleReady = (element) => {
@@ -30,25 +32,28 @@ const StripeForm = props => {
   }
 
   const onStripeSubmit = async data => {
-    const source = await props.stripe.createSource({ type: 'card' }, data.cardHolderName)
-    if (source.error) {
-      return
-    }
     const paymentRequest = {
-      sourceToken: source.source.id,
       planId: props.planId
     }
     try {
       setLoading(true)
       const response = await mutation.mutateAsync(paymentRequest)
-      if (response.data.status === 'incomplete' && response.data.latest_invoice.payment_intent) {
+
+      if (response.data.latest_invoice.payment_intent.client_secret) {
         // handle intent
-        const handleCardPaymentResul = await props.stripe.confirmCardPayment(
-          response.data.latest_invoice.payment_intent.client_secret
+        const handleCardPaymentResult = await props.stripe.confirmCardPayment(
+          response.data.latest_invoice.payment_intent.client_secret,
+          {
+            setup_future_usage: 'off_session',
+            payment_method: {
+              card: cardElement
+            }
+          }
         )
-        if (handleCardPaymentResul.error) {
-          throw new Error(handleCardPaymentResul.error.message)
+        if (handleCardPaymentResult.error) {
+          throw new Error(handleCardPaymentResult.error.message)
         }
+        await setDefaultCreditCard.mutate({ cardId: handleCardPaymentResult.paymentIntent.payment_method })
         queryClient.invalidateQueries(['Customer', props.user.accountId])
         queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
         queryClient.invalidateQueries(['Me'])
@@ -60,13 +65,12 @@ const StripeForm = props => {
         queryClient.invalidateQueries(['Customer', props.user.accountId])
         queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
         queryClient.invalidateQueries(['Me'])
-        // ConfirmAlert.success(response.data.message)
+        ConfirmAlert.success(response.data.message)
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
       }
     } catch (error) {
-      console.log(error)
       ConfirmAlert.error(t('Payment failed'))
       setTimeout(function () {
         window.location.href = '/dashboard'

@@ -57,11 +57,6 @@ const CreateSetupIntent = async (data) => {
   return result
 }
 
-const AddCreditCard = async (data) => {
-  const result = await Axios.authenticated().post('/stripe/cards', data)
-  return result
-}
-
 const RemoveCreditCard = async (data) => {
   const result = await Axios.authenticated().delete('/stripe/cards', { data: data })
   return result
@@ -82,4 +77,4 @@ const UpdateMe = async (data) => {
   return result
 }
 
-export { Logout, Login, ForgotPassword, ResetPassword, ResendActivation, Register, Activate, UpdateAccount, Subscribe, CancelSubscription, AddCreditCard, RemoveCreditCard, SetDefaultCreditCard, ChangePassword, UpdateMe, CreateSetupIntent }
+export { Logout, Login, ForgotPassword, ResetPassword, ResendActivation, Register, Activate, UpdateAccount, Subscribe, CancelSubscription, RemoveCreditCard, SetDefaultCreditCard, ChangePassword, UpdateMe, CreateSetupIntent }
