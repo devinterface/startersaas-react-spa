@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import ConfirmAlert from 'libs/confirmAlert'
 import { useTranslation } from 'react-i18next'
 import { Col, Form, FormGroup } from 'react-bootstrap'
+import { SIGNUP_WITH_ACTIVATE } from 'config'
 
 const RegisterPage = (props) => {
   const mutation = useMutation(Register)
@@ -39,8 +40,12 @@ const RegisterPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        ConfirmAlert.success(t('An email with the activation token has been sent. Check your inbox.'))
-        props.history.push(`/auth/activate/${data.email}`)
+        if (SIGNUP_WITH_ACTIVATE) {
+          props.history.push('/dashboard')
+        } else {
+          ConfirmAlert.success(t('An email with the activation token has been sent. Check your inbox.'))
+          props.history.push(`/auth/activate/${data.email}`)
+        }
       }
     } catch (error) {
       ConfirmAlert.error(t('Email or password invalid'))

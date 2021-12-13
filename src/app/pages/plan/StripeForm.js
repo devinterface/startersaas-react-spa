@@ -17,11 +17,7 @@ const StripeForm = props => {
 
   const [cardElement, setCardElement] = useState(null)
 
-  const mutation = useMutation(Subscribe, {
-    onSuccess: () => {
-
-    }
-  })
+  const mutation = useMutation(Subscribe)
 
   const setDefaultCreditCard = useMutation(SetDefaultCreditCard)
 
