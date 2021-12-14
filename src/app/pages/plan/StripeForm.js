@@ -56,7 +56,7 @@ const StripeForm = props => {
         queryClient.invalidateQueries(['Customer', props.user.accountId])
         queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
         queryClient.invalidateQueries(['Me'])
-        ConfirmAlert.success(t('Payment successfully completed'))
+        ConfirmAlert.success(t('stripeForm.paymentCompleted'))
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
@@ -70,7 +70,7 @@ const StripeForm = props => {
         }, 3000)
       }
     } catch (error) {
-      ConfirmAlert.error(t('Payment failed'))
+      ConfirmAlert.error(t('stripeForm.paymentFailed'))
       setTimeout(function () {
         window.location.href = '/dashboard'
       }, 3000)
@@ -85,15 +85,15 @@ const StripeForm = props => {
           <Loader />
         )}
         <Form.Group controlId='formCard'>
-          <Form.Label>{t('Credit card owner')}</Form.Label>
-          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name='Card Holder' placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
+          <Form.Label>{t('stripeForm.cardOwner')}</Form.Label>
+          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name={t('stripeForm.cardOwner')} placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
           <span className='text-muted'>
             {errors.cardHolderName?.message}
           </span>
           <CardElement style={{ base: { fontSize: '18px', color: '#333', border: '1px solid #ccc' } }} onReady={handleReady} />
         </Form.Group>
         {!loading && (
-          <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('Subscribe')}</Button>
+          <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('stripeForm.subscribe')}</Button>
         )}
       </Form>
     </>

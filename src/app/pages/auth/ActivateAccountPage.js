@@ -28,26 +28,26 @@ const ActivateAccountPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        ConfirmAlert.success(t('alerts.accountActivated'))
+        ConfirmAlert.success(t('activateAccountPage.accountActivated'))
         props.history.push('/auth/login')
       }
     } catch (error) {
-      ConfirmAlert.error('Activation went wrong, please retry')
+      ConfirmAlert.error('activateAccountPage.activationFailure')
     }
   }
 
   return (
     <div>
-      <h3 className='m-20 m-b-30'>{t('Activate Account')}</h3>
+      <h3 className='m-20 m-b-30'>{t('activateAccountPage.activateAccount')}</h3>
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='passwordHelp' className='form-text text-muted'>{errors.token?.message}</small>
           <input className='form-control custom-input' type='string' maxLength='256' name='token' data-name='Token' placeholder={t('Token')} id='token' required='' {...register('token', { required: true })} />
         </FormGroup>
-        <input type='submit' value={t('Activate')} className='btn btn-primary' />
+        <input type='submit' value={t('activateAccountPage.activate')} className='btn btn-primary' />
       </Form>
       <Col sm={12} className='text-center m-t-20'>
-        <Link to='/auth/login'>{t('Back to login page')}</Link><br />
+        <Link to='/auth/login'>{t('activateAccountPage.back')}</Link><br />
       </Col>
     </div>
 

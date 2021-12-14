@@ -61,7 +61,7 @@ const PlanPage = (props) => {
         <Box
           header={
             <div style={{ textAlign: 'center', minWidth: '300px', width: '50%', margin: '0 auto', marginTop: '20px' }}>
-              <h1>{t('Select a plan')}</h1>
+              <h1>{t('planPage.selectaPlan')}</h1>
             </div>
           }
           body={
@@ -70,8 +70,8 @@ const PlanPage = (props) => {
                 <Row>
                   <Col xs={12}>
                     <div className='contain-buttons-plan'>
-                      <Button className={(selectedPlanRecurring === 1) ? 'button1' : 'button1 grey'} onClick={() => { setSelectedPlanRecurring(1) }}>{t('Monthly plan')}</Button>
-                      <Button className={(selectedPlanRecurring === 2) ? 'button2' : 'button2 grey'} onClick={() => { setSelectedPlanRecurring(2) }}>{t('Yearly plan')}</Button>
+                      <Button className={(selectedPlanRecurring === 1) ? 'button1' : 'button1 grey'} onClick={() => { setSelectedPlanRecurring(1) }}>{t('planPage.monthly')}</Button>
+                      <Button className={(selectedPlanRecurring === 2) ? 'button2' : 'button2 grey'} onClick={() => { setSelectedPlanRecurring(2) }}>{t('planPage.yearly')}</Button>
                     </div>
                   </Col>
                 </Row>

@@ -26,14 +26,14 @@ const LoginPage = (props) => {
     try {
       await mutation.mutateAsync(data)
     } catch (error) {
-      ConfirmAlert.error(t('Email or password invalid'))
+      ConfirmAlert.error(t('loginPage.emailPasswordInvalid'))
     }
     props.history.push('/dashboard')
   }
 
   return (
     <div>
-      <h3 className='m-20 m-b-30'>{t('Access')}</h3>
+      <h3 className='m-20 m-b-30'>{t('loginPage.access')}</h3>
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
@@ -43,12 +43,12 @@ const LoginPage = (props) => {
           <small id='passwordHelp' className='form-text text-muted'>{errors.password?.message}</small>
           <input className='form-control custom-input' type='password' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' {...register('password', { required: true })} />
         </FormGroup>
-        <input type='submit' value='Confirm' className='btn btn-primary' />
+        <input type='submit' value={t('loginPage.confirm')} className='btn btn-primary' />
       </Form>
       <Col sm={12} className='text-center m-t-20'>
-        <Link to={{ pathname: '/auth/register' }}>{t('Register')}</Link><br />
-        <Link to={{ pathname: '/auth/forgot-password' }}>{t('Forgot password?')}</Link><br />
-        <Link to={{ pathname: '/auth/resend-activation' }}>{t('Didn\'t receive the activation email?')}</Link><br />
+        <Link to={{ pathname: '/auth/register' }}>{t('loginPage.register')}</Link><br />
+        <Link to={{ pathname: '/auth/forgot-password' }}>{t('loginPage.forgotPassword')}</Link><br />
+        <Link to={{ pathname: '/auth/resend-activation' }}>{t('loginPage.didntReceivedActivationEmail')}</Link><br />
       </Col>
     </div>
   )

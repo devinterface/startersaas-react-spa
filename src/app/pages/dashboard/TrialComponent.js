@@ -20,10 +20,10 @@ const TrialComponent = ({ user }) => {
         body={
           <div className='text-dark'>
             <p>
-              {t('You are currently working on the trial version of Starter SAAS. Enjoy!')}
+              {t('trialComponent.youAreOnTrial')}
             </p>
-            <strong>{t('Trial period ends at')} {moment(user.account.trialPeriodEndsAt).format('DD/MM/YYYY')}</strong>
-            <Link to='/plan' className='custom-btn green'>{t('Go to plans')}</Link>
+            <strong>{t('trialComponent.trialEndsAt')} {moment(user.account.trialPeriodEndsAt).format('DD/MM/YYYY')}</strong>
+            <Link to='/plan' className='custom-btn green'>{t('trialComponent.goToPlans')}</Link>
           </div>
         }
       />

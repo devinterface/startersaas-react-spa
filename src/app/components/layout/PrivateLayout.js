@@ -52,7 +52,7 @@ const PrivateLayout = ({ children, user }) => {
                 <div className='container-fluid'>
                   <a className='navbar-brand' onClick={goToHome}>
                     <img className='logo' src='/images/logo-startersaas.svg' />
-                  </a><button data-toggle='collapse' className='navbar-toggler' data-target='#navcol-1'><span className='sr-only'>Toggle navigation</span><span className='navbar-toggler-icon' /></button>
+                  </a><button data-toggle='collapse' className='navbar-toggler' data-target='#navcol-1'><span className='sr-only'>{t('privateLayout.toggle')}</span><span className='navbar-toggler-icon' /></button>
                   <div className='collapse navbar-collapse d-md-flex d-lg-flex justify-content-md-start justify-content-lg-end' id='navcol-1'>
                     <ul className='navbar-nav d-md-flex flex-grow-1 justify-content-md-end flex-lg-grow-0 justify-content-xl-end'>
                       <li className='nav-item'>
@@ -61,9 +61,9 @@ const PrivateLayout = ({ children, user }) => {
                           <option value='en'>EN</option>
                         </select>
                       </li>
-                      <li className='nav-item'><Link to='/account/edit' className='menu-link' id='account-edit' title={t('Billing details')}><FontAwesomeIcon icon={faMoneyBill} /><span className='only-mobile'>{t('Billing details')}</span></Link></li>
-                      <li className='nav-item'><Link to='/user/edit' className='menu-link' id='user-edit' title={t('Edit user info')}><FontAwesomeIcon icon={faUserEdit} /><span className='only-mobile'>{t('Edit user info')}</span></Link></li>
-                      <li className='nav-item'><a href='#' onClick={logout} className='menu-link' id='logout' title={t('Logout')}><FontAwesomeIcon icon={faSignOutAlt} /><span className='only-mobile'>{t('Logout')}</span></a></li>
+                      <li className='nav-item'><Link to='/account/edit' className='menu-link' id='account-edit' title={t('privateLayout.billingDetails')}><FontAwesomeIcon icon={faMoneyBill} /><span className='only-mobile'>{t('privateLayout.billingDetails')}</span></Link></li>
+                      <li className='nav-item'><Link to='/user/edit' className='menu-link' id='user-edit' title={t('privateLayout.editUser')}><FontAwesomeIcon icon={faUserEdit} /><span className='only-mobile'>{t('privateLayout.editUser')}</span></Link></li>
+                      <li className='nav-item'><a href='#' onClick={logout} className='menu-link' id='logout' title={t('privateLayout.logout')}><FontAwesomeIcon icon={faSignOutAlt} /><span className='only-mobile'>{t('privateLayout.logout')}</span></a></li>
                     </ul>
                   </div>
                 </div>

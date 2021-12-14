@@ -15,12 +15,12 @@ const RegisterPage = (props) => {
   const { t } = useTranslation()
 
   const schema = yup.object().shape({
-    subdomain: yup.string().matches(/^[a-z0-9](-?[a-z0-9])*$/, { excludeEmptyString: false, message: t('Invalid subdomain format') }).lowercase().required(),
+    subdomain: yup.string().matches(/^[a-z0-9](-?[a-z0-9])*$/, { excludeEmptyString: false, message: t('registerPage.invalidSubdomain') }).lowercase().required(),
     email: yup.string().lowercase().email().required(),
     password: yup.string().min(8).required(),
     privacyAccepted: yup.boolean()
-      .required(t('The terms and conditions must be accepted.'))
-      .oneOf([true], t('The terms and conditions must be accepted.'))
+      .required(t('registerPage.termsAccepted'))
+      .oneOf([true], t('registerPage.termsAccepted'))
   })
 
   const slugify = value => {
@@ -43,12 +43,12 @@ const RegisterPage = (props) => {
         if (SIGNUP_WITH_ACTIVATE) {
           props.history.push('/dashboard')
         } else {
-          ConfirmAlert.success(t('An email with the activation token has been sent. Check your inbox.'))
+          ConfirmAlert.success(t('registerPage.confirmEmailSent'))
           props.history.push(`/auth/activate/${data.email}`)
         }
       }
     } catch (error) {
-      ConfirmAlert.error(t('Email or password invalid'))
+      ConfirmAlert.error(t('registerPage.emailPasswordInvalid'))
     }
   }
 
@@ -58,11 +58,11 @@ const RegisterPage = (props) => {
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='subdomainHelp' className='form-text text-muted'>{errors.subdomain?.message}</small>
-          <input type='subdomain' className='form-control custom-input' maxLength='256' aria-describedby='subdomainHelp' name='subdomain' data-name='Subdomain' placeholder='Subdomain' id='subdomain' {...register('subdomain', { required: true })} onChange={e => slugify(e.target.value)} />
+          <input type='subdomain' className='form-control custom-input' maxLength='256' aria-describedby='subdomainHelp' name='subdomain' data-name='Subdomain' placeholder={t('registerPage.subdomain')} id='subdomain' {...register('subdomain', { required: true })} onChange={e => slugify(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <small id='emailHelp' className='form-text text-muted'>{errors.email?.message}</small>
-          <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='E-mail' id='email' {...register('email', { required: true })} />
+          <input type='email' className='form-control custom-input' maxLength='256' aria-describedby='emailHelp' name='email' data-name='Email' placeholder='Email' id='email' {...register('email', { required: true })} />
         </FormGroup>
         <FormGroup>
           <small id='passwordHelp' className='form-text text-muted'>{errors.password?.message}</small>
@@ -76,11 +76,11 @@ const RegisterPage = (props) => {
             {...register('privacyAccepted', { required: true })}
             aria-describedby='privacyAcceptedHelp'
           />
-          <span className='checkbox-label w-form-label text-justify'>&nbsp;{t("By clicking on the 'Register' button I consent the terms and conditions of the service and I understand that my account's informations will be used according to the privacy policy.")}</span>
+          <span className='checkbox-label w-form-label text-justify'>&nbsp;{t('registerPage.registerConsent')}</span>
           <br />
-          <a href='/' target='_blank'>{t('Terms and Conditions')}</a>
+          <a href='/' target='_blank'>{t('registerPage.terms')}</a>
           <br />
-          <a href='/' target='_blank'>{t('Privacy and Policy')}</a>
+          <a href='/' target='_blank'>{t('registerPage.privacy')}</a>
         </FormGroup>
         <FormGroup>
           <small id='marketingAcceptedHelp' className='form-text text-muted'>{errors.marketingAccepted?.message}</small>
@@ -90,13 +90,13 @@ const RegisterPage = (props) => {
             {...register('marketingAccepted')}
             aria-describedby='marketingAcceptedHelp'
           />
-          <span className='checkbox-label w-form-label text-justify'>&nbsp;{t('Starter SAAS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.')}</span>
+          <span className='checkbox-label w-form-label text-justify'>&nbsp;{t('registerPage.marketingConsent')}</span>
         </FormGroup>
-        <input type='submit' value='Confirm' className='btn btn-primary m-t-20' />
+        <input type='submit' value={t('registerPage.confirm')} className='btn btn-primary m-t-20' />
       </Form>
       <Col sm={12} className='text-justify m-t-20'>
-        <Link to='/auth/login'>{t('Already registered?')}</Link><br />
-        <Link to={{ pathname: '/auth/resend-activation' }}>{t('Didn\'t receive the activation email?')}</Link><br />
+        <Link to='/auth/login'>{t('registerPage.alreadyRegistered')}</Link><br />
+        <Link to={{ pathname: '/auth/resend-activation' }}>{t('registerPage.didntReceivedActivationEmail')}</Link><br />
       </Col>
     </div>
   )

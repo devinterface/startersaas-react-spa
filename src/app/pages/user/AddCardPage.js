@@ -25,7 +25,7 @@ const AddCardPage = (props) => {
       <Col xs={12}>
         <Box
           header={
-            <h1>{t('Credit card data')}</h1>
+            <h1>{t('addCardPage.creditCard')}</h1>
           }
           body={
             <StripeProvider apiKey={plansData.data.publicKey}>
