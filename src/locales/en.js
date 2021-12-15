@@ -15,7 +15,7 @@ export default {
     registerConsent: 'By clicking on the \'Register\' button I consent the terms and conditions of the service and I understand that my account\'s informations will be used according to the privacy policy.',
     terms: 'Terms and Conditions',
     privacy: 'Privacy and Policy',
-    marketingConsent: 'Starter SAAS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.',
+    marketingConsent: 'Starter SaaS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.',
     alreadyRegistered: 'Already registered?',
     didntReceivedActivationEmail: 'Didn\'t receive the activation email?',
     confirm: 'Confirm'
@@ -107,13 +107,13 @@ export default {
     creditCard: 'Credit card data'
   },
   trialComponent: {
-    youAreOnTrial: 'You are currently working on the trial version of Starter SAAS. Enjoy!',
+    youAreOnTrial: 'You are currently working on the trial version of Starter SaaS. Enjoy!',
     trialEndsAt: 'Trial period ends at',
     goToPlans: 'Go to plans'
   },
   dashboardPage: {
     unsubscribe: 'Unsubscribe',
-    areYouSureToUnsubscribe: 'Are you sure to unsubscribe? In any case, your subscriptin will be active until the end of the paid period',
+    areYouSureToUnsubscribe: 'Are you sure to unsubscribe? In any case, your subscription will be active until the end of the paid period',
     yes: 'Yes',
     no: 'No',
     removeCard: 'Remove the card',

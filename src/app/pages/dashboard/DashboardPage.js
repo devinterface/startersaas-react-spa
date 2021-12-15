@@ -238,7 +238,6 @@ const DashboardPage = ({ user }) => {
                   body={
                     <div>
                       <div className='inline-data'><strong>{t('dashboardPage.plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
-                      <div className='inline-data'><strong>{t('dashboardPage.willRenewOn')}</strong><span className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</span></div>
                       <div className='inline-data'><strong>{t('dashboardPage.price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
                       <Row>
                         <Col xs={6}><Link to='/plan' className='custom-btn green'>{t('dashboardPage.changePlan')}</Link></Col>
