@@ -28,17 +28,17 @@ const ResetPasswordPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        ConfirmAlert.success(t('Your password has been successfully updated'))
+        ConfirmAlert.success(t('resetPasswordPage.passwordUpdated'))
         props.history.push('/auth/login')
       }
     } catch (error) {
-      ConfirmAlert.error('Reset password went wrong, please retry')
+      ConfirmAlert.error(t('resetPasswordPage.resetPasswordFailure'))
     }
   }
 
   return (
     <div>
-      <h3 className='m-20 m-b-30'>{t('Change password')}</h3>
+      <h3 className='m-20 m-b-30'>{t('resetPasswordPage.changePassword')}</h3>
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='passwordResetTokenHelp' className='form-text text-muted'>{errors.passwordResetToken?.message}</small>
@@ -50,10 +50,10 @@ const ResetPasswordPage = (props) => {
           <input className='form-control custom-input' type='password' maxLength='256' name='password' data-name='Password' placeholder='Password' id='password' required='' {...register('password', { required: true })} />
           <p>{errors.password?.message}</p>
         </FormGroup>
-        <input type='submit' value={t('Update password')} className='btn btn-primary' />
+        <input type='submit' value={t('resetPasswordPage.updatePassword')} className='btn btn-primary' />
       </Form>
       <Col sm={12} className='text-center m-t-20'>
-        <Link to='/auth/login'>{t('Back to login page')}</Link><br />
+        <Link to='/auth/login'>{t('resetPasswordPage.back')}</Link><br />
       </Col>
     </div>
 

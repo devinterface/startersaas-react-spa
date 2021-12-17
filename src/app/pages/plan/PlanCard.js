@@ -16,15 +16,15 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription }) => {
 
   const confirmUpdate = async planId => {
     confirmAlert({
-      title: t('Update your subscription'),
-      message: t('Are you sure tu update your plan?'),
+      title: t('planCard.updateSubscription'),
+      message: t('planCard.areYouSure'),
       buttons: [
         {
-          label: t('Yes'),
+          label: t('planCard.yes'),
           onClick: () => onUpdatePlanSubmit(planId)
         },
         {
-          label: t('No'),
+          label: t('planCard.no'),
           onClick: () => { }
         }
       ]
@@ -40,7 +40,7 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription }) => {
       const response = await mutation.mutateAsync(paymentRequest)
       if (response) {
         setTimeout(function () {
-          ConfirmAlert.success(t('Plan successfully updated'))
+          ConfirmAlert.success(t('planCard.planUpdated'))
           window.location.href = '/'
         }, 1000)
       }
@@ -60,7 +60,7 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription }) => {
                 {plan.title}
                 <br />
                 {formatMoney('it', plan.currency, plan.price)}
-                {monthly ? t('/month') : t('/year')}  (+IVA)
+                {monthly ? t('planCard.month') : t('planCard.year')}  (+IVA)
               </Card.Title>
             </Card.Header>
             <Card.Body>
@@ -70,10 +70,10 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription }) => {
                 </Card.Text>
               )}
               {currentSubscription && currentSubscription.status === 'active' && currentSubscription.plan.id === plan.id && !currentSubscription.canceled_at
-                ? (<Button className='custom-btn w-100-perc' onClick={() => { }}>{t('Your curren plan')}</Button>)
+                ? (<Button className='custom-btn w-100-perc' onClick={() => { }}>{t('planCard.currentPlan')}</Button>)
                 : (currentSubscription && currentSubscription.status === 'active'
-                  ? (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('Change plan')}</Button>)
-                  : (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('Select this plan')}</Button>)
+                  ? (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
+                  : (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.selectPlan')}</Button>)
                 )}
             </Card.Body>
           </div>

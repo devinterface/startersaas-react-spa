@@ -47,7 +47,7 @@ const StripeCCForm = props => {
       if (response) {
         await setDefaultCreditCard.mutate({ cardId: response.setupIntent.payment_method })
         setTimeout(function () {
-          ConfirmAlert.success(t('Card added successfully'))
+          ConfirmAlert.success(t('stripeCCForm.cardAdded'))
           history.push('/')
         }, 1000)
       }
@@ -63,14 +63,14 @@ const StripeCCForm = props => {
           <Loader />
         )}
         <Form.Group controlId='formCard'>
-          <Form.Label>{t('Credit card owner')}</Form.Label>
-          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name='Card Holder' placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
+          <Form.Label>{t('stripeCCForm.cardOwner')}</Form.Label>
+          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name={t('stripeCCForm.cardOwner')} placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
           <span className='text-muted'>
             {errors.cardHolderName?.message}
           </span>
           <CardElement style={{ base: { fontSize: '18px', color: '#333', border: '1px solid #ccc' } }} onReady={handleReady} />
         </Form.Group>
-        <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('Add this card')}</Button>
+        <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('stripeCCForm.addCard')}</Button>
       </Form>
     </>
   )

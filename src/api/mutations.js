@@ -1,6 +1,6 @@
 import Axios from 'libs/axios'
 import Storage from 'libs/storage'
-import { JWT_TOKEN } from 'config'
+import { JWT_TOKEN, SIGNUP_WITH_ACTIVATE } from 'config'
 
 const Logout = async () => {
   Storage.deleteKey(JWT_TOKEN)
@@ -29,6 +29,9 @@ const ResendActivation = async (data) => {
 
 const Register = async (data) => {
   const result = await Axios.base().post('/auth/signup', data)
+  if (SIGNUP_WITH_ACTIVATE) {
+    Storage.setItem(JWT_TOKEN, result.data.token)
+  }
   return result
 }
 

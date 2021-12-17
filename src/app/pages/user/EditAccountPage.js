@@ -16,7 +16,7 @@ const EditAccountPage = (props) => {
     try {
       const response = await mutation.mutateAsync({ accountId: props.user.accountId, data: data })
       if (response) {
-        ConfirmAlert.success(t('Billing details have been successfully updated'))
+        ConfirmAlert.success(t('editAccountPage.detailsUpdated'))
       }
     } catch (error) {
     }
@@ -27,7 +27,7 @@ const EditAccountPage = (props) => {
       <Col xs={12}>
         <Box
           header={
-            <h1>{t('Billing details')}</h1>
+            <h1>{t('editAccountPage.details')}</h1>
           }
           body={
             <AccountForm user={props.user} onSubmit={onSubmit} />

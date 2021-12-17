@@ -10,7 +10,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
 
 const schema = yup.object().shape({
-  password: yup.string().min(8).required('Password is required')
+  password: yup.string().min(8).required('editUserPage.passwordRequired')
 })
 
 const EditUserPage = (props) => {
@@ -25,7 +25,7 @@ const EditUserPage = (props) => {
     data = { password: data.password }
     const response = await mutation.mutateAsync(data)
     if (response) {
-      ConfirmAlert.success(t('Your password has been successfully updated'))
+      ConfirmAlert.success(t('editUserPage.passwordUpdated'))
       props.history.push('/')
     }
   }
@@ -36,8 +36,8 @@ const EditUserPage = (props) => {
         <Box
           header={
             <div>
-              <h1>{t('Change password')}</h1>
-              <p>{t('Insert the new password')}</p>
+              <h1>{t('editUserPage.changePassword')}</h1>
+              <p>{t('editUserPage.insertNewPassword')}</p>
             </div>
           }
           body={
@@ -50,7 +50,7 @@ const EditUserPage = (props) => {
                     {errors.password?.message}
                   </span>
                 </Form.Group>
-                <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('Update password')}</Button>
+                <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('editUserPage.updatePassword')}</Button>
               </Form>
             </div>
           }
