@@ -131,7 +131,7 @@ const DashboardPage = ({ user }) => {
         : (
           <>
             <Row>
-              <Col className='contain-box' sm={8}>
+              <Col className='contain-box' sm={12}>
                 <Box
                   color='blue'
                   header={
@@ -146,13 +146,13 @@ const DashboardPage = ({ user }) => {
                         ? (<>
                           <p><strong>{t('dashboardPage.failedPaymentAt')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br /></p>
                           <p><strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong></p>
-                        </>)
+                           </>)
                         : (<p>
                           {currentSubscription.canceled_at
                             ? (<p><strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong></p>)
                             : (<p><strong>{t('dashboardPage.subscriptionRenewOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong></p>)}
-                        </p>
-                        )}
+                           </p>
+                          )}
                       {currentSubscription.status === 'past_due' && (
                         <p><strong>{t('dashboardPage.checkYourPayments')}</strong></p>
                       )}
@@ -160,7 +160,10 @@ const DashboardPage = ({ user }) => {
                   }
                 />
               </Col>
-              <Col className='contain-box' sm={4}>
+            </Row>
+
+            <Row>
+              <Col className='contain-box' sm={6}>
                 <Box
                   header={
                     <div>
@@ -182,26 +185,29 @@ const DashboardPage = ({ user }) => {
                             <strong>{t('dashboardPage.willDeactivateAt')}</strong>
                             <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                           </div>
-                        </>)
+                           </>)
                         : (
                           <div className='inline-data'>
                             <strong>{t('dashboardPage.willRenewOn')}</strong>
                             <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                           </div>
-                        )}
+                          )}
                       {hasFailedPayment(user.account) && (
                         <div className='inline-data'>
                           <strong>{t('dashboardPage.paymentFailedAt')}</strong>
                           <div className='right'>{moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</div>
                         </div>
                       )}
+                      <Row>
+                        <Col xs={6}><Link to='/plan' className='custom-btn green'>{t('dashboardPage.changePlan')}</Link></Col>
+                        {!currentSubscription.canceled_at && (
+                          <Col xs={6}><Button className='custom-btn red w-100-perc' onClick={() => cancelSubscription(currentSubscription.id)}>{t('dashboardPage.deleteSubscription')}</Button></Col>
+                        )}
+                      </Row>
                     </div>
                   }
                 />
               </Col>
-            </Row>
-
-            <Row>
               <Col className='contain-box' sm={6}>
                 <Box
                   header={
@@ -228,28 +234,6 @@ const DashboardPage = ({ user }) => {
                       )}
                       <Row>
                         <Col sm={6} xs={12}><Link to='/card/add' className='custom-btn green'>{t('dashboardPage.addCreditCard')}</Link></Col>
-                      </Row>
-                    </div>
-                  }
-                />
-              </Col>
-              <Col className='contain-box' sm={6}>
-                <Box
-                  header={
-                    <div>
-                      <div className='semicircle green' />
-                      <h1>{t('Manage your plan')}</h1>
-                    </div>
-                  }
-                  body={
-                    <div>
-                      <div className='inline-data'><strong>{t('dashboardPage.plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
-                      <div className='inline-data'><strong>{t('dashboardPage.price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
-                      <Row>
-                        <Col xs={6}><Link to='/plan' className='custom-btn green'>{t('dashboardPage.changePlan')}</Link></Col>
-                        {!currentSubscription.canceled_at && (
-                          <Col xs={6}><Button className='custom-btn red w-100-perc' onClick={() => cancelSubscription(currentSubscription.id)}>{t('dashboardPage.deleteSubscription')}</Button></Col>
-                        )}
                       </Row>
                     </div>
                   }
@@ -302,7 +286,7 @@ const DashboardPage = ({ user }) => {
               </Col>
             </Row>
           </>
-        )}
+          )}
     </div>
   )
 }
