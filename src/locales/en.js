@@ -75,7 +75,7 @@ export default {
   },
   planCard: {
     updateSubscription: 'Update your subscription',
-    areYouSure: 'Are you sure tu update your plan?',
+    areYouSure: 'Are you sure to update your plan?',
     yes: 'Yes',
     no: 'No',
     planUpdated: 'Plan successfully updated',
@@ -83,7 +83,8 @@ export default {
     year: '/year',
     changePlan: 'Change plan',
     currentPlan: 'Your curren plan',
-    selectPlan: 'Select this plan'
+    selectPlan: 'Select this plan',
+    toPay: 'To pay'
   },
   planPage: {
     selectaPlan: 'Select a plan',
@@ -122,6 +123,7 @@ export default {
     areYouSureMakeDefault: 'Are you sure to make this card the default one?',
     manageSubscription: 'In this panel you can manage your subscription and check your payment history',
     failedPaymentAt: 'ATTENTION! You have a failed payment at',
+    checkYourPayments: 'Please check your due payment in the Payment History section or in your email inbox.',
     subscriptionDeactivateOn: 'Your subscription will automatically deactivate on',
     subscriptionRenewOn: 'Your subscription will automatically renew on',
     yourSubscription: 'Your subscription',
@@ -130,6 +132,7 @@ export default {
     canceledAt: 'Canceled at',
     willDeactivateAt: 'Will deactivate at',
     willRenewOn: 'Will renew on',
+    paymentFailedAt: 'Payment failed at',
     paymentMethods: 'Your payment methods',
     default: 'default',
     remove: 'remove',
@@ -142,7 +145,8 @@ export default {
     date: 'Date',
     total: 'Total',
     paid: 'Paid',
-    toPay: 'To pay'
+    toPay: 'To pay',
+    actions: 'Actions'
   },
   privateLayout: {
     billingDetails: 'Billing details',

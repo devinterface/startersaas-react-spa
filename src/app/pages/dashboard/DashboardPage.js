@@ -134,7 +134,6 @@ const DashboardPage = ({ user }) => {
               <Col className='contain-box' sm={8}>
                 <Box
                   color='blue'
-                  image={<img src='/images/articoliesocial-2.svg' />}
                   header={
                     <div>
                       <h1>{user.email}</h1>
@@ -142,20 +141,21 @@ const DashboardPage = ({ user }) => {
                   }
                   body={
                     <div>
-                      <p>
-                        {t('dashboardPage.manageSubscription')}
-                      </p>
+                      <p />
                       {hasFailedPayment(user.account)
-                        ? (<p>
-                          <strong>{t('dashboardPage.failedPaymentAt')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br />
-                          <strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong>
-                           </p>)
+                        ? (<>
+                          <p><strong>{t('dashboardPage.failedPaymentAt')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br /></p>
+                          <p><strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong></p>
+                        </>)
                         : (<p>
                           {currentSubscription.canceled_at
-                            ? (<strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
-                            : (<strong>{t('dashboardPage.subscriptionRenewOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
-                           </p>
-                          )}
+                            ? (<p><strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong></p>)
+                            : (<p><strong>{t('dashboardPage.subscriptionRenewOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong></p>)}
+                        </p>
+                        )}
+                      {currentSubscription.status === 'past_due' && (
+                        <p><strong>{t('dashboardPage.checkYourPayments')}</strong></p>
+                      )}
                     </div>
                   }
                 />
@@ -182,13 +182,19 @@ const DashboardPage = ({ user }) => {
                             <strong>{t('dashboardPage.willDeactivateAt')}</strong>
                             <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                           </div>
-                           </>)
+                        </>)
                         : (
                           <div className='inline-data'>
                             <strong>{t('dashboardPage.willRenewOn')}</strong>
                             <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
                           </div>
-                          )}
+                        )}
+                      {hasFailedPayment(user.account) && (
+                        <div className='inline-data'>
+                          <strong>{t('dashboardPage.paymentFailedAt')}</strong>
+                          <div className='right'>{moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</div>
+                        </div>
+                      )}
                     </div>
                   }
                 />
@@ -269,11 +275,11 @@ const DashboardPage = ({ user }) => {
                             <th scope='col'>{t('dashboardPage.status')}</th>
                             <th scope='col'>{t('dashboardPage.date')}</th>
                             <th scope='col'>{t('dashboardPage.total')}</th>
-                            {/* <th scope='col'>{t('Receipt')}</th> */}
+                            <th scope='col'>{t('dashboardPage.actions')}</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {invoicesData.data.filter(invoice => (invoice.status === 'paid')).map((invoice, i) =>
+                          {invoicesData.data.filter(invoice => (invoice.status === 'paid' || invoice.status === 'open')).map((invoice, i) =>
                             <tr key={`invoice-${i}`}>
                               <td>{invoice.number}</td>
                               <td>{invoice.paid ? t('dashboardPage.paid') : t('dashboardPage.toPay')}</td>
@@ -281,7 +287,11 @@ const DashboardPage = ({ user }) => {
                               <td>
                                 {formatMoney('it', selectedPlan.currency, invoice.total / 100)}
                               </td>
-                              {/* <td><a href={invoice.invoice_pdf}>pdf</a></td> */}
+                              <td>
+                                {invoice.hosted_invoice_url && invoice.status === 'open' && (
+                                  <strong><a href={invoice.hosted_invoice_url} className='custom-btn mini inline red'>{t('dashboardPage.toPay')}</a></strong>
+                                )}
+                              </td>
                             </tr>
                           )}
                         </tbody>
@@ -292,7 +302,7 @@ const DashboardPage = ({ user }) => {
               </Col>
             </Row>
           </>
-          )}
+        )}
     </div>
   )
 }
