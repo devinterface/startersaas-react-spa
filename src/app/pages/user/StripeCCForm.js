@@ -45,6 +45,9 @@ const StripeCCForm = props => {
         }
       )
       if (response) {
+        if (response.error) {
+          throw new Error(response.error.message)
+        }
         await setDefaultCreditCard.mutate({ cardId: response.setupIntent.payment_method })
         setTimeout(function () {
           ConfirmAlert.success(t('stripeCCForm.cardAdded'))
@@ -52,6 +55,7 @@ const StripeCCForm = props => {
         }, 1000)
       }
     } catch (error) {
+      ConfirmAlert.error(t('stripeCCForm.addCardFailed') + ' ' + error.message)
       setLoading(false)
     }
   }

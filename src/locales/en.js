@@ -71,7 +71,8 @@ export default {
   stripeCCForm: {
     cardAdded: 'Card added successfully',
     cardOwner: 'Credit card owner',
-    addCard: 'Add this card'
+    addCard: 'Add this card',
+    addCardFailed: 'Card is not added due to some errors:'
   },
   planCard: {
     updateSubscription: 'Update your subscription',
