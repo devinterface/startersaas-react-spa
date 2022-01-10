@@ -93,7 +93,7 @@ export default {
     yearly: 'Yearly plan'
   },
   stripeForm: {
-    paymentFailed: 'Payment failed',
+    paymentFailed: 'Payment failed due to some errors:',
     paymentCompleted: 'Payment successfully completed',
     cardOwner: 'Credit card owner',
     subscribe: 'Subscribe'

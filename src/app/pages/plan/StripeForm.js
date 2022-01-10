@@ -70,7 +70,7 @@ const StripeForm = props => {
         }, 3000)
       }
     } catch (error) {
-      ConfirmAlert.error(t('stripeForm.paymentFailed'))
+      ConfirmAlert.error(t('stripeForm.paymentFailed') + ' ' + error.message)
       setTimeout(function () {
         window.location.href = '/dashboard'
       }, 3000)
