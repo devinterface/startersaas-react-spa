@@ -35,28 +35,28 @@ const AccountForm = ({ user, onSubmit }) => {
 
     <Form id='email-form' name='email-form' data-name='Email Form' onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId='formCompanyName'>
-        <Form.Label>{t('Company name')}</Form.Label>
+        <Form.Label>{t('accountForm.companyName')}</Form.Label>
         <Form.Control type='text' maxLength='256' name='companyName' data-name='Compnay Name' placeholder='' id='companyName' {...register('companyName', { required: true })} />
         <span className='text-muted'>
           {errors.companyName?.message}
         </span>
       </Form.Group>
       <Form.Group controlId='formCompanyPhone'>
-        <Form.Label>{t('Phone number')}</Form.Label>
+        <Form.Label>{t('accountForm.phoneNumber')}</Form.Label>
         <Form.Control type='text' maxLength='256' name='companyPhone' data-name='Company Phone' placeholder='' id='companyPhone' {...register('companyPhone', { required: true })} />
         <span className='text-muted'>
           {errors.companyPhone?.message}
         </span>
       </Form.Group>
       <Form.Group controlId='formcompanyBillingAddress'>
-        <Form.Label>{t('Billing address')}</Form.Label>
+        <Form.Label>{t('accountForm.billingAddress')}</Form.Label>
         <Form.Control type='text' maxLength='256' name='companyBillingAddress' data-name='Company Billing Address' placeholder='' id='companyBillingAddress' {...register('companyBillingAddress', { required: true })} />
         <span className='text-muted'>
           {errors.companyBillingAddress?.message}
         </span>
       </Form.Group>
       <Form.Group controlId='formcompanyVat'>
-        <Form.Label>{t('VAT number')}</Form.Label>
+        <Form.Label>{t('accountForm.vatNumber')}</Form.Label>
         <Form.Control type='text' maxLength='256' name='companyVat' data-name='Company Vat' placeholder='' id='companyVat' {...register('companyVat', { required: true })} />
         <span className='text-muted'>
           {errors.companyVat?.message}
@@ -84,7 +84,7 @@ const AccountForm = ({ user, onSubmit }) => {
         </span>
       </Form.Group>
 
-      <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('Update billing details')}</Button>
+      <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('accountForm.update')}</Button>
     </Form>
 
   )

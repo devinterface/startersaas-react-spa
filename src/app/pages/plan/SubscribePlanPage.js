@@ -52,7 +52,7 @@ const SubscribePlanPage = (props) => {
           <Box
             header={
               <div>
-                <h1>{t('Billing details')}</h1>
+                <h1>{t('subscribePlanPage.billingDetails')}</h1>
               </div>
             }
             body={
@@ -67,14 +67,14 @@ const SubscribePlanPage = (props) => {
             <Box
               header={
                 <div>
-                  <h1>{t('Your order')}</h1>
+                  <h1>{t('subscribePlanPage.yourOrder')}</h1>
                 </div>
               }
               body={
                 <div>
-                  <div className='inline-data'><strong>{t('Plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
-                  <div className='inline-data'><strong>{t('Invoicing')}</strong><span className='right'>{selectedPlan.monthly ? t('Monthly') : t('Yearly')}</span></div>
-                  <div className='inline-data'><strong>{t('Price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
+                  <div className='inline-data'><strong>{t('subscribePlanPage.plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
+                  <div className='inline-data'><strong>{t('subscribePlanPage.invoicing')}</strong><span className='right'>{selectedPlan.monthly ? t('subscribePlanPage.monthly') : t('subscribePlanPage.yearly')}</span></div>
+                  <div className='inline-data'><strong>{t('subscribePlanPage.price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
                 </div>
               }
             />
@@ -87,7 +87,7 @@ const SubscribePlanPage = (props) => {
             <Box
               header={
                 <div>
-                  <h1>{t('Credit card data')}</h1>
+                  <h1>{t('subscribePlanPage.creditCard')}</h1>
                 </div>
               }
               body={

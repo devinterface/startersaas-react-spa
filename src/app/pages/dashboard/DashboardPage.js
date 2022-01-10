@@ -43,15 +43,15 @@ const DashboardPage = ({ user }) => {
 
   const cancelSubscription = async (subscriptionId) => {
     confirmAlert({
-      title: t('Unsubscribe'),
-      message: t('Are you sure to unsubscribe? In any case, your subscriptin will be active until the end of the paid period'),
+      title: t('dashboardPage.unsubscribe'),
+      message: t('dashboardPage.areYouSureToUnsubscribe'),
       buttons: [
         {
-          label: 'Si',
+          label: t('dashboardPage.yes'),
           onClick: async () => cancelSubscriptionMutate.mutate({ subscriptionId: subscriptionId })
         },
         {
-          label: 'No',
+          label: t('dashboardPage.no'),
           onClick: () => { }
         }
       ]
@@ -60,15 +60,15 @@ const DashboardPage = ({ user }) => {
 
   const removeCard = async (cardId) => {
     confirmAlert({
-      title: t('Remove the card'),
-      message: t('Are you sure to remove this card?'),
+      title: t('dashboardPage.removeCard'),
+      message: t('dashboardPage.areYouSureToRemoveCard'),
       buttons: [
         {
-          label: t('Yes'),
+          label: t('dashboardPage.yes'),
           onClick: async () => removeCardMutate.mutate({ cardId: cardId })
         },
         {
-          label: t('No'),
+          label: t('dashboardPage.no'),
           onClick: () => { }
         }
       ]
@@ -77,15 +77,15 @@ const DashboardPage = ({ user }) => {
 
   const setDefaultCard = async (cardId) => {
     confirmAlert({
-      title: t('Make default'),
-      message: t('Are you sure to make this card the default one?'),
+      title: t('dashboardPage.makeDefault'),
+      message: t('dashboardPage.areYouSureMakeDefault'),
       buttons: [
         {
-          label: t('Yes'),
+          label: t('dashboardPage.yes'),
           onClick: async () => setDefaultCardMutate.mutate({ cardId: cardId })
         },
         {
-          label: t('No'),
+          label: t('dashboardPage.no'),
           onClick: () => { }
         }
       ]
@@ -131,10 +131,9 @@ const DashboardPage = ({ user }) => {
         : (
           <>
             <Row>
-              <Col className='contain-box' sm={8}>
+              <Col className='contain-box' sm={12}>
                 <Box
                   color='blue'
-                  image={<img src='/images/articoliesocial-2.svg' />}
                   header={
                     <div>
                       <h1>{user.email}</h1>
@@ -142,53 +141,21 @@ const DashboardPage = ({ user }) => {
                   }
                   body={
                     <div>
-                      <p>
-                        {t('In this panel you can manage your subscription and check your payment history')}
-                      </p>
+                      <p />
                       {hasFailedPayment(user.account)
-                        ? (<p>
-                          <strong>{t('ATTENTION! You have a failed payment at')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br />
-                          <strong>{t('Your subscription will automatically deactivate on')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong>
-                           </p>)
+                        ? (<>
+                          <p><strong>{t('dashboardPage.failedPaymentAt')} {moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</strong><br /></p>
+                          <p><strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment(user.account.paymentFailedSubscriptionEndsAt).format('DD/MM/YYYY')}</strong></p>
+                           </>)
                         : (<p>
                           {currentSubscription.canceled_at
-                            ? (<strong>{t('Your subscription will automatically deactivate on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)
-                            : (<strong>{t('Your subscription will automatically renew on')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong>)}
+                            ? (<p><strong>{t('dashboardPage.subscriptionDeactivateOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong></p>)
+                            : (<p><strong>{t('dashboardPage.subscriptionRenewOn')} {moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</strong></p>)}
                            </p>
                           )}
-                    </div>
-                  }
-                />
-              </Col>
-              <Col className='contain-box' sm={4}>
-                <Box
-                  header={
-                    <div>
-                      <div className='semicircle blue' />
-                      <h1>{t('Your subscription')}</h1>
-                    </div>
-                  }
-                  body={
-                    <div>
-                      <div className='inline-data'><strong>{t('Plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
-                      <div className='inline-data'><strong>{t('Price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
-                      {currentSubscription.canceled_at
-                        ? (<>
-                          <div className='inline-data'>
-                            <strong>{t('Canceled at')}</strong>
-                            <div className='right'>{moment.unix(currentSubscription.canceled_at).format('DD/MM/YYYY')}</div>
-                          </div>
-                          <div className='inline-data'>
-                            <strong>{t('Will deactivate at')}</strong>
-                            <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
-                          </div>
-                           </>)
-                        : (
-                          <div className='inline-data'>
-                            <strong>{t('Will renew on')}</strong>
-                            <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
-                          </div>
-                          )}
+                      {currentSubscription.status === 'past_due' && (
+                        <p><strong>{t('dashboardPage.checkYourPayments')}</strong></p>
+                      )}
                     </div>
                   }
                 />
@@ -200,8 +167,53 @@ const DashboardPage = ({ user }) => {
                 <Box
                   header={
                     <div>
+                      <div className='semicircle blue' />
+                      <h1>{t('dashboardPage.yourSubscription')}</h1>
+                    </div>
+                  }
+                  body={
+                    <div>
+                      <div className='inline-data'><strong>{t('dashboardPage.plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
+                      <div className='inline-data'><strong>{t('dashboardPage.price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
+                      {currentSubscription.canceled_at
+                        ? (<>
+                          <div className='inline-data'>
+                            <strong>{t('dashboardPage.canceledAt')}</strong>
+                            <div className='right'>{moment.unix(currentSubscription.canceled_at).format('DD/MM/YYYY')}</div>
+                          </div>
+                          <div className='inline-data'>
+                            <strong>{t('dashboardPage.willDeactivateAt')}</strong>
+                            <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
+                          </div>
+                           </>)
+                        : (
+                          <div className='inline-data'>
+                            <strong>{t('dashboardPage.willRenewOn')}</strong>
+                            <div className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</div>
+                          </div>
+                          )}
+                      {hasFailedPayment(user.account) && (
+                        <div className='inline-data'>
+                          <strong>{t('dashboardPage.paymentFailedAt')}</strong>
+                          <div className='right'>{moment(user.account.paymentFailedFirstAt).format('DD/MM/YYYY')}</div>
+                        </div>
+                      )}
+                      <Row>
+                        <Col xs={6}><Link to='/plan' className='custom-btn green'>{t('dashboardPage.changePlan')}</Link></Col>
+                        {!currentSubscription.canceled_at && (
+                          <Col xs={6}><Button className='custom-btn red w-100-perc' onClick={() => cancelSubscription(currentSubscription.id)}>{t('dashboardPage.deleteSubscription')}</Button></Col>
+                        )}
+                      </Row>
+                    </div>
+                  }
+                />
+              </Col>
+              <Col className='contain-box' sm={6}>
+                <Box
+                  header={
+                    <div>
                       <div className='semicircle green' />
-                      <h1>{t('Your payment methods')}</h1>
+                      <h1>{t('dashboardPage.paymentMethods')}</h1>
                     </div>
                   }
                   body={
@@ -214,37 +226,14 @@ const DashboardPage = ({ user }) => {
                           {cardsData.data.length > 1 && (
                             <span className='right'>
                               {cardData.id === data.data.invoice_settings.default_payment_method || cardData.id === data.data.invoice_settings.default_payment_method.id
-                                ? (<Button className='custom-btn mini inline green' onClick={() => { }}>{t('default')}</Button>)
-                                : (<><Button className='custom-btn mini inline red' onClick={() => removeCard(cardData.id)}>{t('remove')}</Button><Button className='custom-btn mini inline grey' onClick={() => setDefaultCard(cardData.id)}>{t('default')}</Button></>)}
+                                ? (<Button className='custom-btn mini inline green' onClick={() => { }}>{t('dashboardPage.default')}</Button>)
+                                : (<><Button className='custom-btn mini inline red' onClick={() => removeCard(cardData.id)}>{t('dashboardPage.remove')}</Button><Button className='custom-btn mini inline grey' onClick={() => setDefaultCard(cardData.id)}>{t('dashboardPage.default')}</Button></>)}
                             </span>
                           )}
                         </div>
                       )}
                       <Row>
-                        <Col sm={6} xs={12}><Link to='/card/add' className='custom-btn green'>{t('Add a credit card')}</Link></Col>
-                      </Row>
-                    </div>
-                  }
-                />
-              </Col>
-              <Col className='contain-box' sm={6}>
-                <Box
-                  header={
-                    <div>
-                      <div className='semicircle green' />
-                      <h1>{t('Manage your plan')}</h1>
-                    </div>
-                  }
-                  body={
-                    <div>
-                      <div className='inline-data'><strong>{t('Plan')}</strong><span className='right'>{selectedPlan.title}</span></div>
-                      <div className='inline-data'><strong>{t('Auto renew')}</strong><span className='right'>{moment.unix(currentSubscription.current_period_end).format('DD/MM/YYYY')}</span></div>
-                      <div className='inline-data'><strong>{t('Price')}</strong><span className='right'>{formatMoney('it', selectedPlan.currency, selectedPlan.price)}</span></div>
-                      <Row>
-                        <Col xs={6}><Link to='/plan' className='custom-btn green'>{t('Change plan')}</Link></Col>
-                        {!currentSubscription.canceled_at && (
-                          <Col xs={6}><Button className='custom-btn red w-100-perc' onClick={() => cancelSubscription(currentSubscription.id)}>{t('Delete subscription')}</Button></Col>
-                        )}
+                        <Col sm={6} xs={12}><Link to='/card/add' className='custom-btn green'>{t('dashboardPage.addCreditCard')}</Link></Col>
                       </Row>
                     </div>
                   }
@@ -258,7 +247,7 @@ const DashboardPage = ({ user }) => {
                   header={
                     <div>
                       <div className='semicircle green' />
-                      <h1>{t('Payment history')}</h1>
+                      <h1>{t('dashboardPage.paymentHistory')}</h1>
                     </div>
                   }
                   body={
@@ -266,23 +255,27 @@ const DashboardPage = ({ user }) => {
                       <Table responsive>
                         <thead>
                           <tr>
-                            <th scope='col'>{t('Payment ID')}</th>
-                            <th scope='col'>{t('Status')}</th>
-                            <th scope='col'>{t('Date')}</th>
-                            <th scope='col'>{t('Total')}</th>
-                            {/* <th scope='col'>{t('Receipt')}</th> */}
+                            <th scope='col'>{t('dashboardPage.paymentId')}</th>
+                            <th scope='col'>{t('dashboardPage.status')}</th>
+                            <th scope='col'>{t('dashboardPage.date')}</th>
+                            <th scope='col'>{t('dashboardPage.total')}</th>
+                            <th scope='col'>{t('dashboardPage.actions')}</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {invoicesData.data.filter(invoice => (invoice.status === 'paid')).map((invoice, i) =>
+                          {invoicesData.data.filter(invoice => (invoice.status === 'paid' || invoice.status === 'open')).map((invoice, i) =>
                             <tr key={`invoice-${i}`}>
                               <td>{invoice.number}</td>
-                              <td>{invoice.paid ? 'Pagato' : 'Da pagare'}</td>
+                              <td>{invoice.paid ? t('dashboardPage.paid') : t('dashboardPage.toPay')}</td>
                               <td>{moment.unix(invoice.created).format('DD/MM/YYYY')}</td>
                               <td>
                                 {formatMoney('it', selectedPlan.currency, invoice.total / 100)}
                               </td>
-                              {/* <td><a href={invoice.invoice_pdf}>pdf</a></td> */}
+                              <td>
+                                {invoice.hosted_invoice_url && invoice.status === 'open' && (
+                                  <strong><a href={invoice.hosted_invoice_url} className='custom-btn mini inline red' target='_blank' rel='noreferrer'>{t('dashboardPage.toPay')}</a></strong>
+                                )}
+                              </td>
                             </tr>
                           )}
                         </tbody>
