@@ -9,6 +9,7 @@ import ConfirmAlert from 'libs/confirmAlert'
 import { useTranslation } from 'react-i18next'
 import { Col, Form, FormGroup } from 'react-bootstrap'
 import { SIGNUP_WITH_ACTIVATE } from 'config'
+import i18next from 'libs/i18n'
 
 const RegisterPage = (props) => {
   const mutation = useMutation(Register)
@@ -38,6 +39,7 @@ const RegisterPage = (props) => {
 
   const onSubmit = async data => {
     try {
+      data.language = i18next.language
       const response = await mutation.mutateAsync(data)
       if (response) {
         if (SIGNUP_WITH_ACTIVATE) {
