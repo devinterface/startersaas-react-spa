@@ -54,7 +54,7 @@ const RegisterPage = (props) => {
 
   return (
     <div>
-      <h3 className='m-20 m-b-30'>{t('Register')}</h3>
+      <h3 className='m-20 m-b-30'>{t('registerPage.register')}</h3>
       <Form id='email-form' name='email-form' data-name='Email Form' className='form' onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <small id='subdomainHelp' className='form-text text-muted'>{errors.subdomain?.message}</small>

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOutAlt, faUserEdit, faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
-import { Container } from 'react-bootstrap'
+import { Container, Col, Form, FormGroup } from 'react-bootstrap'
 import { selectedPlanState } from 'libs/atoms'
 import { useRecoilState } from 'recoil'
 import '../../../css/privateLayout/private.css'
@@ -56,10 +56,12 @@ const PrivateLayout = ({ children, user }) => {
                   <div className='collapse navbar-collapse d-md-flex d-lg-flex justify-content-md-start justify-content-lg-end' id='navcol-1'>
                     <ul className='navbar-nav d-md-flex flex-grow-1 justify-content-md-end flex-lg-grow-0 justify-content-xl-end'>
                       <li className='nav-item'>
-                        <select onChange={handleSubmit(onSubmit)} name='language' {...register('language')}>
-                          <option value='it'>IT</option>
-                          <option value='en'>EN</option>
-                        </select>
+                        <form onChange={handleSubmit(onSubmit)}>
+                          <select {...register('language')}>
+                            <option value='it'>IT</option>
+                            <option value='en'>EN</option>
+                          </select>
+                        </form>
                       </li>
                       <li className='nav-item'><Link to='/account/edit' className='menu-link' id='account-edit' title={t('privateLayout.billingDetails')}><FontAwesomeIcon icon={faMoneyBill} /><span className='only-mobile'>{t('privateLayout.billingDetails')}</span></Link></li>
                       <li className='nav-item'><Link to='/user/edit' className='menu-link' id='user-edit' title={t('privateLayout.editUser')}><FontAwesomeIcon icon={faUserEdit} /><span className='only-mobile'>{t('privateLayout.editUser')}</span></Link></li>
