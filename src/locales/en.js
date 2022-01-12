@@ -18,7 +18,8 @@ export default {
     marketingConsent: 'Starter SaaS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.',
     alreadyRegistered: 'Already registered?',
     didntReceivedActivationEmail: 'Didn\'t receive the activation email?',
-    confirm: 'Confirm'
+    confirm: 'Confirm',
+    register: 'Register'
   },
   forgotPasswordPage: {
     passwordEmailSent: 'An email with the reset password code has been sent. Check your inbox',
@@ -31,7 +32,8 @@ export default {
     emailSent: 'An email with the activation token has been sent. Check your inbox.',
     invalidEmail: 'Email not valid',
     resendActivationCode: 'Resend activation code',
-    back: 'Back to login page'
+    back: 'Back to login page',
+    confirm: 'Confirm'
   },
   resetPasswordPage: {
     passwordUpdated: 'Your password has been successfully updated',
@@ -109,7 +111,7 @@ export default {
     creditCard: 'Credit card data'
   },
   trialComponent: {
-    youAreOnTrial: 'You are currently working on the trial version of Starter SaaS. Enjoy!',
+    youAreOnTrial: 'You are currently working on the trial version of Starter SaaS.',
     trialEndsAt: 'Trial period ends at',
     goToPlans: 'Go to plans'
   },
