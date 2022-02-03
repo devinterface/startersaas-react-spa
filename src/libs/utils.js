@@ -1,29 +1,19 @@
-import moment from 'moment'
+import { ACCOUNT_STATUSES } from 'config'
 
 const formatMoney = (locale, currency = 'EUR', number) => {
   return new Intl.NumberFormat('de-DE', { style: 'currency', currency: currency }).format(number)
 }
 
 const hasFailedPayment = (account) => {
-  return account.paymentFailed && account.paymentFailedFirstAt
-}
-
-const isFailedPaymentExpired = (account) => {
-  return account.paymentFailed && moment(account.paymentFailedSubscriptionEndsAt).isBefore(Date.now())
+  return account.subscriptionStatus === ACCOUNT_STATUSES.subscriptionPaymentFailed
 }
 
 const isAccountActive = (account) => {
-  let active = false
-  if (isFailedPaymentExpired(account)) {
-    active = false
-  } else {
-    active = account.active || isFreeTrial(account)
-  }
-  return active
+  return account.subscriptionStatus === ACCOUNT_STATUSES.subscriptionActive || isFreeTrial(account) || hasFailedPayment(account)
 }
 
 const isFreeTrial = (account) => {
-  return !account.active && moment(account.trialPeriodEndsAt).isAfter(Date.now())
+  return account.subscriptionStatus === ACCOUNT_STATUSES.subscriptionTrial
 }
 
-export { formatMoney, isAccountActive, isFreeTrial, hasFailedPayment, isFailedPaymentExpired }
+export { formatMoney, isAccountActive, isFreeTrial, hasFailedPayment }
