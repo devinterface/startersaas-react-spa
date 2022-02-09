@@ -10,13 +10,11 @@ import { confirmAlert } from 'react-confirm-alert' // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { Card, Button, Image } from 'react-bootstrap'
 
-const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe }) => {
+const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe, cardsData }) => {
   const { t } = useTranslation()
   const mutation = useMutation(Subscribe)
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
-
-  console.log('currentSubscription', currentSubscription)
 
   const confirmUpdate = async planId => {
     confirmAlert({
@@ -42,7 +40,7 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe 
     try {
       setLoading(true)
       const response = await mutation.mutateAsync(paymentRequest)
-      if (response.data.latest_invoice.payment_intent.client_secret) {
+      if (response.data.latest_invoice.payment_intent && response.data.latest_invoice.payment_intent.client_secret) {
         const handleCardPaymentResult = await stripe.confirmCardPayment(
           response.data.latest_invoice.payment_intent.client_secret,
           {
@@ -57,15 +55,18 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe 
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
-      } else {
+      } else if (response.data.latest_invoice.paid) {
         queryClient.invalidateQueries(['Me'])
-        ConfirmAlert.success(response.data.message)
+        ConfirmAlert.success(t('planCard.planUpdated'))
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
+      } else {
+        queryClient.invalidateQueries(['Me'])
+        ConfirmAlert.success(response.data.message)
       }
     } catch (error) {
-      console.log('error', error)
+      console.log('error ---- ', error)
       ConfirmAlert.error(t('stripeForm.paymentFailed'))
       setTimeout(function () {
         window.location.href = '/dashboard'
@@ -81,7 +82,11 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe 
       } else if (currentSubscription.status === 'past_due' && currentSubscription.plan.id === plan.id) {
         return (<Button className='custom-btn green w-100-perc' onClick={() => { }}>{t('planCard.toPay')}</Button>)
       } else if (currentSubscription.status === 'active' && currentSubscription.plan.id !== plan.id) {
-        return (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
+        if (cardsData.length === 0) {
+          return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.changePlan')}</Button>)
+        } else {
+          return (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
+        }
       }
     } else {
       return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.selectPlan')}</Button>)
@@ -112,7 +117,7 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe 
 
             </Card.Body>
           </div>
-          )}
+        )}
     </Card>
   )
 }

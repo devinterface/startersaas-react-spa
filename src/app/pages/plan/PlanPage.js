@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Customer, Plans } from 'api/queries'
+import { Customer, Plans, CustomerCards } from 'api/queries'
 import { StripeProvider, Elements } from 'react-stripe-elements'
 import { useQuery } from 'react-query'
 import PlanCard from './PlanCard'
@@ -24,7 +24,6 @@ const PlanPage = (props) => {
   const [currentSubscription, setCurrentSubscription] = useState()
 
   useEffect(() => {
-    // Storage.setItem('selectedPlan', selectedPlan)
     if (selectedPlan !== undefined) {
       setRedirectTo(true)
     }
@@ -50,7 +49,11 @@ const PlanPage = (props) => {
     retry: false
   })
 
-  if (isLoading || plansLoading) {
+  const { isLoading: cardsLoading, data: cardsData } = useQuery(['CustomerCards', props.user.accountId], CustomerCards, {
+    retry: false
+  })
+
+  if (isLoading || plansLoading || cardsLoading) {
     return <Loader />
   }
 
@@ -88,7 +91,7 @@ const PlanPage = (props) => {
                       <>
                         {plansData.data.plans.filter(p => p.monthly).map((plan, i) =>
                           <Col xs={12} md={4} key={i} className='contain-card-plan'>
-                            <PlanCard plan={plan} monthly key={`montly-${i}`} setSelectedPlan={setSelectedPlan} currentSubscription={currentSubscription} />
+                            <PlanCard plan={plan} monthly key={`montly-${i}`} setSelectedPlan={setSelectedPlan} currentSubscription={currentSubscription} cardsData={cardsData.data} />
                           </Col>
                         )}
                       </>
@@ -97,7 +100,7 @@ const PlanPage = (props) => {
                       <>
                         {plansData.data.plans.filter(p => !p.monthly).map((plan, i) =>
                           <Col xs={12} md={4} key={i} className='contain-card-plan'>
-                            <PlanCard plan={plan} monthly={false} key={`yearly-${i}`} setSelectedPlan={setSelectedPlan} currentSubscription={currentSubscription} />
+                            <PlanCard plan={plan} monthly={false} key={`yearly-${i}`} setSelectedPlan={setSelectedPlan} currentSubscription={currentSubscription} cardsData={cardsData.data} />
                           </Col>
                         )}
                       </>

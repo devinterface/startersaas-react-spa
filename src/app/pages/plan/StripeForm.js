@@ -35,7 +35,7 @@ const StripeForm = props => {
       setLoading(true)
       const response = await mutation.mutateAsync(paymentRequest)
 
-      if (response.data.latest_invoice.payment_intent.client_secret) {
+      if (response.data.latest_invoice.payment_intent && response.data.latest_invoice.payment_intent.client_secret) {
         // handle intent
         const handleCardPaymentResult = await props.stripe.confirmCardPayment(
           response.data.latest_invoice.payment_intent.client_secret,
@@ -60,6 +60,14 @@ const StripeForm = props => {
         setTimeout(function () {
           window.location.href = '/dashboard'
         }, 3000)
+      } else if (response.data.latest_invoice.paid) {
+        queryClient.invalidateQueries(['Customer', props.user.accountId])
+        queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
+        queryClient.invalidateQueries(['Me'])
+        ConfirmAlert.success(t('stripeForm.paymentCompleted'))
+        setTimeout(function () {
+          window.location.href = '/dashboard'
+        }, 3000)
       } else {
         queryClient.invalidateQueries(['Customer', props.user.accountId])
         queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
@@ -70,6 +78,7 @@ const StripeForm = props => {
         }, 3000)
       }
     } catch (error) {
+      console.log('error ------ ', error)
       ConfirmAlert.error(t('stripeForm.paymentFailed') + ' ' + error.message)
       setTimeout(function () {
         window.location.href = '/dashboard'
@@ -84,14 +93,16 @@ const StripeForm = props => {
         {loading && (
           <Loader />
         )}
-        <Form.Group controlId='formCard'>
-          <Form.Label>{t('stripeForm.cardOwner')}</Form.Label>
-          <Form.Control type='text' maxLength='256' name='cardHolderName' data-name={t('stripeForm.cardOwner')} placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
-          <span className='text-muted'>
-            {errors.cardHolderName?.message}
-          </span>
-          <CardElement style={{ base: { fontSize: '18px', color: '#333', border: '1px solid #ccc' } }} onReady={handleReady} />
-        </Form.Group>
+        {props.selectedPlan.price > 0 && (
+          <Form.Group controlId='formCard'>
+            <Form.Label>{t('stripeForm.cardOwner')}</Form.Label>
+            <Form.Control type='text' maxLength='256' name='cardHolderName' data-name={t('stripeForm.cardOwner')} placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
+            <span className='text-muted'>
+              {errors.cardHolderName?.message}
+            </span>
+            <CardElement style={{ base: { fontSize: '18px', color: '#333', border: '1px solid #ccc' } }} onReady={handleReady} />
+          </Form.Group>
+        )}
         {!loading && (
           <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('stripeForm.subscribe')}</Button>
         )}
