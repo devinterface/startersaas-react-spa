@@ -92,7 +92,8 @@ export default {
   planPage: {
     selectaPlan: 'Select a plan',
     monthly: 'Monthly plan',
-    yearly: 'Yearly plan'
+    yearly: 'Yearly plan',
+    deactivatedAccountNotice: 'Your account isn\'t active. Please subscribe a plan to activate it.'
   },
   stripeForm: {
     paymentFailed: 'Payment failed due to some errors:',

@@ -87,6 +87,12 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe,
         } else {
           return (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
         }
+      } else if (currentSubscription.status === 'incomplete') {
+        if (cardsData.length === 0) {
+          return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.changePlan')}</Button>)
+        } else {
+          return (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
+        }
       }
     } else {
       return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.selectPlan')}</Button>)

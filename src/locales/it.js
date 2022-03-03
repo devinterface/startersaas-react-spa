@@ -92,7 +92,9 @@ export default {
   planPage: {
     selectaPlan: 'Seleziona un piano',
     monthly: 'Piano mensile',
-    yearly: 'Piano annuale'
+    yearly: 'Piano annuale',
+    deactivatedAccountNotice: 'Il tuo account non è attivo. Sei pregato di sottoscrivere un abbonamento per attivarlo.'
+
   },
   stripeForm: {
     paymentFailed: 'Il pagamento è fallito a causa di questi errori:',

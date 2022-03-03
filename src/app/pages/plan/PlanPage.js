@@ -10,7 +10,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import Box from 'app/components/dashboard/Box'
 import { useRecoilState } from 'recoil'
 import { selectedPlanState } from 'libs/atoms'
-import { isFreeTrial } from 'libs/utils'
+import { isFreeTrial, isAccountActive } from 'libs/utils'
 
 const PlanPage = (props) => {
   const { t } = useTranslation()
@@ -70,6 +70,9 @@ const PlanPage = (props) => {
           header={
             <div style={{ textAlign: 'center', minWidth: '300px', width: '50%', margin: '0 auto', marginTop: '20px' }}>
               <h1>{t('planPage.selectaPlan')}</h1>
+              {!isAccountActive(props.user.account) && (
+                <p>{t('planPage.deactivatedAccountNotice')}</p>
+              )}
             </div>
           }
           body={
