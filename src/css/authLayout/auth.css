@@ -15,7 +15,7 @@
 }
 .center-div {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -64,5 +64,18 @@
     padding-left: 0px;
     padding-right: 0px;
   }
-}
+  .card-auth .card-body{
+    padding: 20px;
+  }
 
+  .center-div {
+    top: 50%;
+  }
+  .m-b-40{
+    margin-bottom: 0;
+  }
+
+  #page-content.auth-content{
+    height: 100%;
+  }
+}

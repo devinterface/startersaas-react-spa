@@ -25,7 +25,7 @@
     .nav-item{
       font-size: 30px;
       margin: 20px;
-    }	
+    }
     .only-mobile{
       margin: 5px;
       font-size: 22px;
@@ -35,42 +35,42 @@
       display: inline-block;
     }
   }
-  
-  
+
+
   .heading-list-group-item-green {
     background-color: #0d8680;
     }
-  
+
   .heading-list-group-item-blue {
     background-color: #007bff;
     }
-  
+
   .font-size-small {
     font-size: 14px;
   }
-  
+
   .logo {
     width: 190px;
     height: auto;
     cursor: pointer;
   }
-  
+
   #intro-home {
     background-color: #fbfbfc;
   }
-  
+
   #container-prezzi {
     background-color: #fbfbfc;
   }
-  
+
   #budget-paragraph {
     font-size: 13px;
   }
-  
+
   #container-servizi {
     background-color: #f7fff8;
   }
-  
+
   #footer {
     background-color: #fbfbfc;
   }
@@ -79,7 +79,7 @@
     .logo {
       width: 260px;
       height: auto;
-    }	
+    }
   }
   .w-100-perc{
     width: 100% !important;
@@ -144,3 +144,19 @@
   .p-50{
     padding: 50px !important;
   }
+
+
+html,
+body,
+#root,
+#h100 {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer img{
+  width: 150px;
+}
