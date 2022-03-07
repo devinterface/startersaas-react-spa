@@ -25,11 +25,11 @@ const ResendActivationPage = (props) => {
     try {
       const response = await mutation.mutateAsync(data)
       if (response) {
-        ConfirmAlert.success('resendActivationPage.emailSent')
+        ConfirmAlert.success(t('resendActivationPage.emailSent'))
         props.history.push(`/auth/activate/${data.email}`)
       }
     } catch (error) {
-      ConfirmAlert.error('resendActivationPage.invalidEmail')
+      ConfirmAlert.error(t('resendActivationPage.invalidEmail'))
     }
   }
 

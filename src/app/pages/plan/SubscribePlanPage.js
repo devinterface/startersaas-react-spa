@@ -94,7 +94,7 @@ const SubscribePlanPage = (props) => {
                 <div>
                   <StripeProvider apiKey={plansData.data.publicKey}>
                     <Elements>
-                      <StripeForm planId={planId} user={props.user} />
+                      <StripeForm planId={planId} selectedPlan={selectedPlan} user={props.user} />
                     </Elements>
                   </StripeProvider>
                 </div>
