@@ -2,21 +2,21 @@
 
 This project contains everything you need to setup a fully featured SaaS SPA in 5 minutes.
 # Installation
-Then make sure you have Node installed. Version `14` or higher is required.
-
-Install all dependencies by running 
-
-```bash
-yarn install
-```
- 
 Copy `.env.example` into `.env`.
 
-Finally, run the SPA by typing:
+Build the application
 
 ```bash
-yarn start
+docker compose build
 ```
+
+And finally, run the application
+
+```bash
+docker compose up
+```
+
+Application runs on http://localhost:3010
 
 # Configuring .env
 
