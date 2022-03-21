@@ -6,6 +6,14 @@ Copy `.env.example` into `.env`.
 
 Build the application
 
+Create a startersaas newtwork typing:
+
+```bash
+docker network create startersaas-network
+```
+
+Then build the container
+
 ```bash
 docker compose build
 ```
