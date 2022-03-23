@@ -13,7 +13,6 @@ import ResetPasswordPage from 'app/pages/auth/ResetPasswordPage'
 import ResendActivationPage from 'app/pages/auth/ResendActivationPage'
 import RegisterPage from 'app/pages/auth/RegisterPage'
 import ActivateAccountPage from 'app/pages/auth/ActivateAccountPage'
-import DashboardPage from 'app/pages/dashboard/DashboardPage'
 import PlanPage from 'app/pages/plan/PlanPage'
 import SubscribePlanPage from 'app/pages/plan/SubscribePlanPage'
 import AddCardPage from 'app/pages/user/AddCardPage'
@@ -21,6 +20,9 @@ import EditUserPage from 'app/pages/user/EditUserPage'
 import EditAccountPage from 'app/pages/user/EditAccountPage'
 import IndexPage from 'app/pages/public/IndexPage'
 import DashboardSwitcher from 'app/pages/dashboard/DashboardSwitcher'
+import IndexUsersPage from 'app/pages/users/IndexUsersPage'
+import CreateUsersPage from 'app/pages/users/CreateUsersPage'
+import EditUsersPage from 'app/pages/users/EditUsersPage'
 
 const Private = withCurrentUser(PrivateRoute)
 const PrivateActive = withCurrentUser(PrivateActiveRoute)
@@ -29,7 +31,7 @@ const OnlyPublic = withCurrentUser(OnlyPublicRoute)
 const ApplicationRouter = () => {
   return (
     <Switch>
-      <OnlyPublic exact path='/' component={LoginPage} layout={AuthLayout} />
+      <OnlyPublic exact path='/' component={IndexPage} layout={PublicLayout} />
       <OnlyPublic
         exact
         path='/auth/login'
@@ -107,6 +109,27 @@ const ApplicationRouter = () => {
         layout={PrivateLayout}
         allowedRoles={['admin']}
         component={EditAccountPage}
+      />
+      <Private
+        exact
+        path='/users'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={IndexUsersPage}
+      />
+      <Private
+        exact
+        path='/create-user'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={CreateUsersPage}
+      />
+      <Private
+        exact
+        path='/edit-user/:userId'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={EditUsersPage}
       />
     </Switch>
   )

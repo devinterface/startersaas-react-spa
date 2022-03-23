@@ -1,11 +1,11 @@
 import Axios from 'libs/axios'
 
-const Me = async (key) => {
+const Me = async key => {
   const result = await Axios.authenticated().get('/users/me?withAccount=true')
   return result
 }
 
-const Account = async (accountId) => {
+const Account = async accountId => {
   const result = await Axios.authenticated().get(`/accounts/${accountId}`)
   return result
 }
@@ -16,7 +16,9 @@ const Customer = async () => {
 }
 
 const CustomerInvoices = async () => {
-  const result = await Axios.authenticated().get('/stripe/customers/me/invoices')
+  const result = await Axios.authenticated().get(
+    '/stripe/customers/me/invoices'
+  )
   return result
 }
 
@@ -30,4 +32,23 @@ const Plans = async () => {
   return result
 }
 
-export { Me, Account, Customer, CustomerInvoices, CustomerCards, Plans }
+const Users = async () => {
+  const result = await Axios.authenticated().get('/users/')
+  return result
+}
+
+const User = async userId => {
+  const result = await Axios.authenticated().get(`/users/${userId}`)
+  return result
+}
+
+export {
+  Me,
+  Account,
+  Customer,
+  CustomerInvoices,
+  CustomerCards,
+  Plans,
+  Users,
+  User
+}

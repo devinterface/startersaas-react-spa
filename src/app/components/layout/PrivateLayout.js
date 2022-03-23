@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSignOutAlt,
   faUserEdit,
-  faMoneyBill
+  faMoneyBill,
+  faUsers
 } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from 'react-query'
@@ -114,6 +115,21 @@ const PrivateLayout = ({ children, user }) => {
                             </span>
                           </Link>
                         </li>
+                        {user.role === 'admin' && (
+                          <li className='nav-item'>
+                            <Link
+                              to='/users'
+                              className='menu-link'
+                              id='user-edit'
+                              title={t('privateLayout.users')}
+                            >
+                              <FontAwesomeIcon icon={faUsers} />
+                              <span className='only-mobile'>
+                                {t('privateLayout.users')}
+                              </span>
+                            </Link>
+                          </li>
+                        )}
                         <li className='nav-item'>
                           <a
                             href='#'
