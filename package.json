@@ -1,6 +1,6 @@
 {
   "name": "startersaas-react-spa",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "license": "Apache 2.0 with Commons Clause",
   "author": "Stefano Mancini <stefano.mancini@devinterface.com> (https://www.devinterface.com)",
   "homepage": "https://www.startersaas.com",
@@ -32,7 +32,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "PORT=5000 react-scripts start",
+    "start": "PORT=3010 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

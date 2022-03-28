@@ -13,13 +13,16 @@ import ResetPasswordPage from 'app/pages/auth/ResetPasswordPage'
 import ResendActivationPage from 'app/pages/auth/ResendActivationPage'
 import RegisterPage from 'app/pages/auth/RegisterPage'
 import ActivateAccountPage from 'app/pages/auth/ActivateAccountPage'
-import DashboardPage from 'app/pages/dashboard/DashboardPage'
 import PlanPage from 'app/pages/plan/PlanPage'
 import SubscribePlanPage from 'app/pages/plan/SubscribePlanPage'
 import AddCardPage from 'app/pages/user/AddCardPage'
 import EditUserPage from 'app/pages/user/EditUserPage'
 import EditAccountPage from 'app/pages/user/EditAccountPage'
 import IndexPage from 'app/pages/public/IndexPage'
+import DashboardSwitcher from 'app/pages/dashboard/DashboardSwitcher'
+import IndexUsersPage from 'app/pages/users/IndexUsersPage'
+import CreateUsersPage from 'app/pages/users/CreateUsersPage'
+import EditUsersPage from 'app/pages/users/EditUsersPage'
 
 const Private = withCurrentUser(PrivateRoute)
 const PrivateActive = withCurrentUser(PrivateActiveRoute)
@@ -29,18 +32,105 @@ const ApplicationRouter = () => {
   return (
     <Switch>
       <OnlyPublic exact path='/' component={IndexPage} layout={PublicLayout} />
-      <OnlyPublic exact path='/auth/login' component={LoginPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/forgot-password' component={ForgotPasswordPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/resend-activation' component={ResendActivationPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/reset-password/:email' component={ResetPasswordPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/activate/:email' component={ActivateAccountPage} layout={AuthLayout} />
-      <OnlyPublic exact path='/auth/register' component={RegisterPage} layout={AuthLayout} />
-      <PrivateActive exact path='/dashboard' layout={PrivateLayout} allowedRoles={['admin', 'user']} component={DashboardPage} />
-      <Private exact path='/plan/subscribe' layout={PrivateLayout} allowedRoles={['admin']} component={SubscribePlanPage} />
-      <Private exact path='/plan' layout={PrivateLayout} allowedRoles={['admin']} component={PlanPage} />
-      <PrivateActive exact path='/card/add' layout={PrivateLayout} allowedRoles={['admin']} component={AddCardPage} />
-      <PrivateActive exact path='/user/edit' layout={PrivateLayout} allowedRoles={['admin', 'user']} component={EditUserPage} />
-      <PrivateActive exact path='/account/edit' layout={PrivateLayout} allowedRoles={['admin']} component={EditAccountPage} />
+      <OnlyPublic
+        exact
+        path='/auth/login'
+        component={LoginPage}
+        layout={AuthLayout}
+      />
+      <OnlyPublic
+        exact
+        path='/auth/forgot-password'
+        component={ForgotPasswordPage}
+        layout={AuthLayout}
+      />
+      <OnlyPublic
+        exact
+        path='/auth/resend-activation'
+        component={ResendActivationPage}
+        layout={AuthLayout}
+      />
+      <OnlyPublic
+        exact
+        path='/auth/reset-password/:email'
+        component={ResetPasswordPage}
+        layout={AuthLayout}
+      />
+      <OnlyPublic
+        exact
+        path='/auth/activate/:email'
+        component={ActivateAccountPage}
+        layout={AuthLayout}
+      />
+      <OnlyPublic
+        exact
+        path='/auth/register'
+        component={RegisterPage}
+        layout={AuthLayout}
+      />
+      <PrivateActive
+        exact
+        path='/dashboard'
+        layout={PrivateLayout}
+        allowedRoles={['admin', 'user']}
+        component={DashboardSwitcher}
+      />
+      <Private
+        exact
+        path='/plan/subscribe'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={SubscribePlanPage}
+      />
+      <Private
+        exact
+        path='/plan'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={PlanPage}
+      />
+      <PrivateActive
+        exact
+        path='/card/add'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={AddCardPage}
+      />
+      <Private
+        exact
+        path='/user/edit'
+        layout={PrivateLayout}
+        allowedRoles={['admin', 'user']}
+        component={EditUserPage}
+      />
+      <Private
+        exact
+        path='/account/edit'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={EditAccountPage}
+      />
+      <Private
+        exact
+        path='/users'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={IndexUsersPage}
+      />
+      <Private
+        exact
+        path='/create-user'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={CreateUsersPage}
+      />
+      <Private
+        exact
+        path='/edit-user/:userId'
+        layout={PrivateLayout}
+        allowedRoles={['admin']}
+        component={EditUsersPage}
+      />
     </Switch>
   )
 }
