@@ -24,7 +24,11 @@ And finally, run the application
 docker compose up
 ```
 
-Application runs on http://localhost:3010
+Application will be reachable on 
+
+```bash
+http://localhost:3010
+```
 
 # Configuring .env
 
@@ -34,6 +38,7 @@ Below the meaning of every environment variable you can setup.
 `REACT_APP_API_HOST=http://localhost:3000` the host of Starter SaaS API
 `REACT_APP_API_PATH=/api/v1` don't change it
 `REACT_APP_JWT_TOKEN_NAME=startersaas-jwt` the name of the jwt token
+`REACT_APP_SIGNUP_WITH_ACTIVATE=true` set this value as true if you want to log the new registered user directly, without asking for email confirmation
 
 # Features
 
@@ -53,16 +58,17 @@ Below the meaning of every environment variable you can setup.
 * add new credit card
 * subscription cancel
 * 3D Secure ready payments
-
-### API only
-
 * account's users list (by admins only)
 * account's user create (by admins only)
 * account's user update (by admins only)
+* account's user delete (by admins only)
+
+### API only
+
 * stripe webhooks handling
 * events notifications by email:
   - new user subscribed
-  - succesful payments
+  - successful payments
   - failed payments
 * daily notifications by email:
   - expiring trials
