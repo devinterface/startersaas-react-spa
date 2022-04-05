@@ -59,7 +59,8 @@ export default {
     phoneNumber: 'Phone number',
     billingAddress: 'Billing address',
     vatNumber: 'VAT number',
-    update: 'Update billing details'
+    update: 'Update billing details',
+    companyCountry: 'Country'
   },
   addCardPage: {
     creditCard: 'Credit card data'

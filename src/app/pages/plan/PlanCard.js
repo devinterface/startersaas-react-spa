@@ -10,7 +10,14 @@ import { confirmAlert } from 'react-confirm-alert' // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { Card, Button, Image } from 'react-bootstrap'
 
-const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe, cardsData }) => {
+const PlanCard = ({
+  plan,
+  monthly,
+  setSelectedPlan,
+  currentSubscription,
+  stripe,
+  cardsData
+}) => {
   const { t } = useTranslation()
   const mutation = useMutation(Subscribe)
   const [loading, setLoading] = useState(false)
@@ -27,7 +34,7 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe,
         },
         {
           label: t('planCard.no'),
-          onClick: () => { }
+          onClick: () => {}
         }
       ]
     })
@@ -40,7 +47,10 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe,
     try {
       setLoading(true)
       const response = await mutation.mutateAsync(paymentRequest)
-      if (response.data.latest_invoice.payment_intent && response.data.latest_invoice.payment_intent.client_secret) {
+      if (
+        response.data.latest_invoice.payment_intent &&
+        response.data.latest_invoice.payment_intent.client_secret
+      ) {
         const handleCardPaymentResult = await stripe.confirmCardPayment(
           response.data.latest_invoice.payment_intent.client_secret,
           {
@@ -77,53 +87,120 @@ const PlanCard = ({ plan, monthly, setSelectedPlan, currentSubscription, stripe,
 
   const renderButton = () => {
     if (currentSubscription !== undefined) {
-      if (currentSubscription.status === 'active' && currentSubscription.plan.id === plan.id) {
-        return (<Button className='custom-btn w-100-perc' onClick={() => { }}>{t('planCard.currentPlan')}</Button>)
-      } else if (currentSubscription.status === 'past_due' && currentSubscription.plan.id === plan.id) {
-        return (<Button className='custom-btn green w-100-perc' onClick={() => { }}>{t('planCard.toPay')}</Button>)
-      } else if (currentSubscription.status === 'active' && currentSubscription.plan.id !== plan.id) {
+      if (
+        currentSubscription.status === 'active' &&
+        currentSubscription.plan.id === plan.id
+      ) {
+        return (
+          <Button className='custom-btn w-100-perc' onClick={() => {}}>
+            {t('planCard.currentPlan')}
+          </Button>
+        )
+      } else if (
+        currentSubscription.status === 'past_due' &&
+        currentSubscription.plan.id === plan.id
+      ) {
+        return (
+          <Button className='custom-btn green w-100-perc' onClick={() => {}}>
+            {t('planCard.toPay')}
+          </Button>
+        )
+      } else if (
+        currentSubscription.status === 'active' &&
+        currentSubscription.plan.id !== plan.id
+      ) {
         if (cardsData.length === 0) {
-          return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.changePlan')}</Button>)
+          return (
+            <Button
+              className='custom-btn green w-100-perc'
+              onClick={() => {
+                setSelectedPlan(plan.id)
+              }}
+            >
+              {t('planCard.changePlan')}
+            </Button>
+          )
         } else {
-          return (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
+          return (
+            <Button
+              className='custom-btn green w-100-perc'
+              onClick={() => {
+                confirmUpdate(plan.id)
+              }}
+            >
+              {t('planCard.changePlan')}
+            </Button>
+          )
         }
       } else if (currentSubscription.status === 'incomplete') {
         if (cardsData.length === 0) {
-          return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.changePlan')}</Button>)
+          return (
+            <Button
+              className='custom-btn green w-100-perc'
+              onClick={() => {
+                setSelectedPlan(plan.id)
+              }}
+            >
+              {t('planCard.changePlan')}
+            </Button>
+          )
         } else {
-          return (<Button className='custom-btn green w-100-perc' onClick={() => { confirmUpdate(plan.id) }}>{t('planCard.changePlan')}</Button>)
+          return (
+            <Button
+              className='custom-btn green w-100-perc'
+              onClick={() => {
+                confirmUpdate(plan.id)
+              }}
+            >
+              {t('planCard.changePlan')}
+            </Button>
+          )
         }
       }
     } else {
-      return (<Button className='custom-btn green w-100-perc' onClick={() => { setSelectedPlan(plan.id) }}>{t('planCard.selectPlan')}</Button>)
+      return (
+        <Button
+          className='custom-btn green w-100-perc'
+          onClick={() => {
+            setSelectedPlan(plan.id)
+          }}
+        >
+          {t('planCard.selectPlan')}
+        </Button>
+      )
     }
   }
 
   return (
     <Card>
-      {loading
-        ? (<Loader />)
-        : (
-          <div className='div-card-container'>
-            <Card.Header className='blue'>
-              <Card.Title>
-                {plan.title}
-                <br />
-                {formatMoney('it', plan.currency, plan.price)}
-                {monthly ? t('planCard.month') : t('planCard.year')}  (+IVA)
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {plan.features.map((feature, i) =>
-                <Card.Text key={`feature-${i}`}>
-                  <span><Image src='/images/menuclick-check.svg' className='img-check' /></span><span>{t(feature)}</span>
-                </Card.Text>
-              )}
-              {renderButton()}
-
-            </Card.Body>
-          </div>
-        )}
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className='div-card-container'>
+          <Card.Header className='blue'>
+            <Card.Title>
+              {plan.title}
+              <br />
+              {formatMoney('it', plan.currency, plan.price)}
+              {monthly ? t('planCard.month') : t('planCard.year')}
+            </Card.Title>
+          </Card.Header>
+          <Card.Body>
+            {plan.features.map((feature, i) => (
+              <Card.Text key={`feature-${i}`}>
+                <span>
+                  <Image
+                    src='/images/menuclick-check.svg'
+                    className='img-check'
+                  />
+                </span>
+                <span>{t(feature)}</span>
+              </Card.Text>
+            ))}
+            {renderButton()}
+          </Card.Body>
+        </div>
+      )}
     </Card>
   )
 }

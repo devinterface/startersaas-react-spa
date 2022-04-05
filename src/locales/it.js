@@ -62,7 +62,8 @@ export default {
     phoneNumber: 'Numero di telefono',
     billingAddress: 'Indirizzo di fatturazione',
     vatNumber: 'P.IVA',
-    update: 'Aggiorna dettagli di fatturazione'
+    update: 'Aggiorna dettagli di fatturazione',
+    companyCountry: 'Stato'
   },
   addCardPage: {
     creditCard: 'Dati carta di credito'
