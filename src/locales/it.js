@@ -63,7 +63,8 @@ export default {
     billingAddress: 'Indirizzo di fatturazione',
     vatNumber: 'P.IVA',
     update: 'Aggiorna dettagli di fatturazione',
-    companyCountry: 'Stato'
+    companyCountry: 'Stato',
+    selectOne: 'Seleziona'
   },
   addCardPage: {
     creditCard: 'Dati carta di credito'

@@ -60,7 +60,8 @@ export default {
     billingAddress: 'Billing address',
     vatNumber: 'VAT number',
     update: 'Update billing details',
-    companyCountry: 'Country'
+    companyCountry: 'Country',
+    selectOne: 'Select one'
   },
   addCardPage: {
     creditCard: 'Credit card data'
