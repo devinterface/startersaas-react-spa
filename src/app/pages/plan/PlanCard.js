@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Subscribe } from 'api/mutations'
+import { Subscribe, CreateCustomerPortalSession } from 'api/mutations'
 import { useMutation, useQueryClient } from 'react-query'
 import { injectStripe } from 'react-stripe-elements'
 import Loader from 'app/components/Loader'
@@ -9,6 +9,7 @@ import { formatMoney } from 'libs/utils'
 import { confirmAlert } from 'react-confirm-alert' // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { Card, Button, Image } from 'react-bootstrap'
+import { ENABLE_CUSTOMER_PORTAL } from 'config'
 
 const PlanCard = ({
   plan,
@@ -23,7 +24,20 @@ const PlanCard = ({
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
 
+  const customerPortalSessionMutate = useMutation(
+    CreateCustomerPortalSession,
+    {}
+  )
+
+  const redirectToCustomerPortalSessionMutate = async () => {
+    const response = await customerPortalSessionMutate.mutateAsync()
+    window.location.href = response.data.redirect_url
+  }
+
   const confirmUpdate = async planId => {
+    if (ENABLE_CUSTOMER_PORTAL) {
+      return redirectToCustomerPortalSessionMutate()
+    }
     confirmAlert({
       title: t('planCard.updateSubscription'),
       message: t('planCard.areYouSure'),

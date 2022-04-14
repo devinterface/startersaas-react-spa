@@ -117,7 +117,8 @@ export default {
     price: 'Price',
     monthly: 'Monthly plan',
     yearly: 'Yearly plan',
-    creditCard: 'Credit card data'
+    creditCard: 'Credit card data',
+    subscribe: 'Subscribe'
   },
   trialComponent: {
     youAreOnTrial:

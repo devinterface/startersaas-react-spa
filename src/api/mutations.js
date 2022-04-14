@@ -65,7 +65,7 @@ const CancelSubscription = async data => {
 
 const CreateSetupIntent = async data => {
   const result = await Axios.authenticated().post(
-    '/stripe/createSetupIntent',
+    '/stripe/create-setup-intent',
     data
   )
   return result
@@ -114,6 +114,22 @@ const DeleteUser = async userId => {
   return result
 }
 
+const CreateCustomerCheckoutSession = async data => {
+  console.log('-----', data)
+  const result = await Axios.authenticated().post(
+    `/stripe/create-customer-checkout-session`,
+    data
+  )
+  return result
+}
+
+const CreateCustomerPortalSession = async () => {
+  const result = await Axios.authenticated().post(
+    `/stripe/create-customer-portal-session`
+  )
+  return result
+}
+
 export {
   Logout,
   Login,
@@ -132,5 +148,7 @@ export {
   CreateSetupIntent,
   CreateUser,
   UpdateUser,
-  DeleteUser
+  DeleteUser,
+  CreateCustomerPortalSession,
+  CreateCustomerCheckoutSession
 }

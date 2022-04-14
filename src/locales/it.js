@@ -121,7 +121,8 @@ export default {
     price: 'Prezzo',
     monthly: 'Piano mensile',
     yearly: 'Piano annuale',
-    creditCard: 'Dati carta di credito'
+    creditCard: 'Dati carta di credito',
+    subscribe: 'Abbonati'
   },
   trialComponent: {
     youAreOnTrial:
