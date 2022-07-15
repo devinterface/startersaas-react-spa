@@ -1,11 +1,11 @@
-import en from './en'
-import it from './it'
+import en from "./en";
+import it from "./it";
 
 export default {
   en: {
-    translation: en
+    translation: en,
   },
   it: {
-    translation: it
-  }
-}
+    translation: it,
+  },
+};

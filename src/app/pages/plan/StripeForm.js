@@ -1,113 +1,156 @@
-import React, { useState } from 'react'
-import { injectStripe, CardElement } from 'react-stripe-elements'
-import { useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from 'react-query'
-import { Subscribe, SetDefaultCreditCard } from 'api/mutations'
-import { useTranslation } from 'react-i18next'
-import ConfirmAlert from 'libs/confirmAlert'
-import Loader from 'app/components/Loader'
-import { Button, Form } from 'react-bootstrap'
+import { SetDefaultCreditCard, Subscribe } from "api/mutations";
+import Loader from "app/components/Loader";
+import ConfirmAlert from "libs/confirmAlert";
+import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useMutation, useQueryClient } from "react-query";
+import { CardElement, injectStripe } from "react-stripe-elements";
 
-const StripeForm = props => {
-  const { t } = useTranslation()
+const StripeForm = (props) => {
+  const { t } = useTranslation();
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  const { register, handleSubmit, formState: { errors } } = useForm({})
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({});
 
-  const [cardElement, setCardElement] = useState(null)
+  const [cardElement, setCardElement] = useState(null);
 
-  const mutation = useMutation(Subscribe)
+  const mutation = useMutation(Subscribe);
 
-  const setDefaultCreditCard = useMutation(SetDefaultCreditCard)
+  const setDefaultCreditCard = useMutation(SetDefaultCreditCard);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const handleReady = (element) => {
-    setCardElement(element)
-  }
+    setCardElement(element);
+  };
 
-  const onStripeSubmit = async data => {
+  const onStripeSubmit = async (data) => {
     const paymentRequest = {
-      planId: props.planId
-    }
+      planId: props.planId,
+    };
     try {
-      setLoading(true)
-      const response = await mutation.mutateAsync(paymentRequest)
+      setLoading(true);
+      const response = await mutation.mutateAsync(paymentRequest);
 
-      if (response.data.latest_invoice.payment_intent && response.data.latest_invoice.payment_intent.client_secret) {
+      if (
+        response.data.latest_invoice.payment_intent &&
+        response.data.latest_invoice.payment_intent.client_secret
+      ) {
         // handle intent
         const handleCardPaymentResult = await props.stripe.confirmCardPayment(
           response.data.latest_invoice.payment_intent.client_secret,
           {
-            setup_future_usage: 'off_session',
+            setup_future_usage: "off_session",
             payment_method: {
               card: cardElement,
               billing_details: {
-                name: data.cardHolderName
-              }
-            }
+                name: data.cardHolderName,
+              },
+            },
           }
-        )
+        );
         if (handleCardPaymentResult.error) {
-          throw new Error(handleCardPaymentResult.error.message)
+          throw new Error(handleCardPaymentResult.error.message);
         }
-        await setDefaultCreditCard.mutate({ cardId: handleCardPaymentResult.paymentIntent.payment_method })
-        queryClient.invalidateQueries(['Customer', props.user.accountId])
-        queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
-        queryClient.invalidateQueries(['Me'])
-        ConfirmAlert.success(t('stripeForm.paymentCompleted'))
+        await setDefaultCreditCard.mutate({
+          cardId: handleCardPaymentResult.paymentIntent.payment_method,
+        });
+        queryClient.invalidateQueries(["Customer", props.user.accountId]);
+        queryClient.invalidateQueries([
+          "CustomerInvoices",
+          props.user.accountId,
+        ]);
+        queryClient.invalidateQueries(["Me"]);
+        ConfirmAlert.success(t("stripeForm.paymentCompleted"));
         setTimeout(function () {
-          window.location.href = '/dashboard'
-        }, 3000)
+          window.location.href = "/dashboard";
+        }, 3000);
       } else if (response.data.latest_invoice.paid) {
-        queryClient.invalidateQueries(['Customer', props.user.accountId])
-        queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
-        queryClient.invalidateQueries(['Me'])
-        ConfirmAlert.success(t('stripeForm.paymentCompleted'))
+        queryClient.invalidateQueries(["Customer", props.user.accountId]);
+        queryClient.invalidateQueries([
+          "CustomerInvoices",
+          props.user.accountId,
+        ]);
+        queryClient.invalidateQueries(["Me"]);
+        ConfirmAlert.success(t("stripeForm.paymentCompleted"));
         setTimeout(function () {
-          window.location.href = '/dashboard'
-        }, 3000)
+          window.location.href = "/dashboard";
+        }, 3000);
       } else {
-        queryClient.invalidateQueries(['Customer', props.user.accountId])
-        queryClient.invalidateQueries(['CustomerInvoices', props.user.accountId])
-        queryClient.invalidateQueries(['Me'])
-        ConfirmAlert.success(response.data.message)
+        queryClient.invalidateQueries(["Customer", props.user.accountId]);
+        queryClient.invalidateQueries([
+          "CustomerInvoices",
+          props.user.accountId,
+        ]);
+        queryClient.invalidateQueries(["Me"]);
+        ConfirmAlert.success(response.data.message);
         setTimeout(function () {
-          window.location.href = '/dashboard'
-        }, 3000)
+          window.location.href = "/dashboard";
+        }, 3000);
       }
     } catch (error) {
-      console.log('error ------ ', error)
-      ConfirmAlert.error(t('stripeForm.paymentFailed') + ' ' + error.message)
+      console.log("error ------ ", error);
+      ConfirmAlert.error(t("stripeForm.paymentFailed") + " " + error.message);
       setTimeout(function () {
-        window.location.href = '/dashboard'
-      }, 3000)
-      setLoading(false)
+        window.location.href = "/dashboard";
+      }, 3000);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
-      <Form id='email-form' name='email-form' data-name='Email Form' method='get' onSubmit={handleSubmit(onStripeSubmit)}>
-        {loading && (
-          <Loader />
-        )}
+      <Form
+        id="email-form"
+        name="email-form"
+        data-name="Email Form"
+        method="get"
+        onSubmit={handleSubmit(onStripeSubmit)}
+      >
+        {loading && <Loader />}
         {props.selectedPlan.price > 0 && (
-          <Form.Group controlId='formCard'>
-            <Form.Label>{t('stripeForm.cardOwner')}</Form.Label>
-            <Form.Control type='text' maxLength='256' name='cardHolderName' data-name={t('stripeForm.cardOwner')} placeholder='' id='cardHolderName' {...register('cardHolderName', { required: true })} />
-            <span className='text-muted'>
-              {errors.cardHolderName?.message}
-            </span>
-            <CardElement style={{ base: { fontSize: '18px', color: '#333', border: '1px solid #ccc' } }} onReady={handleReady} />
+          <Form.Group controlId="formCard">
+            <Form.Label>{t("stripeForm.cardOwner")}</Form.Label>
+            <Form.Control
+              type="text"
+              maxLength="256"
+              name="cardHolderName"
+              data-name={t("stripeForm.cardOwner")}
+              placeholder=""
+              id="cardHolderName"
+              {...register("cardHolderName", { required: true })}
+            />
+            <span className="text-muted">{errors.cardHolderName?.message}</span>
+            <CardElement
+              style={{
+                base: {
+                  fontSize: "18px",
+                  color: "#333",
+                  border: "1px solid #ccc",
+                },
+              }}
+              onReady={handleReady}
+            />
           </Form.Group>
         )}
         {!loading && (
-          <Button type='submit' className='custom-btn green w-100-perc' data-wait='Please wait...'>{t('stripeForm.subscribe')}</Button>
+          <Button
+            type="submit"
+            className="custom-btn green w-100-perc"
+            data-wait="Please wait..."
+          >
+            {t("stripeForm.subscribe")}
+          </Button>
         )}
       </Form>
     </>
-  )
-}
-export default injectStripe(StripeForm)
+  );
+};
+export default injectStripe(StripeForm);

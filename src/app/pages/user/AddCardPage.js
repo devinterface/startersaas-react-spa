@@ -1,32 +1,34 @@
-import React, { } from 'react'
-import { StripeProvider, Elements } from 'react-stripe-elements'
-import { Plans } from 'api/queries'
-import { useQuery } from 'react-query'
+import { Plans } from "api/queries";
 
-import StripeCCForm from './StripeCCForm'
-import { useTranslation } from 'react-i18next'
-import { Row, Col } from 'react-bootstrap'
-import Box from 'app/components/dashboard/Box'
-import Loader from 'app/components/Loader'
+import { useQuery } from "react-query";
+import { Elements, StripeProvider } from "react-stripe-elements";
+
+import Box from "app/components/dashboard/Box";
+import Loader from "app/components/Loader";
+import { Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import StripeCCForm from "./StripeCCForm";
 
 const AddCardPage = (props) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const { isLoading: plansLoading, data: plansData } = useQuery('Plans', Plans, {
-    retry: false
-  })
+  const { isLoading: plansLoading, data: plansData } = useQuery(
+    "Plans",
+    Plans,
+    {
+      retry: false,
+    }
+  );
 
   if (plansLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
     <Row>
       <Col xs={12}>
         <Box
-          header={
-            <h1>{t('addCardPage.creditCard')}</h1>
-          }
+          header={<h1>{t("addCardPage.creditCard")}</h1>}
           body={
             <StripeProvider apiKey={plansData.data.publicKey}>
               <Elements>
@@ -37,7 +39,7 @@ const AddCardPage = (props) => {
         />
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default AddCardPage
+export default AddCardPage;

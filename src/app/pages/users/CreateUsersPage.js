@@ -1,45 +1,44 @@
-import React from 'react'
-import { CreateUser } from 'api/mutations'
-import { useMutation, useQueryClient } from 'react-query'
-import ConfirmAlert from 'libs/confirmAlert'
-import { useTranslation } from 'react-i18next'
-import { Form, Row, Col, Button } from 'react-bootstrap'
-import Box from 'app/components/dashboard/Box'
-import UsersForm from './UsersForm'
+import { CreateUser } from "api/mutations";
+import Box from "app/components/dashboard/Box";
+import ConfirmAlert from "libs/confirmAlert";
+import { Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useMutation, useQueryClient } from "react-query";
+import UsersForm from "./UsersForm";
 
-const CreateUsersPage = props => {
-  const { t } = useTranslation()
+const CreateUsersPage = (props) => {
+  const { t } = useTranslation();
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const createUserMutate = useMutation(CreateUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['Users', user.accountId])
-    }
-  })
+      queryClient.invalidateQueries(["Users", user.accountId]);
+    },
+  });
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     try {
-      const response = await createUserMutate.mutateAsync(data)
+      const response = await createUserMutate.mutateAsync(data);
       if (response) {
-        ConfirmAlert.success(t('createUsersPage.userCreated'))
-        props.history.push('/users')
+        ConfirmAlert.success(t("createUsersPage.userCreated"));
+        props.history.push("/users");
       }
     } catch (error) {
       if (error.response?.data) {
-        ConfirmAlert.error(error.response.data)
-        return
+        ConfirmAlert.error(error.response.data);
+        return;
       }
     }
-  }
+  };
 
   const user = {
-    name: '',
-    surname: '',
-    email: '',
-    language: 'en',
-    role: 'user'
-  }
+    name: "",
+    surname: "",
+    email: "",
+    language: "en",
+    role: "user",
+  };
 
   return (
     <Row>
@@ -47,7 +46,7 @@ const CreateUsersPage = props => {
         <Box
           header={
             <div>
-              <h1>{t('createUsersPage.createUser')}</h1>
+              <h1>{t("createUsersPage.createUser")}</h1>
             </div>
           }
           body={
@@ -58,6 +57,6 @@ const CreateUsersPage = props => {
         />
       </Col>
     </Row>
-  )
-}
-export default CreateUsersPage
+  );
+};
+export default CreateUsersPage;

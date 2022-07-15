@@ -1,6 +1,6 @@
-import axios from 'axios'
-import Storage from './storage'
-import { API_URL, JWT_TOKEN } from 'config'
+import axios from "axios";
+import { API_URL, JWT_TOKEN } from "config";
+import Storage from "./storage";
 
 // const formatErrors = (error) => {
 //   let msg = '<ul>'
@@ -38,35 +38,40 @@ import { API_URL, JWT_TOKEN } from 'config'
 // }
 
 class Axios {
-  constructor () {
+  constructor() {
     this.instance = axios.create({
       baseURL: API_URL,
       timeout: 4 * 60 * 1000,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+      },
+    });
+
+    this.instance.interceptors.response.use(
+      function (response) {
+        return response;
+      },
+      function (error) {
+        // if (error.response) {
+        //   handleError(error)
+        // } else if (error.request) {
+        // } else {
+        // }
+        return Promise.reject(error);
       }
-    })
-
-    this.instance.interceptors.response.use(function (response) {
-      return response
-    }, function (error) {
-      // if (error.response) {
-      //   handleError(error)
-      // } else if (error.request) {
-      // } else {
-      // }
-      return Promise.reject(error)
-    })
+    );
   }
 
-  base () {
-    return this.instance
+  base() {
+    return this.instance;
   }
 
-  authenticated () {
-    this.instance.defaults.headers.common.Authorization = `Bearer ${Storage.getItem(JWT_TOKEN)}`
-    return this.instance
+  authenticated() {
+    this.instance.defaults.headers.common.Authorization = `Bearer ${Storage.getItem(
+      JWT_TOKEN
+    )}`;
+    return this.instance;
   }
 }
 
-export default new Axios()
+export default new Axios();
