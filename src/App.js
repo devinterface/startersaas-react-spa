@@ -1,22 +1,15 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import ApplicationRouter from './ApplicationRouter'
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue
-} from 'recoil'
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import ApplicationRouter from "./ApplicationRouter";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false
-    }
-  }
-})
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
   return (
@@ -27,7 +20,7 @@ const App = () => {
         </BrowserRouter>
       </QueryClientProvider>
     </RecoilRoot>
-  )
-}
+  );
+};
 
-export default App
+export default App;

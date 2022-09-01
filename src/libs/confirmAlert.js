@@ -1,30 +1,30 @@
-import { confirmAlert } from 'react-confirm-alert' // Import
-import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 class ConfirmAlert {
-  success (message) {
+  success(message) {
     confirmAlert({
       message: message,
       buttons: [
         {
-          label: 'OK',
-          onClick: () => { }
-        }
-      ]
-    })
+          label: "OK",
+          onClick: () => {},
+        },
+      ],
+    });
   }
 
-  error (message) {
+  error(message) {
     confirmAlert({
       message: message,
       buttons: [
         {
-          label: 'OK',
-          onClick: () => { }
-        }
-      ]
-    })
+          label: "OK",
+          onClick: () => {},
+        },
+      ],
+    });
   }
 }
 
-export default new ConfirmAlert()
+export default new ConfirmAlert();

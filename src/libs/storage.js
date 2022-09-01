@@ -1,19 +1,19 @@
 class Storage {
-  getItem (key) {
-    return localStorage.getItem(key)
+  getItem(key) {
+    return localStorage.getItem(key);
   }
 
-  setItem (key, value) {
-    localStorage.setItem(key, value)
+  setItem(key, value) {
+    localStorage.setItem(key, value);
   }
 
-  deleteKey (key) {
-    delete localStorage[key]
+  deleteKey(key) {
+    delete localStorage[key];
   }
 
-  clear () {
-    localStorage.clear()
+  clear() {
+    localStorage.clear();
   }
 }
 
-export default new Storage()
+export default new Storage();

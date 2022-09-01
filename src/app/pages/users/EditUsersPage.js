@@ -1,67 +1,67 @@
-import React, { useState } from 'react'
-import { UpdateUser } from 'api/mutations'
-import { User } from 'api/queries'
-import { useMutation, useQueryClient, useQuery } from 'react-query'
-import ConfirmAlert from 'libs/confirmAlert'
-import { useTranslation } from 'react-i18next'
-import { Form, Row, Col, Button } from 'react-bootstrap'
-import Box from 'app/components/dashboard/Box'
-import { useParams } from 'react-router-dom'
-import UsersForm from './UsersForm'
-import Loader from 'app/components/Loader'
+import { UpdateUser } from "api/mutations";
+import { User } from "api/queries";
+import Box from "app/components/dashboard/Box";
+import Loader from "app/components/Loader";
+import ConfirmAlert from "libs/confirmAlert";
+import { useState } from "react";
+import { Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useParams } from "react-router-dom";
+import UsersForm from "./UsersForm";
 
-const EditUsersPage = props => {
-  const { t } = useTranslation()
+const EditUsersPage = (props) => {
+  const { t } = useTranslation();
 
-  const { userId } = useParams()
+  const { userId } = useParams();
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const { isLoading, data } = useQuery(
-    ['User', props.user.accountId],
+    ["User", props.user.accountId],
     () => User(userId),
     {
       retry: false,
-      onSuccess: data => {
+      onSuccess: (data) => {
         if (data.data.accountOwner) {
-          props.history.push('/users')
+          props.history.push("/users");
         } else {
-          setUser(data.data)
+          setUser(data.data);
         }
-      }
+      },
     }
-  )
+  );
 
   const updateUserMutate = useMutation(UpdateUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['Users', props.user.accountId])
-      queryClient.invalidateQueries(['User', props.user.accountId])
-    }
-  })
+      queryClient.invalidateQueries(["Users", props.user.accountId]);
+      queryClient.invalidateQueries(["User", props.user.accountId]);
+    },
+  });
 
-  const onSubmit = async data => {
-    delete data.email
+  const onSubmit = async (data) => {
+    delete data.email;
     try {
       const response = await updateUserMutate.mutateAsync({
         userId: userId,
-        data: data
-      })
+        data: data,
+      });
       if (response) {
-        ConfirmAlert.success(t('updateUsersPage.userUpdated'))
-        props.history.push('/users')
+        ConfirmAlert.success(t("updateUsersPage.userUpdated"));
+        props.history.push("/users");
       }
     } catch (error) {
       if (error.response?.data) {
-        ConfirmAlert.error(error.response.data)
-        return
+        ConfirmAlert.error(error.response.data);
+        return;
       }
     }
-  }
+  };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
@@ -70,7 +70,7 @@ const EditUsersPage = props => {
         <Box
           header={
             <div>
-              <h1>{t('updateUsersPage.updatedUser')}</h1>
+              <h1>{t("updateUsersPage.updatedUser")}</h1>
             </div>
           }
           body={
@@ -83,6 +83,6 @@ const EditUsersPage = props => {
         />
       </Col>
     </Row>
-  )
-}
-export default EditUsersPage
+  );
+};
+export default EditUsersPage;
