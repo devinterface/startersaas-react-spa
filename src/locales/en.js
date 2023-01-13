@@ -172,6 +172,10 @@ export default {
     logout: "Logout",
     toggle: "Toggle",
     users: "Manage users",
+    manageUser: "User data",
+    managePayment: "Billing details",
+    managePlan: "Manage plan",
+    users: "USERS",
   },
   indexUsersPage: {
     users: "Users",
@@ -193,6 +197,11 @@ export default {
   createUsersPage: {
     createUser: "Create a new user",
     userCreated: "User created",
+    name: "Name",
+    surname: "Surname",
+    email: "Email",
+    cancel: "Cancel",
+    save: "Save"
   },
   updateUsersPage: {
     updatedUser: "Update user",
@@ -206,6 +215,26 @@ export default {
     role: "Role",
     user: "User",
     admin: "Admin",
+    save: "Save",
+  },
+  buttonUsers: {
+    createUser: "Create User",
+    edit: "Edit",
+    delete: "Delete"
+  },
+  search: {
+    placeholder: "Search"
+  },
+  userEdit: {
+    user: "User",
+    editUser: "Edit user",
+    group: "Group",
+    users: "Users",
+    name: "Name",
+    surname: "Surname",
+    language: "Language",
+    role: "Role",
+    email: "Email",
     save: "Save",
   },
 };

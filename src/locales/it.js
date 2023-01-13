@@ -176,6 +176,10 @@ export default {
     logout: "Logout",
     toggle: "Attiva",
     users: "Gestisci utenti",
+    manageUser: "Dati utente",
+    managePayment: "Dati di fatturazione",
+    managePlan: "Gestisci abbonamento",
+    users: "UTENTI"
   },
   indexUsersPage: {
     users: "Utenti",
@@ -197,6 +201,11 @@ export default {
   createUsersPage: {
     createUser: "Crea un nuovo utente",
     userCreated: "Utente creato",
+    name: "Nome",
+    surname: "Cognome",
+    email: "Email",
+    cancel: "Anulla",
+    save: "Salva"
   },
   updateUsersPage: {
     updatedUser: "Aggiorna utente",
@@ -210,6 +219,26 @@ export default {
     role: "Ruolo",
     user: "Utente",
     admin: "Amministratore",
+    save: "Salva",
+  },
+  buttonUsers: {
+    createUser: "Crea utente",
+    edit: "Modifica",
+    delete: "Cancella"
+  },
+  search: {
+    placeholder: "Cerca"
+  },
+  userEdit: {
+    user: "Utente",
+    editUser: "Modifica utente",
+    group: "Gruppi",
+    users: "Utenti",
+    name: "Nome",
+    surname: "Cognome",
+    language: "Lingua",
+    role: "Ruolo",
+    email: "Email",
     save: "Salva",
   },
 };

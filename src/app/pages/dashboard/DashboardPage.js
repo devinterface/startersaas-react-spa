@@ -72,7 +72,7 @@ const DashboardPage = ({ user }) => {
         },
         {
           label: t("dashboardPage.no"),
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });
@@ -89,7 +89,7 @@ const DashboardPage = ({ user }) => {
         },
         {
           label: t("dashboardPage.no"),
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });
@@ -106,7 +106,7 @@ const DashboardPage = ({ user }) => {
         },
         {
           label: t("dashboardPage.no"),
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });
@@ -339,12 +339,12 @@ const DashboardPage = ({ user }) => {
                               {cardData.id ===
                                 data.data.invoice_settings
                                   .default_payment_method ||
-                              cardData.id ===
+                                cardData.id ===
                                 data.data.invoice_settings
                                   .default_payment_method.id ? (
                                 <Button
                                   className="custom-btn mini inline green"
-                                  onClick={() => {}}
+                                  onClick={() => { }}
                                 >
                                   {t("dashboardPage.default")}
                                 </Button>

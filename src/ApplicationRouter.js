@@ -15,6 +15,7 @@ import AddCardPage from "app/pages/user/AddCardPage";
 import EditAccountPage from "app/pages/user/EditAccountPage";
 import EditUserPage from "app/pages/user/EditUserPage";
 import CreateUsersPage from "app/pages/users/CreateUsersPage";
+import EditUser from "app/pages/users/EditUser";
 import EditUsersPage from "app/pages/users/EditUsersPage";
 import IndexUsersPage from "app/pages/users/IndexUsersPage";
 import withCurrentUser from "hoc/withCurrentUser";
@@ -114,6 +115,7 @@ const ApplicationRouter = () => {
         path="/users"
         layout={PrivateLayout}
         allowedRoles={["admin"]}
+        planType={["premium"]}
         component={IndexUsersPage}
       />
       <Private
@@ -129,6 +131,14 @@ const ApplicationRouter = () => {
         layout={PrivateLayout}
         allowedRoles={["admin"]}
         component={EditUsersPage}
+      />
+      <Private
+        exact
+        path="/user/:userId"
+        layout={PrivateLayout}
+        allowedRoles={["admin"]}
+        planType={["premium"]}
+        component={EditUser}
       />
     </Switch>
   );

@@ -1,5 +1,6 @@
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { formatErrors } from "./utils";
 
 class ConfirmAlert {
   success(message) {
@@ -8,19 +9,20 @@ class ConfirmAlert {
       buttons: [
         {
           label: "OK",
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });
   }
 
   error(message) {
+    let msg = formatErrors(message);
     confirmAlert({
-      message: message,
+      message: msg,
       buttons: [
         {
           label: "OK",
-          onClick: () => {},
+          onClick: () => { },
         },
       ],
     });
