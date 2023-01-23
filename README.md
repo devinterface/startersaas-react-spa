@@ -1,4 +1,4 @@
-# Starter SaaS React SPA
+# StarterSaaS React SPA
 
 This project contains everything you need to setup a fully featured SaaS SPA in 5 minutes.
 
@@ -36,7 +36,7 @@ http://localhost:3010
 
 Below the meaning of every environment variable you can setup.
 
-`REACT_APP_API_HOST=http://localhost:3000` the host of Starter SaaS API
+`REACT_APP_API_HOST=http://localhost:3000` the host of StarterSaaS API
 
 `REACT_APP_API_PATH=/api/v1` don't change it
 
@@ -94,3 +94,7 @@ Below the meaning of every environment variable you can setup.
 Author: Stefano Mancini <stefano.mancini@devinterface.com>
 
 Company: DevInterface SRL (https://www.devinterface.com)
+
+### License
+
+Licensed under the [MIT License](https://github.com/devinterface/startersaas-react-spa/blob/master/LICENSE)
