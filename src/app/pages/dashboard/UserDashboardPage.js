@@ -9,13 +9,9 @@ const DashboardPage = ({ user }) => {
 
   return (
     <div className="dashboard-page">
-      {isFreeTrial(user.account) ? (
-        <TrialComponent user={user} />
-      ) : (
-        <>
-          <Row>IMPLEMENT ME</Row>
-        </>
-      )}
+      <>
+        <Row>IMPLEMENT ME</Row>
+      </>
     </div>
   );
 };

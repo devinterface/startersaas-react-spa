@@ -18,7 +18,7 @@ export default {
     terms: "Temini e condizioni",
     privacy: "Privacy e Policy",
     marketingConsent:
-      "Starter SaaS si impegna a proteggere e rispettare la tua privacy e utilizzerà le tue informazioni personali solo per gestire il tuo account e fornire il servizio da te richiesto. Ogni tanto ci piacerebbe comunque tenerti aggiornato sui nostri prodotti e servizi ed altri contenuti che potrebbero interessarti.",
+      "StarterSaaS si impegna a proteggere e rispettare la tua privacy e utilizzerà le tue informazioni personali solo per gestire il tuo account e fornire il servizio da te richiesto. Ogni tanto ci piacerebbe comunque tenerti aggiornato sui nostri prodotti e servizi ed altri contenuti che potrebbero interessarti.",
     alreadyRegistered: "Già registrato?",
     didntReceivedActivationEmail: "Non hai ricevuto la mail di attivazione?",
     confirm: "Conferma",
@@ -126,7 +126,7 @@ export default {
   },
   trialComponent: {
     youAreOnTrial:
-      "Stai attualmente utilizzando la versione di prova di Starter SaaS.",
+      "Stai attualmente utilizzando la versione di prova di StarterSaaS.",
     trialEndsAt: "Il periodo di prova termina il",
     goToPlans: "Va ai piani",
   },
@@ -169,6 +169,7 @@ export default {
     paid: "Pagato",
     toPay: "Da pagare",
     actions: "Azioni",
+    invoice: "Fattura",
   },
   privateLayout: {
     billingDetails: "Dettagli fatturazione",
@@ -179,7 +180,7 @@ export default {
     manageUser: "Dati utente",
     managePayment: "Dati di fatturazione",
     managePlan: "Gestisci abbonamento",
-    users: "UTENTI"
+    users: "UTENTI",
   },
   indexUsersPage: {
     users: "Utenti",
@@ -205,7 +206,7 @@ export default {
     surname: "Cognome",
     email: "Email",
     cancel: "Anulla",
-    save: "Salva"
+    save: "Salva",
   },
   updateUsersPage: {
     updatedUser: "Aggiorna utente",
@@ -224,10 +225,10 @@ export default {
   buttonUsers: {
     createUser: "Crea utente",
     edit: "Modifica",
-    delete: "Cancella"
+    delete: "Cancella",
   },
   search: {
-    placeholder: "Cerca"
+    placeholder: "Cerca",
   },
   userEdit: {
     user: "Utente",

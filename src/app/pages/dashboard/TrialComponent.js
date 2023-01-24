@@ -24,9 +24,11 @@ const TrialComponent = ({ user }) => {
               {t("trialComponent.trialEndsAt")}{" "}
               {moment(user.account.trialPeriodEndsAt).format("DD/MM/YYYY")}
             </strong>
-            <Link to="/plan" className="custom-btn green">
-              {t("trialComponent.goToPlans")}
-            </Link>
+            {user.role === "admin" && (
+              <Link to="/plan" className="custom-btn green">
+                {t("trialComponent.goToPlans")}
+              </Link>
+            )}
           </div>
         }
       />
