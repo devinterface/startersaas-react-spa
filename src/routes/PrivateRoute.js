@@ -8,9 +8,14 @@ const PrivateRoute = ({
   layout: Layout,
   container,
   allowedRoles,
+  planType,
   ...rest
 }) => {
-  const allowed = isAuthenticated && user && allowedRoles.includes(user.role);
+  let allowed = isAuthenticated && user && allowedRoles.includes(user.role);
+
+  if (planType && planType.length > 0) {
+    allowed = allowed && planType.includes(user.account.planType);
+  }
 
   return (
     <Route
@@ -26,17 +31,17 @@ const PrivateRoute = ({
               }}
             />
           ) : // eslint-disable-next-line no-nested-ternary
-          allowed ? (
-            Layout === undefined ? (
-              <Component user={user} {...props} />
-            ) : (
-              <Layout container={container} user={user}>
+            allowed ? (
+              Layout === undefined ? (
                 <Component user={user} {...props} />
-              </Layout>
+              ) : (
+                <Layout container={container} user={user}>
+                  <Component user={user} {...props} />
+                </Layout>
+              )
+            ) : (
+              <div>Forbidden</div>
             )
-          ) : (
-            <div>Forbidden</div>
-          )
         );
       }}
     />

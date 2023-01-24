@@ -18,7 +18,7 @@ export default {
     terms: "Terms and Conditions",
     privacy: "Privacy and Policy",
     marketingConsent:
-      "Starter SaaS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.",
+      "StarterSaaS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.",
     alreadyRegistered: "Already registered?",
     didntReceivedActivationEmail: "Didn't receive the activation email?",
     confirm: "Confirm",
@@ -122,7 +122,7 @@ export default {
   },
   trialComponent: {
     youAreOnTrial:
-      "You are currently working on the trial version of Starter SaaS.",
+      "You are currently working on the trial version of StarterSaaS.",
     trialEndsAt: "Trial period ends at",
     goToPlans: "Go to plans",
   },
@@ -165,6 +165,7 @@ export default {
     paid: "Paid",
     toPay: "To pay",
     actions: "Actions",
+    invoice: "Invoice",
   },
   privateLayout: {
     billingDetails: "Billing details",
@@ -172,6 +173,10 @@ export default {
     logout: "Logout",
     toggle: "Toggle",
     users: "Manage users",
+    manageUser: "User data",
+    managePayment: "Billing details",
+    managePlan: "Manage plan",
+    users: "USERS",
   },
   indexUsersPage: {
     users: "Users",
@@ -193,6 +198,11 @@ export default {
   createUsersPage: {
     createUser: "Create a new user",
     userCreated: "User created",
+    name: "Name",
+    surname: "Surname",
+    email: "Email",
+    cancel: "Cancel",
+    save: "Save",
   },
   updateUsersPage: {
     updatedUser: "Update user",
@@ -206,6 +216,26 @@ export default {
     role: "Role",
     user: "User",
     admin: "Admin",
+    save: "Save",
+  },
+  buttonUsers: {
+    createUser: "Create User",
+    edit: "Edit",
+    delete: "Delete",
+  },
+  search: {
+    placeholder: "Search",
+  },
+  userEdit: {
+    user: "User",
+    editUser: "Edit user",
+    group: "Group",
+    users: "Users",
+    name: "Name",
+    surname: "Surname",
+    language: "Language",
+    role: "Role",
+    email: "Email",
     save: "Save",
   },
 };

@@ -455,19 +455,20 @@ const DashboardPage = ({ user }) => {
                                 )}
                               </td>
                               <td>
-                                {invoice.hosted_invoice_url &&
-                                  invoice.status === "open" && (
-                                    <strong>
-                                      <a
-                                        href={invoice.hosted_invoice_url}
-                                        className="custom-btn mini inline red"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                      >
-                                        {t("dashboardPage.toPay")}
-                                      </a>
-                                    </strong>
-                                  )}
+                                {invoice.hosted_invoice_url && (
+                                  <strong>
+                                    <a
+                                      href={invoice.hosted_invoice_url}
+                                      className="custom-btn mini inline red"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      {invoice.status === "open"
+                                        ? t("dashboardPage.toPay")
+                                        : t("dashboardPage.invoice")}
+                                    </a>
+                                  </strong>
+                                )}
                               </td>
                             </tr>
                           ))}

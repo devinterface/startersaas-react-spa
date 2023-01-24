@@ -50,7 +50,7 @@ const LoginPage = (props) => {
             {errors.email?.message}
           </small>
           <input
-            className="form-control custom-input"
+            className="form-control custom-input mb-3"
             type="text"
             name="email"
             aria-describedby="emailHelp"
@@ -66,7 +66,7 @@ const LoginPage = (props) => {
             {errors.password?.message}
           </small>
           <input
-            className="form-control custom-input"
+            className="form-control custom-input mb-3"
             type="password"
             maxLength="256"
             name="password"

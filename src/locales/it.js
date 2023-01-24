@@ -18,7 +18,7 @@ export default {
     terms: "Temini e condizioni",
     privacy: "Privacy e Policy",
     marketingConsent:
-      "Starter SaaS si impegna a proteggere e rispettare la tua privacy e utilizzerà le tue informazioni personali solo per gestire il tuo account e fornire il servizio da te richiesto. Ogni tanto ci piacerebbe comunque tenerti aggiornato sui nostri prodotti e servizi ed altri contenuti che potrebbero interessarti.",
+      "StarterSaaS si impegna a proteggere e rispettare la tua privacy e utilizzerà le tue informazioni personali solo per gestire il tuo account e fornire il servizio da te richiesto. Ogni tanto ci piacerebbe comunque tenerti aggiornato sui nostri prodotti e servizi ed altri contenuti che potrebbero interessarti.",
     alreadyRegistered: "Già registrato?",
     didntReceivedActivationEmail: "Non hai ricevuto la mail di attivazione?",
     confirm: "Conferma",
@@ -126,7 +126,7 @@ export default {
   },
   trialComponent: {
     youAreOnTrial:
-      "Stai attualmente utilizzando la versione di prova di Starter SaaS.",
+      "Stai attualmente utilizzando la versione di prova di StarterSaaS.",
     trialEndsAt: "Il periodo di prova termina il",
     goToPlans: "Va ai piani",
   },
@@ -169,6 +169,7 @@ export default {
     paid: "Pagato",
     toPay: "Da pagare",
     actions: "Azioni",
+    invoice: "Fattura",
   },
   privateLayout: {
     billingDetails: "Dettagli fatturazione",
@@ -176,6 +177,10 @@ export default {
     logout: "Logout",
     toggle: "Attiva",
     users: "Gestisci utenti",
+    manageUser: "Dati utente",
+    managePayment: "Dati di fatturazione",
+    managePlan: "Gestisci abbonamento",
+    users: "UTENTI",
   },
   indexUsersPage: {
     users: "Utenti",
@@ -197,6 +202,11 @@ export default {
   createUsersPage: {
     createUser: "Crea un nuovo utente",
     userCreated: "Utente creato",
+    name: "Nome",
+    surname: "Cognome",
+    email: "Email",
+    cancel: "Anulla",
+    save: "Salva",
   },
   updateUsersPage: {
     updatedUser: "Aggiorna utente",
@@ -210,6 +220,26 @@ export default {
     role: "Ruolo",
     user: "Utente",
     admin: "Amministratore",
+    save: "Salva",
+  },
+  buttonUsers: {
+    createUser: "Crea utente",
+    edit: "Modifica",
+    delete: "Cancella",
+  },
+  search: {
+    placeholder: "Cerca",
+  },
+  userEdit: {
+    user: "Utente",
+    editUser: "Modifica utente",
+    group: "Gruppi",
+    users: "Utenti",
+    name: "Nome",
+    surname: "Cognome",
+    language: "Lingua",
+    role: "Ruolo",
+    email: "Email",
     save: "Salva",
   },
 };

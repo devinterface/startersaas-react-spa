@@ -1,14 +1,14 @@
 {
   "name": "startersaas-react-spa",
   "version": "3.5.0",
-  "license": "Apache 2.0 with Commons Clause",
+  "license": "MIT",
   "author": "Stefano Mancini <stefano.mancini@devinterface.com> (https://www.devinterface.com)",
   "homepage": "https://www.startersaas.com",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/resolvers": "^2.8.3",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
@@ -18,7 +18,7 @@
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "react": "^17.0.2",
-    "react-bootstrap": "^1.5.2",
+    "react-bootstrap": "^2.7.0",
     "react-confirm-alert": "^2.6.1",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.20.2",
@@ -32,7 +32,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "PORT=3010 react-scripts start",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider PORT=3010 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

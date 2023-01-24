@@ -85,7 +85,7 @@ const RegisterPage = (props) => {
           </small>
           <input
             type="subdomain"
-            className="form-control custom-input"
+            className="form-control custom-input mb-3"
             maxLength="256"
             aria-describedby="subdomainHelp"
             name="subdomain"
@@ -102,7 +102,7 @@ const RegisterPage = (props) => {
           </small>
           <input
             type="email"
-            className="form-control custom-input"
+            className="form-control custom-input mb-3"
             maxLength="256"
             aria-describedby="emailHelp"
             name="email"
@@ -118,7 +118,7 @@ const RegisterPage = (props) => {
           </small>
           <input
             type="password"
-            className="form-control custom-input"
+            className="form-control custom-input mb-3"
             maxLength="256"
             name="password"
             data-name="Password"
