@@ -1,13 +1,13 @@
-version: '3.3'
+version: "3.3"
 
 services:
   startersaas-react-spa:
     container_name: startersaas-react-spa
-    build: 
+    build:
       context: .
       dockerfile: docker/dev/Dockerfile
     ports:
-      - 3010:3010
+      - "${APP_PORT}:3010"
     volumes:
       - .:/app
       - node_modules:/app/node_modules
