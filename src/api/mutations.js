@@ -133,6 +133,31 @@ const CreateCustomerPortalSession = async () => {
   return result;
 };
 
+const CreateTeam = async (data) => {
+  const result = await Axios.authenticated().post(`/teams`, data);
+  return result;
+}
+
+const DeleteTeam = async (id) => {
+  const result = await Axios.authenticated().delete(`/teams/${id}`);
+  return result;
+}
+
+const UpdateTeam = async ({ id, data }) => {
+  const result = await Axios.authenticated().put(`/teams/${id}`, data);
+  return result;
+}
+
+const AddTeamUser = async ({ teamId, userId }) => {
+  const result = await Axios.authenticated().put(`/teams/${teamId}/add-user/${userId}`);
+  return result;
+}
+
+const RemoveTeamUser = async ({ teamId, userId }) => {
+  const result = await Axios.authenticated().put(`/teams/${teamId}/remove-user/${userId}`);
+  return result;
+}
+
 export {
   Logout,
   Login,
@@ -154,4 +179,9 @@ export {
   DeleteUser,
   CreateCustomerPortalSession,
   CreateCustomerCheckoutSession,
+  CreateTeam,
+  DeleteTeam,
+  UpdateTeam,
+  AddTeamUser,
+  RemoveTeamUser
 };

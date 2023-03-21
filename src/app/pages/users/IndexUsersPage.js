@@ -36,23 +36,6 @@ const IndexUsersPage = ({ user }) => {
     },
   });
 
-  // const deleteUser = async (userId) => {
-  //   confirmAlert({
-  //     title: t("indexUsersPage.deleteUser"),
-  //     message: t("indexUsersPage.areYouSureToDelete"),
-  //     buttons: [
-  //       {
-  //         label: t("indexUsersPage.yes"),
-  //         onClick: async () => deleteUserMutate.mutate(userId),
-  //       },
-  //       {
-  //         label: t("indexUsersPage.no"),
-  //         onClick: () => { },
-  //       },
-  //     ],
-  //   });
-  // };
-
   const createUserMutate = useMutation(CreateUser, {
     onSuccess: () => {
       queryClient.invalidateQueries(["Users", user.accountId]);
@@ -118,7 +101,7 @@ const IndexUsersPage = ({ user }) => {
   return (
     <>
       <div>
-        <Modal show={createUserPopup}>
+        <Modal show={createUserPopup} onHide={() => setCreateUserPopup(false)}>
           <div className='popup-crea-gruppo p-4'>
             <div>
               <div className='fw-bold mb-2'>{t("createUsersPage.name")}</div>
@@ -171,12 +154,8 @@ const IndexUsersPage = ({ user }) => {
           </div>
         </Modal>
         <h1>{t("indexUsersPage.users")}</h1>
-        <div className='dashboard-box mt-3 h-auto'>
-          <div className='d-flex justify-content-between mb-4'>
-            <form className="d-none d-md-block mt-3 position-relative w-100-perc">
-              <input className='tag-search-input ' placeholder={t("search.placeholder")} />
-              <FontAwesomeIcon className="search-button position-absolute" icon={faMagnifyingGlass} />
-            </form>
+        <div className='dashboard-box mt-5 h-auto'>
+          <div className='d-flex justify-content-end mb-4'>
             <div className='mt-3 create-group-button d-flex justify-content-center align-items-center' onClick={() => setCreateUserPopup(true)}>{t("buttonUsers.createUser")}</div>
           </div>
           <Table responsive>
@@ -222,75 +201,6 @@ const IndexUsersPage = ({ user }) => {
             </tbody>
           </Table>
         </div>
-        <>
-          {/* <Row>
-        <Col cs={12}>
-          <Box
-            header={
-              <div>
-                <div className="semicircle green" />
-                <h1>{t("indexUsersPage.users")}</h1>
-              </div>
-            }
-            body={
-              <div>
-                <Table responsive>
-                  <thead>
-                    <tr>
-                      <th scope="col">{t("indexUsersPage.name")}</th>
-                      <th scope="col">{t("indexUsersPage.surname")}</th>
-                      <th scope="col">{t("indexUsersPage.email")}</th>
-                      <th scope="col">{t("indexUsersPage.role")}</th>
-                      <th scope="col">{t("indexUsersPage.actions")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.data.map((user, i) => (
-                      <tr key={`user-${i}`}>
-                        <td>{user.name}</td>
-                        <td>{user.surname}</td>
-                        <td>{user.email}</td>
-                        <td>{user.role}</td>
-                        <td>
-                          {!user.accountOwner && (
-                            <Link
-                              to={`/edit-user/${user.id}`}
-                              className="mr-2"
-                              id="user-edit"
-                              title={t("indexUsersPage.editUser")}
-                            >
-                              <FontAwesomeIcon icon={faEdit} />
-                              <span className="only-mobile">
-                                {t("indexUsersPage.editUser")}
-                              </span>
-                            </Link>
-                          )}
-                          {!user.accountOwner && (
-                            <Link
-                              onClick={() => deleteUser(user.id)}
-                              id="user-edit"
-                              title={t("indexUsersPage.deleteUser")}
-                            >
-                              <FontAwesomeIcon icon={faTrash} />
-                              <span className="only-mobile">
-                                {t("indexUsersPage.deleteUser")}
-                              </span>
-                            </Link>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-                <Link to="/create-user" className="custom-btn green w-100-perc">
-                  {t("indexUsersPage.addUser")}
-                </Link>
-              </div>
-            }
-          />
-        </Col>
-      </Row> */}
-        </>
       </div>
     </>
   );

@@ -42,6 +42,16 @@ const User = async (userId) => {
   return result;
 };
 
+const Teams = async () => {
+  const result = await Axios.authenticated().get("/teams");
+  return result;
+}
+
+const Team = async (id) => {
+  const result = await Axios.authenticated().get(`teams/${id}`);
+  return result;
+}
+
 export {
   Me,
   Account,
@@ -51,4 +61,6 @@ export {
   Plans,
   Users,
   User,
+  Teams,
+  Team
 };

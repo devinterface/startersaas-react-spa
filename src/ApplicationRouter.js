@@ -11,6 +11,8 @@ import DashboardSwitcher from "app/pages/dashboard/DashboardSwitcher";
 import PlanPage from "app/pages/plan/PlanPage";
 import SubscribePlanPage from "app/pages/plan/SubscribePlanPage";
 import IndexPage from "app/pages/public/IndexPage";
+import IndexTeamsPage from "app/pages/teams/IndexTeamsPage";
+import TeamPage from "app/pages/teams/TeamPage";
 import AddCardPage from "app/pages/user/AddCardPage";
 import EditAccountPage from "app/pages/user/EditAccountPage";
 import EditUserPage from "app/pages/user/EditUserPage";
@@ -74,6 +76,20 @@ const ApplicationRouter = () => {
         layout={PrivateLayout}
         allowedRoles={["admin", "user"]}
         component={DashboardSwitcher}
+      />
+      <PrivateActive
+        exact
+        path="/teams"
+        layout={PrivateLayout}
+        allowedRoles={["admin", "user"]}
+        component={IndexTeamsPage}
+      />
+      <PrivateActive
+        exact
+        path="/teams/:teamId"
+        layout={PrivateLayout}
+        allowedRoles={["admin"]}
+        component={TeamPage}
       />
       <Private
         exact

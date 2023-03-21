@@ -241,4 +241,25 @@ export default {
     email: "Email",
     save: "Salva",
   },
+  teamsPage: {
+    teams: "Gruppi",
+    name: "Nome",
+    users: "Utenti",
+    code: "Codice",
+    actions: "Azioni",
+    createTeam: "Crea Team",
+    edit: "Modifica",
+    delete: "Cancella",
+    deleteTeam: "Cancella Team",
+    yes: "si",
+    no: "no",
+    cancel: "Cancella",
+    create: "Crea"
+  },
+  teamPage: {
+    save: "Salva",
+    user: "Utente",
+    name: "Nome",
+    code: "Codice"
+  }
 };
