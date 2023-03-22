@@ -93,7 +93,7 @@ const ApplicationRouter = () => {
       />
       <Private
         exact
-        path="/plan/subscribe"
+        path="/plan/:planId/subscribe"
         layout={PrivateLayout}
         allowedRoles={["admin"]}
         component={SubscribePlanPage}
