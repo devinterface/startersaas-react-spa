@@ -66,7 +66,7 @@ export default function IndexTeamsPage({ user }) {
   }
 
   return (
-    <div>
+    <div className='max-width'>
       <Modal show={createTeamModal} centered onHide={() => setCreateTeamModal(false)}>
         <Modal.Header closeButton>
           <h4>{t("teamsPage.createTeam")}</h4>
@@ -106,23 +106,28 @@ export default function IndexTeamsPage({ user }) {
         <div className='d-flex justify-content-end mb-4'>
           <div className='mt-3 create-group-button d-flex justify-content-center align-items-center' onClick={() => { setCreateTeamModal(true) }}>{t("teamsPage.createTeam")}</div>
         </div>
-        <Table responsive >
+        <Table responsive bordered >
           <thead>
-            <tr>
-              <th className='col-1 text-center fs-4'>{t("teamsPage.name")}</th>
-              <th className='col-1 text-center fs-4'>{t("teamsPage.users")}</th>
-              <th className='col-1 text-center fs-4'>{t("teamsPage.code")}</th>
-              <th className='col-1 text-center fs-4'>{t("teamsPage.actions")}</th>
+            <tr className="d-none d-md-table-row">
+              <th className='col-1 text-start fs-5' style={{ borderLeft: "0px", borderRight: "0px" }}>{t("teamsPage.name")}</th>
+              <th className='col-1 text-start fs-5' style={{ borderLeft: "0px", borderRight: "0px" }}>{t("teamsPage.users")}</th>
+              <th className='col-1 text-start fs-5' style={{ borderLeft: "0px", borderRight: "0px" }}>{t("teamsPage.code")}</th>
+              <th className='col-1 text-start fs-5' style={{ borderLeft: "0px", borderRight: "0px" }}>{t("teamsPage.actions")}</th>
             </tr>
           </thead>
           <tbody>
             {teams &&
               <>{teams.data.map((element, i) =>
-                <tr key={`team-${i}`}>
-                  <td className='text-center'>{element.name}</td>
-                  <td className='text-center'>{element.users.length}</td>
-                  <td className='text-center'>{element.code}</td>
-                  <td className='text-center d-flex justify-content-center'>
+                <tr key={`team-${i}`} className='text-secondary d-flex flex-column d-md-table-row'>
+                  <div className="d-md-none fs-6 fw-bold pb-0">{t("teamsPage.name")}:</div>
+                  <td className='text-start border-0 text-break'>{element.name}</td>
+                  <div className="d-md-none fs-6 fw-bold pb-0">{t("teamsPage.users")}:</div>
+                  <td className='text-start border-0 text-break'>{element.users.length}</td>
+                  <div className="d-md-none fs-6 fw-bold pb-0">{t("teamsPage.code")}:</div>
+                  <td className='text-start border-0 text-break'>{element.code}</td>
+                  <div className="d-md-none fs-6 fw-bold pb-0">{t("teamsPage.actions")}:</div>
+
+                  <td className='text-start border-0 text-break d-flex justify-content-start'>
                     <Link to={`/teams/${element.id}`} className='me-2 group-button-edit text-decoration-none'>{t("teamsPage.edit")}</Link>
                     <div onClick={() => { setDeleteModal(true); setSelectedTeamId(element.id) }} className='me-2 group-button-delete text-decoration-none'>{t("teamsPage.delete")}</div>
                   </td>

@@ -169,6 +169,7 @@ export default {
     paid: "Pagato",
     toPay: "Da pagare",
     actions: "Azioni",
+    noAccess: "Non puoi accedere a questa pagina"
   },
   privateLayout: {
     billingDetails: "Dettagli fatturazione",
@@ -254,7 +255,8 @@ export default {
     yes: "si",
     no: "no",
     cancel: "Cancella",
-    create: "Crea"
+    create: "Crea",
+    userWithNoTeams: "Non sei stato inserito in alcun gruppo."
   },
   teamPage: {
     save: "Salva",

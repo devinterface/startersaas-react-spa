@@ -23,8 +23,8 @@ body {
 }
 
 .dashboard-box {
-  min-height: 250px;
-  height: 100%;
+  min-height: 200px;
+  /* height: 100%; */
   border-radius: 5px;
   background-color: #fff;
   width: 100%;
@@ -35,6 +35,7 @@ body {
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%);
   overflow: hidden;
   position: relative;
+  max-width: 1440px;
 }
 
 .custom-btn {
@@ -410,6 +411,20 @@ body {
   justify-content: space-around;
 }
 
+.container-width {
+  max-width: 80%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media screen and (max-width: 758px) {
+  .container-width {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 .popup-crea-gruppo-input {
   margin-right: 10px;
   text-indent: 10px;
@@ -476,4 +491,33 @@ body {
   background: #a5a5a5 0% 0% no-repeat padding-box;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.modal-backdrop {
+  background-color: white;
+}
+
+.modal-content {
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 100px;
+}
+
+.btn-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.max-width {
+  max-width: 1440px;
+}
+
+thead > tr {
+  border-top: 0px;
+}
+
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #f8f8f8;
 }

@@ -4,6 +4,7 @@ import {
   faUser,
   faHouse,
   faXmark,
+  faMoneyBills,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Logout, UpdateMe } from "api/mutations";
@@ -16,15 +17,20 @@ import { useMutation, useQueryClient } from "react-query";
 import { Link, useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import "../../../css/privateLayout/private.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import useOnClickOutside from "hoc/onClickOutsude";
 
 const PrivateLayout = ({ children, user }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
+
+  const refUser = useRef()
+
+  const refMenu = useRef()
 
   const [selectedPlan, setSelectedPlan] = useRecoilState(selectedPlanState);
 
@@ -67,13 +73,16 @@ const PrivateLayout = ({ children, user }) => {
     }
   }
 
+  useOnClickOutside(refUser, () => setUserIcon("d-none"))
+  useOnClickOutside(refMenu, () => setOpen(false))
+
   return (
     <div className="d-flex flex-column" id="h100">
       <div id="page-content">
         <header>
           <>
             {['md'].map((expand) => (
-              <Navbar key={expand} bg="light" expand={"md"} expanded={open}>
+              <Navbar key={expand} bg="light" expand={"md"} expanded={open} ref={refMenu}>
                 <Container fluid>
                   <Navbar.Brand href="#" className="w-100-perc d-flex justify-content-between p-0">
                     <div className="d-flex">
@@ -105,9 +114,9 @@ const PrivateLayout = ({ children, user }) => {
                           </select>
                         </form>
                       </li>
-                      <li className="me-4 m-auto">
+                      <li className="me-4 m-auto" ref={refUser}>
                         <FontAwesomeIcon icon={faCircleUser} className="user-icon" onClick={() => displayUserMenu()} />
-                        <div className={`${userIcon} usericon-drop position-absolute`}>
+                        <div className={`${userIcon} usericon-drop position-absolute`} ref={refUser}>
                           <div className="usericon-items fw-bold" >{user.name}</div>
                           <div className="usericon-items" >
                             <Link
@@ -201,7 +210,7 @@ const PrivateLayout = ({ children, user }) => {
                             {user.role === "admin" &&
                               <>
                                 <Link className="text-decoration-none text-white" to="/plan" onClick={() => setOpen(!open)}>
-                                  <FontAwesomeIcon icon={faUser} className="me-2" />
+                                  <FontAwesomeIcon icon={faMoneyBills} className="me-2" />
                                 </Link>
                                 <Link
                                   className="d-md-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
@@ -223,52 +232,46 @@ const PrivateLayout = ({ children, user }) => {
           </>
         </header>
         <div className="d-flex flex-column flex-md-row h-100">
-          {user.role == "admin" && (<>
-            <div className="d-none d-md-flex flex-column justify-content-lg-start ps-5 gap-2 p-3 align-items-start text-white bg-dark mediaq-side ">
-              <div className="d-flex align-items-center fs-4 ms-5 mt-md-5" >
-                {user.role === "admin" &&
-                  <>
-                    <Link className="text-decoration-none text-white" to="/users">
-                      <FontAwesomeIcon icon={faUser} className="me-2" />
-                    </Link>
-                    <Link
-                      className="d-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
-                      to="/users"
-                      id="users-edit"
-                      title="Utenti"
-                    >{t("privateLayout.users")}</Link>
-                  </>
-                }
-              </div>
-              <div className="d-flex align-items-center fs-4 ms-5 mt-0 mt-md-5">
-                {user.role === "admin" &&
-                  <>
-                    <Link className="text-decoration-none text-white" to="/teams"> <FontAwesomeIcon icon={faUsers} className="me-2" /></Link>
-                    <Link
-                      className="d-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
-                      to="/teams"
-                      id="teams"
-                      title="Teams"
-                    >TEAMS</Link>
-                  </>
-                }
-              </div>
-              <div className="d-flex align-items-center fs-4 ms-5 mt-0 mt-md-5">
-                {user.role === "admin" &&
-                  <>
-                    <Link className="text-decoration-none text-white" to={"/plan"}> <FontAwesomeIcon icon={faUser} className="me-2" /> </Link>
-                    <Link
-                      className="d-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
-                      to="/plan"
-                      id="plan"
-                      title="Plan"
-                    >{t("dashboardPage.plan").toUpperCase()}</Link>
-                  </>
-                }
-              </div>
+
+          <div className="d-none d-md-flex flex-column justify-content-lg-start ps-5 gap-2 p-3 align-items-start text-white bg-dark mediaq-side ">
+            <div className="d-flex align-items-center fs-4 ms-5 mt-md-5" >
+              <>
+                <Link className="text-decoration-none text-white" to="/users">
+                  <FontAwesomeIcon icon={faUser} className="me-2" />
+                </Link>
+                <Link
+                  className="d-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
+                  to="/users"
+                  id="users-edit"
+                  title="Utenti"
+                >{t("privateLayout.users")}</Link>
+              </>
             </div>
-          </>)}
-          <Container className="first-container">{children}</Container>
+            <div className="d-flex align-items-center fs-4 ms-5 mt-0 mt-md-5">
+              <>
+                <Link className="text-decoration-none text-white" to="/teams"> <FontAwesomeIcon icon={faUsers} className="me-2" /></Link>
+                <Link
+                  className="d-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
+                  to={user.role == "admin" ? "/teams" : "/user-teams"}
+                  id="teams"
+                  title="Teams"
+                >TEAMS</Link>
+              </>
+            </div>
+            <div className="d-flex align-items-center fs-4 ms-5 mt-0 mt-md-5">
+              <>
+                <Link className="text-decoration-none text-white" to={"/plan"}> <FontAwesomeIcon icon={faMoneyBills} className="me-2" /> </Link>
+                <Link
+                  className="d-none d-lg-block text-decoration-none text-white link-aside rounded-2 p-1"
+                  to="/plan"
+                  id="plan"
+                  title="Plan"
+                >{t("dashboardPage.plan").toUpperCase()}</Link>
+              </>
+            </div>
+          </div>
+
+          <Container className="first-container container-width">{children}</Container>
         </div>
       </div>
       <BaseFooter />

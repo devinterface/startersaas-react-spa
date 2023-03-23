@@ -13,6 +13,7 @@ import SubscribePlanPage from "app/pages/plan/SubscribePlanPage";
 import IndexPage from "app/pages/public/IndexPage";
 import IndexTeamsPage from "app/pages/teams/IndexTeamsPage";
 import TeamPage from "app/pages/teams/TeamPage";
+import UserTeams from "app/pages/teams/UserTeams";
 import AddCardPage from "app/pages/user/AddCardPage";
 import EditAccountPage from "app/pages/user/EditAccountPage";
 import EditUserPage from "app/pages/user/EditUserPage";
@@ -90,6 +91,13 @@ const ApplicationRouter = () => {
         layout={PrivateLayout}
         allowedRoles={["admin"]}
         component={TeamPage}
+      />
+      <PrivateActive
+        exact
+        path="/user-teams"
+        layout={PrivateLayout}
+        allowedRoles={["user"]}
+        component={UserTeams}
       />
       <Private
         exact

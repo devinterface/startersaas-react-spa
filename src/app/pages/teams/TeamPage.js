@@ -99,7 +99,7 @@ export default function TeamPage({ user }) {
   }
 
   return (
-    <div>
+    <div className='max-width'>
       {team &&
         <>
           <h1>Team</h1>
@@ -109,48 +109,39 @@ export default function TeamPage({ user }) {
               <div className='d-flex justify-content-end mb-4'>
                 <Link to={"#"} onClick={() => { history.push("/teams") }} className='table-row-color mt-3 create-group-button d-flex justify-content-center align-items-center text-decoration-none'>{t("teamPage.save")}</Link>
               </div>
-              <Table responsive>
+              <Table responsive bordered>
                 <thead>
                   <tr className="d-none d-md-table-row">
-                    <th className='col-1 font-20'><div className='unchecked-user'></div></th>
-                    <th className='col-1 text-start font-20'>#</th>
-                    <th className='col-1 text-start font-20'>
-                      <span>
-                        {t("teamPage.user")}
-                      </span>
-                    </th>
-                    <th className='col-1 text-start font-20'>
-                      <span>
-                        Email
-                      </span>
-                    </th>
+                    <th style={{ borderLeft: "0px", borderRight: "0px" }} className='col-1'><div className='unchecked-user'></div></th>
+                    <th style={{ borderLeft: "0px", borderRight: "0px" }} className='col-1 text-start '>#</th>
+                    <th style={{ borderLeft: "0px", borderRight: "0px" }} className='col-1 text-start '>{t("teamPage.user")}</th>
+                    <th style={{ borderLeft: "0px", borderRight: "0px" }} className='col-1 text-start '>Email</th>
                   </tr>
                 </thead>
                 {users &&
                   <tbody>
                     {users.data.map((user, id) => (
-                      <tr key={`user-${id}`} className='font-14 d-flex flex-column d-md-table-row '>
-                        <>
-                          {user.teams && user.teams.some((check) => check.id === teamId) ? (
-                            <td className='d-flex justify-content-start align-items-center'>
-                              <div className='d-flex justify-content-center align-items-center check-user' onClick={() => removeTeamUser(user.id)}>
-                                <FontAwesomeIcon className="text-white" icon={faCheck} />
-                              </div>
-                            </td>
-                          ) : (
-                            <td>
-                              <div className='d-flex justify-content-start align-items-center'>
-                                <div className='unchecked-user' onClick={() => addTeamUser(user.id)} />
-                              </div>
-                            </td>)
-                          }
-                          <div className="d-md-none font-16 fw-bold pb-0">#:</div>
-                          <td className='text-start vertical-align'>{id + 1}</td>
-                          <div className="d-md-none font-16 fw-bold pb-0">{t("teamPage.user")}:</div>
-                          <td className='text-start vertical-align'>{user.name}</td>
-                          <div className="d-md-none font-16 fw-bold pb-0">Email:</div>
-                          <td className='text-start vertical-align'>{user.email}</td>
-                        </>
+                      <tr key={`user-${id}`} className='d-flex flex-column d-md-table-row'>
+                        {user.teams && user.teams.some((check) => check.id === teamId) ? (
+                          <td className='d-flex justify-content-start align-items-center border-0'>
+                            <div className='d-flex justify-content-center align-items-center check-user' onClick={() => removeTeamUser(user.id)}>
+                              <FontAwesomeIcon className="text-white" icon={faCheck} />
+                            </div>
+                          </td>
+                        ) : (
+                          <td className='border-0'>
+                            <div className='d-flex justify-content-start align-items-center'>
+                              <div className='unchecked-user' onClick={() => addTeamUser(user.id)} />
+                            </div>
+                          </td>)
+                        }
+                        <div className="d-md-none fw-bold pb-0">#:</div>
+                        <td className='text-start border-0 vertical-align'>{id + 1}</td>
+                        <div className="d-md-none fw-bold pb-0">{t("teamPage.user")}:</div>
+                        <td className='text-start border-0 vertical-align'>{user.name}</td>
+                        <div className="d-md-none fw-bold pb-0">Email:</div>
+                        <td className='text-start border-0 vertical-align'>{user.email}</td>
+
                       </tr>
                     ))
                     }
