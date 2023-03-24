@@ -1,28 +1,27 @@
 import { CreateUser, DeleteUser } from "api/mutations";
 import { Users } from "api/queries";
 import Loader from "app/components/Loader";
+import ConfirmAlert from "libs/confirmAlert";
 import { useState } from "react";
 import { Dropdown, Modal, Table } from "react-bootstrap";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
-import ConfirmAlert from "libs/confirmAlert";
-
 
 const IndexUsersPage = ({ user }) => {
   const { t } = useTranslation();
 
-  const [createUserPopup, setCreateUserPopup] = useState(false)
-  const [deleteUserPopup, setDeleteUserPopup] = useState(false)
-  const [userId, setUserId] = useState(undefined)
+  const [createUserPopup, setCreateUserPopup] = useState(false);
+  const [deleteUserPopup, setDeleteUserPopup] = useState(false);
+  const [userId, setUserId] = useState(undefined);
   const [userData, setUserData] = useState({
     name: "",
     surname: "",
     email: "",
     language: "en",
-    role: "user"
-  })
+    role: "user",
+  });
 
   const queryClient = useQueryClient();
 
@@ -58,37 +57,37 @@ const IndexUsersPage = ({ user }) => {
   });
 
   const handleUserNameInput = (event) => {
-    setUserData({ ...userData, name: event.target.value })
-  }
+    setUserData({ ...userData, name: event.target.value });
+  };
 
   const handleUserSurnameInput = (event) => {
-    setUserData({ ...userData, surname: event.target.value })
-  }
+    setUserData({ ...userData, surname: event.target.value });
+  };
 
   const handleUserEmailInput = (event) => {
-    setUserData({ ...userData, email: event.target.value })
-  }
+    setUserData({ ...userData, email: event.target.value });
+  };
 
   const deleteUser = async () => {
     try {
       const response = await deleteUserMutate.mutate(userId);
       if (response) {
-        ConfirmAlert.success("User deleted")
+        ConfirmAlert.success("User deleted");
       }
     } catch (error) {
       if (error.response && error.response.data) {
         ConfirmAlert.error(error.response.data);
         return;
       }
-    };
-  }
+    }
+  };
 
   const userRole = (role) => {
     if (role === "user") {
-      return "User"
+      return "User";
     }
-    return "Admin"
-  }
+    return "Admin";
+  };
 
   if (isLoading) {
     return <Loader />;

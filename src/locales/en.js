@@ -18,7 +18,7 @@ export default {
     terms: "Terms and Conditions",
     privacy: "Privacy and Policy",
     marketingConsent:
-      "Starter SaaS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.",
+      "StarterSaaS is committed to protecting and respecting your privacy, and will only use your personal information to administer your account and to provide the service you have requested. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.",
     alreadyRegistered: "Already registered?",
     didntReceivedActivationEmail: "Didn't receive the activation email?",
     confirm: "Confirm",
@@ -122,7 +122,7 @@ export default {
   },
   trialComponent: {
     youAreOnTrial:
-      "You are currently working on the trial version of Starter SaaS.",
+      "You are currently working on the trial version of StarterSaaS.",
     trialEndsAt: "Trial period ends at",
     goToPlans: "Go to plans",
   },
@@ -166,6 +166,7 @@ export default {
     toPay: "To pay",
     actions: "Actions",
     noAccess: "You don't have access to this page.",
+    invoice: "Invoice",
   },
   privateLayout: {
     billingDetails: "Billing details",
@@ -202,7 +203,7 @@ export default {
     surname: "Surname",
     email: "Email",
     cancel: "Cancel",
-    save: "Save"
+    save: "Save",
   },
   updateUsersPage: {
     updatedUser: "Update user",
@@ -221,10 +222,10 @@ export default {
   buttonUsers: {
     createUser: "Create User",
     edit: "Edit",
-    delete: "Delete"
+    delete: "Delete",
   },
   search: {
-    placeholder: "Search"
+    placeholder: "Search",
   },
   userEdit: {
     user: "User",

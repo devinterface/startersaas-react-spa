@@ -139,7 +139,7 @@ const ApplicationRouter = () => {
         path="/users"
         layout={PrivateLayout}
         allowedRoles={["admin"]}
-        planType={["premium"]}
+        planType={["starter", "basic", "premium"]}
         component={IndexUsersPage}
       />
       <Private
