@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 const SubscribePlanPage = (props) => {
   const { t } = useTranslation();
 
-  const { planId } = useParams()
+  const { planId } = useParams();
 
   const [selectedPlan, setSelectedPlan] = useState(null);
 

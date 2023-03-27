@@ -45,12 +45,12 @@ const User = async (userId) => {
 const Teams = async () => {
   const result = await Axios.authenticated().get("/teams");
   return result;
-}
+};
 
 const Team = async (id) => {
   const result = await Axios.authenticated().get(`teams/${id}`);
   return result;
-}
+};
 
 export {
   Me,
@@ -62,5 +62,5 @@ export {
   Users,
   User,
   Teams,
-  Team
+  Team,
 };

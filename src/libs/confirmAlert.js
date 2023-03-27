@@ -9,7 +9,7 @@ class ConfirmAlert {
       buttons: [
         {
           label: "OK",
-          onClick: () => { },
+          onClick: () => {},
         },
       ],
     });
@@ -22,7 +22,7 @@ class ConfirmAlert {
       buttons: [
         {
           label: "OK",
-          onClick: () => { },
+          onClick: () => {},
         },
       ],
     });

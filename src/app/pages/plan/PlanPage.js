@@ -15,7 +15,7 @@ const PlanPage = (props) => {
 
   const [selectedPlanRecurring, setSelectedPlanRecurring] = useState(1);
 
-  const [selectedPlan, setSelectedPlan] = useState(undefined)
+  const [selectedPlan, setSelectedPlan] = useState(undefined);
 
   const [redirectTo, setRedirectTo] = useState(false);
 
@@ -36,7 +36,7 @@ const PlanPage = (props) => {
           if (cs) {
             setCurrentSubscription(cs);
           }
-        } catch (e) { }
+        } catch (e) {}
       }
     },
   });
@@ -91,7 +91,7 @@ const PlanPage = (props) => {
                 <div>
                   {plansData.data.plans.filter((p) => p.monthly).length > 0 &&
                     plansData.data.plans.filter((p) => !p.monthly).length >
-                    0 && (
+                      0 && (
                       <Row>
                         <Col xs={12}>
                           <div className="contain-buttons-plan">
@@ -149,7 +149,7 @@ const PlanPage = (props) => {
                     )}
                     {selectedPlanRecurring === 2 &&
                       plansData.data.plans.filter((p) => !p.monthly).length >
-                      0 && (
+                        0 && (
                         <>
                           {plansData.data.plans
                             .filter((p) => !p.monthly)

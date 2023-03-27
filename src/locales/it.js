@@ -257,12 +257,12 @@ export default {
     no: "no",
     cancel: "Cancella",
     create: "Crea",
-    userWithNoTeams: "Non sei stato inserito in alcun gruppo."
+    userWithNoTeams: "Non sei stato inserito in alcun gruppo.",
   },
   teamPage: {
     save: "Salva",
     user: "Utente",
     name: "Nome",
-    code: "Codice"
-  }
+    code: "Codice",
+  },
 };
