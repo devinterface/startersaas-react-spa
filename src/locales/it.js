@@ -169,6 +169,7 @@ export default {
     paid: "Pagato",
     toPay: "Da pagare",
     actions: "Azioni",
+    noAccess: "Non puoi accedere a questa pagina",
     invoice: "Fattura",
   },
   privateLayout: {
@@ -242,4 +243,26 @@ export default {
     email: "Email",
     save: "Salva",
   },
+  teamsPage: {
+    teams: "Gruppi",
+    name: "Nome",
+    users: "Utenti",
+    code: "Codice",
+    actions: "Azioni",
+    createTeam: "Crea Team",
+    edit: "Modifica",
+    delete: "Cancella",
+    deleteTeam: "Cancella Team",
+    yes: "si",
+    no: "no",
+    cancel: "Cancella",
+    create: "Crea",
+    userWithNoTeams: "Non sei stato inserito in alcun gruppo."
+  },
+  teamPage: {
+    save: "Salva",
+    user: "Utente",
+    name: "Nome",
+    code: "Codice"
+  }
 };

@@ -4,20 +4,19 @@ import Box from "app/components/dashboard/Box";
 import Loader from "app/components/Loader";
 import AccountForm from "app/pages/user/AccountForm";
 import { ENABLE_CUSTOMER_PORTAL } from "config";
-import { selectedPlanState } from "libs/atoms";
 import { formatMoney } from "libs/utils";
 import { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "react-query";
 import { Elements, StripeProvider } from "react-stripe-elements";
-import { useRecoilValue } from "recoil";
 import StripeForm from "./StripeForm";
+import { useParams } from "react-router-dom";
 
 const SubscribePlanPage = (props) => {
   const { t } = useTranslation();
 
-  const planId = useRecoilValue(selectedPlanState);
+  const { planId } = useParams()
 
   const [selectedPlan, setSelectedPlan] = useState(null);
 

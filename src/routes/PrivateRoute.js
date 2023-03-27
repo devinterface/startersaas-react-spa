@@ -40,7 +40,12 @@ const PrivateRoute = ({
                 </Layout>
               )
             ) : (
-              <div>Forbidden</div>
+              <Redirect
+                to={{
+                  pathname: "/dashboard",
+                  state: { from: props.location },
+                }}
+              />
             )
         );
       }}
