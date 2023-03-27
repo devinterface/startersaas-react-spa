@@ -39,5 +39,10 @@ const formatErrors = (message) => {
   return msg;
 };
 
-
-export { formatMoney, isAccountActive, isFreeTrial, hasFailedPayment, formatErrors };
+export {
+  formatMoney,
+  isAccountActive,
+  isFreeTrial,
+  hasFailedPayment,
+  formatErrors,
+};

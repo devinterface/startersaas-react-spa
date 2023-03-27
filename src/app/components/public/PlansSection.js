@@ -36,8 +36,8 @@ const PlansSection = (plans) => {
           >
             {data && data.data.plans.length > 0
               ? data.data.plans.map((plan) => (
-                <PlanComponent key={plan.id} plan={plan} />
-              ))
+                  <PlanComponent key={plan.id} plan={plan} />
+                ))
               : "Non ci sono piani disponibili"}
             <ul>
               <li>

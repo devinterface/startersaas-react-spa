@@ -30,22 +30,22 @@ const PrivateActiveRoute = ({
               }}
             />
           ) : // eslint-disable-next-line no-nested-ternary
-            authorized ? (
-              Layout === undefined ? (
-                <Component user={user} {...props} />
-              ) : (
-                <Layout container={container} user={user}>
-                  <Component user={user} {...props} />
-                </Layout>
-              )
+          authorized ? (
+            Layout === undefined ? (
+              <Component user={user} {...props} />
             ) : (
-              <Redirect
-                to={{
-                  pathname: "/plan",
-                  state: { from: props.location },
-                }}
-              />
+              <Layout container={container} user={user}>
+                <Component user={user} {...props} />
+              </Layout>
             )
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/plan",
+                state: { from: props.location },
+              }}
+            />
+          )
         );
       }}
     />

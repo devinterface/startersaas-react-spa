@@ -1,14 +1,14 @@
 /* Card */
-.shadow-box{
+.shadow-box {
   overflow: hidden;
   width: 70vw;
   border-radius: 10px;
   border: none;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(204,204,204,0.6);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(204,204,204,0.6);
-  box-shadow: 0px 0px 5px 0px rgba(204,204,204,0.6);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(204, 204, 204, 0.6);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(204, 204, 204, 0.6);
+  box-shadow: 0px 0px 5px 0px rgba(204, 204, 204, 0.6);
 }
-.img-full{
+.img-full {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -19,73 +19,73 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.card-auth .card-body{
-  padding: 70px
+.card-auth .card-body {
+  padding: 70px;
 }
 
-.card-auth form{
+.card-auth form {
   margin: 0 auto;
 }
 
-.carousel-control-prev, .carousel-control-next{
+.carousel-control-prev,
+.carousel-control-next {
   display: none;
 }
 
 @media screen and (max-width: 992px) {
-  .img-full{
+  .img-full {
     height: 300px;
   }
 }
 
 @media screen and (max-width: 770px) {
-  .text-center-mobile{
+  .text-center-mobile {
     text-align: center !important;
   }
-  .m-t-20-mobile{
-    margin-top: 20px
+  .m-t-20-mobile {
+    margin-top: 20px;
   }
-  .img-full{
+  .img-full {
     height: 200px;
   }
-  .shadow-box{
+  .shadow-box {
     width: 85vw;
   }
-  .card-auth .card-body{
+  .card-auth .card-body {
     padding-left: 30px;
     padding-right: 30px;
   }
-  .card-auth form{
+  .card-auth form {
     width: 100%;
   }
 }
 
 @media screen and (max-width: 572px) {
-  .card-body{
+  .card-body {
     padding-left: 0px;
     padding-right: 0px;
   }
-  .card-auth .card-body{
+  .card-auth .card-body {
     padding: 20px;
   }
 
   .center-div {
     top: 55%;
   }
-  .m-b-40{
+  .m-b-40 {
     margin-bottom: 0;
   }
 
-  #page-content.auth-content{
-    height: 108%
+  #page-content.auth-content {
+    height: 108%;
   }
 }
-
 
 @media screen and (max-width: 375px) {
   .center-div {
     top: 60%;
   }
-  #page-content.auth-content{
+  #page-content.auth-content {
     height: 115%;
   }
 }
@@ -94,7 +94,7 @@
   .center-div {
     top: 65%;
   }
-  #page-content.auth-content{
+  #page-content.auth-content {
     height: 130%;
   }
 }

@@ -72,7 +72,7 @@ const DashboardPage = ({ user }) => {
         },
         {
           label: t("dashboardPage.no"),
-          onClick: () => { },
+          onClick: () => {},
         },
       ],
     });
@@ -89,7 +89,7 @@ const DashboardPage = ({ user }) => {
         },
         {
           label: t("dashboardPage.no"),
-          onClick: () => { },
+          onClick: () => {},
         },
       ],
     });
@@ -106,7 +106,7 @@ const DashboardPage = ({ user }) => {
         },
         {
           label: t("dashboardPage.no"),
-          onClick: () => { },
+          onClick: () => {},
         },
       ],
     });
@@ -339,12 +339,12 @@ const DashboardPage = ({ user }) => {
                               {cardData.id ===
                                 data.data.invoice_settings
                                   .default_payment_method ||
-                                cardData.id ===
+                              cardData.id ===
                                 data.data.invoice_settings
                                   .default_payment_method.id ? (
                                 <Button
                                   className="custom-btn mini inline green"
-                                  onClick={() => { }}
+                                  onClick={() => {}}
                                 >
                                   {t("dashboardPage.default")}
                                 </Button>
@@ -420,11 +420,36 @@ const DashboardPage = ({ user }) => {
                     <Table responsive bordered>
                       <thead>
                         <tr className="d-none d-md-table-row">
-                          <th scope="col" style={{ borderLeft: "0px", borderRight: "0px" }}>{t("dashboardPage.paymentId")}</th>
-                          <th scope="col" style={{ borderLeft: "0px", borderRight: "0px" }}>{t("dashboardPage.status")}</th>
-                          <th scope="col" style={{ borderLeft: "0px", borderRight: "0px" }}>{t("dashboardPage.date")}</th>
-                          <th scope="col" style={{ borderLeft: "0px", borderRight: "0px" }}>{t("dashboardPage.total")}</th>
-                          <th scope="col" style={{ borderLeft: "0px", borderRight: "0px" }}>{t("dashboardPage.actions")}</th>
+                          <th
+                            scope="col"
+                            style={{ borderLeft: "0px", borderRight: "0px" }}
+                          >
+                            {t("dashboardPage.paymentId")}
+                          </th>
+                          <th
+                            scope="col"
+                            style={{ borderLeft: "0px", borderRight: "0px" }}
+                          >
+                            {t("dashboardPage.status")}
+                          </th>
+                          <th
+                            scope="col"
+                            style={{ borderLeft: "0px", borderRight: "0px" }}
+                          >
+                            {t("dashboardPage.date")}
+                          </th>
+                          <th
+                            scope="col"
+                            style={{ borderLeft: "0px", borderRight: "0px" }}
+                          >
+                            {t("dashboardPage.total")}
+                          </th>
+                          <th
+                            scope="col"
+                            style={{ borderLeft: "0px", borderRight: "0px" }}
+                          >
+                            {t("dashboardPage.actions")}
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -435,22 +460,33 @@ const DashboardPage = ({ user }) => {
                               invoice.status === "open"
                           )
                           .map((invoice, i) => (
-                            <tr key={`invoice-${i}`} className="d-flex flex-column d-md-table-row">
-                              <div className="d-md-none fs-6 fw-bold pb-0">{t("dashboardPage.paymentId")}:</div>
+                            <tr
+                              key={`invoice-${i}`}
+                              className="d-flex flex-column d-md-table-row"
+                            >
+                              <div className="d-md-none fs-6 fw-bold pb-0">
+                                {t("dashboardPage.paymentId")}:
+                              </div>
                               <td className="border-0">{invoice.number}</td>
-                              <div className="d-md-none fs-6 fw-bold pb-0">{t("dashboardPage.status")}:</div>
+                              <div className="d-md-none fs-6 fw-bold pb-0">
+                                {t("dashboardPage.status")}:
+                              </div>
                               <td className="border-0">
                                 {invoice.paid
                                   ? t("dashboardPage.paid")
                                   : t("dashboardPage.toPay")}
                               </td>
-                              <div className="d-md-none fs-6 fw-bold pb-0">{t("dashboardPage.date")}:</div>
+                              <div className="d-md-none fs-6 fw-bold pb-0">
+                                {t("dashboardPage.date")}:
+                              </div>
                               <td className="border-0">
                                 {moment
                                   .unix(invoice.created)
                                   .format("DD/MM/YYYY")}
                               </td>
-                              <div className="d-md-none fs-6 fw-bold pb-0">{t("dashboardPage.total")}:</div>
+                              <div className="d-md-none fs-6 fw-bold pb-0">
+                                {t("dashboardPage.total")}:
+                              </div>
                               <td className="border-0">
                                 {formatMoney(
                                   "it",
@@ -458,7 +494,9 @@ const DashboardPage = ({ user }) => {
                                   invoice.total / 100
                                 )}
                               </td>
-                              <div className="d-md-none fs-6 fw-bold pb-0">{t("dashboardPage.actions")}:</div>
+                              <div className="d-md-none fs-6 fw-bold pb-0">
+                                {t("dashboardPage.actions")}:
+                              </div>
                               <td className="border-0">
                                 {invoice.hosted_invoice_url &&
                                   invoice.status === "open" && (

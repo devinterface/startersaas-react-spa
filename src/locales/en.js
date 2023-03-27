@@ -253,12 +253,12 @@ export default {
     no: "no",
     cancel: "Cancel",
     create: "Create",
-    userWithNoTeams: "You have not been added to any team."
+    userWithNoTeams: "You have not been added to any team.",
   },
   teamPage: {
     save: "Save",
     user: "User",
     name: "Name",
-    code: "Code"
-  }
+    code: "Code",
+  },
 };
